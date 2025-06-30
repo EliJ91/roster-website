@@ -276,198 +276,173 @@ const ViewRosterPage = () => {
 				alignItems: 'center',
 			}}
 		>
-			<UserProfile />
 			<div
 				style={{
+					width: '100%',
 					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'space-between',
-					marginBottom: '0.75rem', // was 1.5rem, now half
-					width: '80%',
-					maxWidth: 1200,
+					flexDirection: 'row',
+					justifyContent: 'flex-end',
+					alignItems: 'flex-start',
+					border: '2px solid #e11d48', // red
 				}}
 			>
-                <div style={{ display: 'flex', alignItems: 'flex-end', gap: '1.2rem' }}>
-                    <h1 className="conflict-army-heading" style={{ margin: 0 }}>Conflict Army</h1>
-                    {isElevated && (
-                        <div
-                          className="actions-hamburger-container"
-                          style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
-                          ref={actionsRef}
-                        >
-                          <button
-                            title="Show Tools"
-                            className="icon-btn"
-                            style={{ background: 'none', border: 'none', color: '#fff', fontSize: 22, padding: '0.5rem', cursor: 'pointer', marginBottom: '-2px', display: 'flex', alignItems: 'flex-end' }}
-                            onClick={() => setActionsOpen((open) => !open)}
-                            aria-expanded={actionsOpen}
-                            aria-label={actionsOpen ? 'Close tools' : 'Show tools'}
-                          >
-                            <span className={`gear-icon${actionsOpen ? ' open' : ' closed'}`}>
-                              <FaCog />
-                            </span>
-                          </button>
-                          <div
-                            className={`actions-collapse${actionsOpen ? ' open' : ''}`}
-                            style={{
-                              position: 'absolute',
-                              left: 0,
-                              top: 0,
-                              display: actionsOpen ? 'flex' : 'none',
-                              flexDirection: 'row',
-                              gap: '0.3rem',
-                              background: 'none',
-                              borderRadius: 8,
-                              boxShadow: 'none',
-                              padding: '0.3rem 0.7rem',
-                              zIndex: 10,
-                              alignItems: 'center',
-                              minWidth: 0,
-                              maxWidth: actionsOpen ? 400 : 0,
-                              opacity: 1,
-                              pointerEvents: actionsOpen ? 'auto' : 'none',
-                              transform: actionsOpen ? 'translateX(48px)' : 'translateX(0)',
-                              transition: 'transform 0.32s cubic-bezier(.7,1.7,.5,1), max-width 0.32s cubic-bezier(.7,1.7,.5,1)',
-                            }}
-                          >
-                            <button
-                              title="Clear Roster"
-                              className="icon-btn"
-                              style={{ background: 'none', border: 'none', color: '#dc2626', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
-                              onClick={() => setActionsOpen(false)}
-                            >
-                              <FaTrash />
-                            </button>
-                            <button
-                              title="Archive Roster"
-                              className="icon-btn"
-                              style={{ background: 'none', border: 'none', color: '#a16207', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
-                              onClick={() => setActionsOpen(false)}
-                            >
-                              <FaArchive />
-                            </button>
-                            <button
-                              title="Show Unassigned Players"
-                              className="icon-btn"
-                              style={{ background: 'none', border: 'none', color: '#6366f1', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
-                              onClick={() => { setUnassignedModalOpen(true); setActionsOpen(false); }}
-                            >
-                              <FaUserClock />
-                            </button>
-                            <button
-                              title="Create New Roster"
-                              className="icon-btn"
-                              style={{ background: 'none', border: 'none', color: '#059669', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
-                              onClick={() => { window.location.href = '/create-roster'; setActionsOpen(false); }}
-                            >
-                              <FaPlus />
-                            </button>
-                          </div>
-                        </div>
-                    )}
-                </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1rem',
-                    }}
-                >
-                    <button
-                        onClick={() => setSignupOpen(true)}
-                        className="signup-btn"
-                    >
-                        Sign Up
-                    </button>
-                    {isElevated && (
-                        <div
-                            style={{
-                                marginLeft: '2rem',
-                                fontWeight: 600,
-                            }}
-                        >
-                            Total Players: {totalPlayers}
-                            {Object.keys(liveGuildTagCounts).length > 0 && (
-                                <span style={{ marginLeft: '1rem' }}>
-                                    {Object.entries(liveGuildTagCounts).map(
-                                        ([tag, count]) => (
-                                            <span
-                                                key={tag}
-                                                style={{
-                                                    marginRight: '1rem',
-                                                }}
-                                            >
-                                                {tag}: {count}
-                                            </span>
-                                        )
-                                    )}
-                                </span>
-                            )}
-                        </div>
-                    )}
-                </div>
-            </div>
+				<UserProfile style={{ border: '2px solid #0ea5e9' }} /> {/* blue */}
+			</div>
+			<div style={{ height: '2.5rem', border: '2px solid #f59e42' }} /> {/* orange */}
+			<div
+				className="roster-topbar"
+				style={{
+					display: 'flex',
+					alignItems: 'flex-start',
+					justifyContent: 'flex-start',
+					marginBottom: '0.75rem',
+					width: '100%',
+					maxWidth: 1200,
+					gap: 0,
+					flexWrap: 'wrap',
+					padding: 0,
+					border: '2px solid #22c55e', // green
+				}}
+			>
+				<div className="roster-actions-bar" style={{ display: 'flex', alignItems: 'center', gap: 0, width: 'auto', flex: 'none', minWidth: 0, justifyContent: 'flex-start', padding: 0, margin: 0, border: '2px solid #a21caf' }}>
+					<button
+						className={"signup-btn signup-btn-mobile-left"}
+						onClick={() => setSignupOpen(true)}
+						style={{ marginRight: 0, marginLeft: 0, border: '2px solid #2563eb', background: '#111' }} // blue
+					>
+						Sign Up
+					</button>
+					{isElevated && (
+					  <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+					    <button
+					      title="Show Tools"
+					      className="icon-btn cogwheel-btn"
+					      style={{ background: 'none', border: 'none', color: '#fff', fontSize: 22, padding: '0.5rem', cursor: 'pointer', marginBottom: '-2px', display: 'flex', alignItems: 'flex-end', marginLeft: '0.5rem', zIndex: 11 }}
+					      onClick={() => setActionsOpen((open) => !open)}
+					      aria-expanded={actionsOpen}
+					      aria-label={actionsOpen ? 'Close tools' : 'Show tools'}
+					      ref={actionsRef}
+					    >
+					      <span className={`gear-icon${actionsOpen ? ' open' : ' closed'}`} style={{ border: '2px solid #10b981', borderRadius: 4 }}>
+					        <FaCog />
+					      </span>
+					    </button>
+					    <div
+					      className={`actions-collapse${actionsOpen ? ' open' : ''}`}
+					      style={{
+					        position: 'absolute',
+					        left: '100%',
+					        top: 0,
+					        marginLeft: 8,
+					        display: actionsOpen ? 'flex' : 'none',
+					        flexDirection: 'row',
+					        gap: '0.3rem',
+					        background: '#18181b',
+					        borderRadius: 8,
+					        boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
+					        padding: '0.3rem 0.7rem',
+					        zIndex: 10,
+					        alignItems: 'center',
+					        minWidth: 0,
+					        maxWidth: actionsOpen ? 400 : 0,
+					        opacity: 1,
+					        pointerEvents: actionsOpen ? 'auto' : 'none',
+					        border: '2px solid #6366f1',
+					        transition: 'max-width 0.32s cubic-bezier(.7,1.7,.5,1), opacity 0.2s',
+					      }}
+					    >
+					      <button
+					        title="Clear Roster"
+					        className="icon-btn"
+					        style={{ background: 'none', border: 'none', color: '#dc2626', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
+					        onClick={() => setActionsOpen(false)}
+					      >
+					        <FaTrash />
+					      </button>
+					      <button
+					        title="Archive Roster"
+					        className="icon-btn"
+					        style={{ background: 'none', border: 'none', color: '#a16207', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
+					        onClick={() => setActionsOpen(false)}
+					      >
+					        <FaArchive />
+					      </button>
+					      <button
+					        title="Show Unassigned Players"
+					        className="icon-btn"
+					        style={{ background: 'none', border: 'none', color: '#6366f1', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
+					        onClick={() => { setUnassignedModalOpen(true); setActionsOpen(false); }}
+					      >
+					        <FaUserClock />
+					      </button>
+					      <button
+					        title="Create New Roster"
+					        className="icon-btn"
+					        style={{ background: 'none', border: 'none', color: '#059669', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
+					        onClick={() => { window.location.href = '/create-roster'; setActionsOpen(false); }}
+					      >
+					        <FaPlus />
+					      </button>
+					    </div>
+					  </div>
+					)}
+				</div>
+				<div style={{ display: 'flex', alignItems: 'flex-end', gap: '1.2rem', flex: 0, marginLeft: 'auto', border: '2px solid #7c3aed' }}>
+					<h1 className="conflict-army-heading" style={{ margin: 0, display: 'block', border: '2px solid #f472b6', borderRadius: 4 }}>Conflict Army</h1>
+				</div>
+			</div>
 			<SignupModal
 				open={signupOpen}
 				onClose={() => setSignupOpen(false)}
 			/>
-			<table className="roster-table"
-				style={{ width: '80%', maxWidth: 1200 }}
-			>
-				<thead>
-					<tr>
-						<th>Role</th>
-						<th>Weapon</th>
-						<th>Player</th>
-						<th>Build</th>
-					</tr>
-				</thead>
-				<tbody>
-					{sortedRoster.map((entry, index) => (
-						<tr key={index}>
-							<td>
-            {entry.role === 'Main Caller' ? (
-              <span className="role-pill role-main-caller">{entry.role}</span>
-            ) : (
-              <span className={`role-pill role-${entry.role.toLowerCase()}`}>{entry.role}</span>
-            )}
-          </td>
-							<td>{entry.weapon}</td>
-							<td>
-          {isElevated ? (
-            <select
-              className={selectedPlayers[index] ? 'selected' : ''}
-              style={{ minWidth: 220, maxWidth: 340, width: '100%', textAlign: 'center' }}
-              value={selectedPlayers[index] || ''}
-              onChange={e => handleSelectPlayer(index, e.target.value)}
-            >
-              <option value="">-- Select Player --</option>
-              {selectedPlayers[index]
-                ? (() => {
-                    // Show the selected user as the first option
-                    const selectedUser = fakeSignups.find(u => u.id === selectedPlayers[index]);
-                    return selectedUser ? [
-                      <option key={selectedUser.id} value={selectedUser.id}>{selectedUser.nickname}</option>,
-                      ...getUsersForWeapon(entry.weapon, assignedUserIds).filter(u => u.id !== selectedUser.id).map(u => (
-                        <option key={u.id} value={u.id}>{u.nickname}</option>
-                      ))
-                    ] : getUsersForWeapon(entry.weapon, assignedUserIds).map(u => (
-                      <option key={u.id} value={u.id}>{u.nickname}</option>
-                    ));
-                  })()
-                : getUsersForWeapon(entry.weapon, assignedUserIds).map(u => (
-                    <option key={u.id} value={u.id}>{u.nickname}</option>
-                  ))}
-            </select>
-          ) : (
-            entry.player
-          )}
-        </td>
-							<td style={{ textAlign: 'left' }}>{entry.build}</td>
-						</tr>
-					))}
-				</tbody>
-			</table>
+			<div style={{ width: '100%', maxWidth: 1200, overflowX: 'auto' }}>
+			  <table className="roster-table"
+			    style={{ minWidth: 320, width: '100%' }}
+			  >
+			    <thead>
+			      <tr>
+			        <th>Weapon</th>
+			        <th>Player</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      {sortedRoster.map((entry, index) => (
+			        <tr key={index}>
+			          <td>{entry.weapon}</td>
+			          <td>
+			            {isElevated ? (
+			              <select
+			                className={selectedPlayers[index] ? 'selected' : ''}
+			                style={{ minWidth: 120, maxWidth: 220, width: '100%', textAlign: 'center' }}
+			                value={selectedPlayers[index] || ''}
+			                onChange={e => handleSelectPlayer(index, e.target.value)}
+			              >
+			                <option value="">-- Select Player --</option>
+			                {selectedPlayers[index]
+			                  ? (() => {
+			                      const selectedUser = fakeSignups.find(u => u.id === selectedPlayers[index]);
+			                      return selectedUser ? [
+			                        <option key={selectedUser.id} value={selectedUser.id}>{selectedUser.nickname}</option>,
+			                        ...getUsersForWeapon(entry.weapon, assignedUserIds).filter(u => u.id !== selectedUser.id).map(u => (
+			                          <option key={u.id} value={u.id}>{u.nickname}</option>
+			                        ))
+			                      ] : getUsersForWeapon(entry.weapon, assignedUserIds).map(u => (
+			                        <option key={u.id} value={u.id}>{u.nickname}</option>
+			                      ));
+			                    })()
+			                  : getUsersForWeapon(entry.weapon, assignedUserIds).map(u => (
+			                      <option key={u.id} value={u.id}>{u.nickname}</option>
+			                    ))}
+			              </select>
+			            ) : (
+			              entry.player
+			            )}
+			          </td>
+			        </tr>
+			      ))}
+			    </tbody>
+			  </table>
+			</div>
 			{unassignedModalOpen && (
             <div
                 style={{
@@ -554,10 +529,6 @@ const gearSpinStyles = `
 .gear-icon.closed {
   color: #fff !important;
 }
-.icon-btn:hover .gear-icon, .icon-btn:focus .gear-icon {
-  transform: scale(1.22);
-  z-index: 2;
-}
 `;
 if (typeof document !== 'undefined' && !document.getElementById('gear-spin-styles')) {
   const style = document.createElement('style');
@@ -586,3 +557,116 @@ const fakeSignups = [
 ];
 
 export default ViewRosterPage;
+
+// Responsive styles for mobile roster table and select/button
+if (typeof document !== 'undefined' && !document.getElementById('roster-responsive-styles')) {
+  const style = document.createElement('style');
+  style.id = 'roster-responsive-styles';
+  style.innerHTML = `
+    @media (max-width: 700px) {
+      .roster-table th, .roster-table td {
+        padding: 0.5rem 0.3rem !important;
+        font-size: 0.95rem !important;
+      }
+      .roster-topbar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.7rem !important;
+      }
+      .roster-table {
+        min-width: 320px !important;
+      }
+      .roster-table select {
+        min-width: 90px !important;
+        max-width: 140px !important;
+        font-size: 0.95em !important;
+        padding: 0.3em 0.5em !important;
+      }
+      .signup-btn {
+        font-size: 0.98em !important;
+        padding: 0.4em 1em !important;
+        min-width: 0 !important;
+        max-width: 140px !important;
+      }
+    }
+    @media (max-width: 400px) {
+      .roster-table th, .roster-table td {
+        font-size: 0.85rem !important;
+        padding: 0.3rem 0.1rem !important;
+      }
+      .roster-table select {
+        min-width: 70px !important;
+        max-width: 100px !important;
+        font-size: 0.9em !important;
+        padding: 0.2em 0.3em !important;
+      }
+      .signup-btn {
+        font-size: 0.92em !important;
+        padding: 0.3em 0.7em !important;
+        max-width: 100px !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+// Add responsive CSS for hiding .roster-stats-topbar on mobile
+if (typeof document !== 'undefined' && !document.getElementById('roster-stats-mobile-hide')) {
+  const style = document.createElement('style');
+  style.id = 'roster-stats-mobile-hide';
+  style.innerHTML = `
+    @media (max-width: 700px) {
+      .roster-stats-topbar { display: none !important; }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+// Responsive CSS for hiding Conflict Army text and adjusting actions bar on mobile
+if (typeof document !== 'undefined' && !document.getElementById('roster-topbar-mobile-hide')) {
+  const style = document.createElement('style');
+  style.id = 'roster-topbar-mobile-hide';
+  style.innerHTML = `
+    @media (max-width: 700px) {
+      .conflict-army-heading { display: none !important; }
+      .roster-topbar { flex-direction: column !important; align-items: stretch !important; gap: 0.7rem !important; }
+      .roster-actions-bar { flex-direction: row !important; justify-content: flex-end !important; gap: 0.7rem !important; }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+// Responsive CSS for mobile: sign up button to far left, actions bar row, extra spacing
+if (typeof document !== 'undefined' && !document.getElementById('roster-topbar-mobile-signup')) {
+  const style = document.createElement('style');
+  style.id = 'roster-topbar-mobile-signup';
+  style.innerHTML = `
+    @media (max-width: 700px) {
+      .conflict-army-heading { display: none !important; }
+      .roster-topbar { flex-direction: column !important; align-items: stretch !important; gap: 0.7rem !important; }
+      .roster-actions-bar { flex-direction: row !important; justify-content: flex-start !important; gap: 0.7rem !important; width: 100% !important; position: relative; }
+      .signup-cog-row { flex-direction: row !important; justify-content: flex-start !important; gap: 0.5rem !important; width: auto !important; }
+      .signup-btn-mobile-left { margin-right: 0 !important; margin-left: 0 !important; }
+      .icon-btn { margin-left: 0 !important; }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+// Responsive CSS for UserProfile top right and cog near sign up on mobile
+if (typeof document !== 'undefined' && !document.getElementById('roster-topbar-mobile-userprofile')) {
+  const style = document.createElement('style');
+  style.id = 'roster-topbar-mobile-userprofile';
+  style.innerHTML = `
+    @media (max-width: 700px) {
+      .conflict-army-heading { display: none !important; }
+      .roster-topbar { flex-direction: column !important; align-items: stretch !important; gap: 0.7rem !important; }
+      .roster-actions-bar { flex-direction: row !important; justify-content: flex-end !important; gap: 0.7rem !important; width: 100% !important; position: relative; }
+      .signup-btn-mobile-left { margin-right: 0.5rem !important; }
+      .icon-btn { margin-left: 0 !important; }
+      /* UserProfile top right */
+      .user-profile-top-right { position: absolute !important; top: 1.2rem !important; right: 1.2rem !important; z-index: 100 !important; }
+    }
+  `;
+  document.head.appendChild(style);
+}

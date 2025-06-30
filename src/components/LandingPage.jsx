@@ -49,58 +49,80 @@ const LandingPage = () => {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'flex-start',
+      justifyContent: 'flex-end',
       fontFamily: "'UnifrakturCook', 'Cinzel', serif",
       letterSpacing: '0.04em',
       padding: '0 1.5rem',
       position: 'relative',
       zIndex: 1,
+      overflow: 'hidden',
     }}>
-      <div style={{ marginTop: '30rem', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-        <h1 style={{
-          fontFamily: "'UnifrakturCook', 'Cinzel', serif",
-          fontSize: '5.2rem',
-          color: '#fff',
-          textShadow: '0 4px 24px #000a, 0 0 8px #fff, 2px 2px 0 #23232a',
-          marginBottom: '0.7rem',
-          letterSpacing: '0.18em',
-          textAlign: 'center',
-          filter: 'drop-shadow(0 2px 8px #000a)',
-        }}>
+      <div className="landing-content"
+        style={{
+          marginBottom: '6.5rem',
+          marginTop: '8vh',
+          width: '100%',
+          maxWidth: 600,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          flex: 1,
+          gap: '2.2rem',
+        }}
+      >
+        <h1 className="conflict-landing-heading"
+          style={{
+            fontFamily: "'UnifrakturCook', 'Cinzel', serif",
+            fontSize: 'clamp(2.2rem, 8vw, 5.2rem)',
+            color: '#fff',
+            textShadow: '0 4px 24px #000a, 0 0 8px #fff, 2px 2px 0 #23232a',
+            marginBottom: 0,
+            letterSpacing: '0.18em',
+            textAlign: 'center',
+            filter: 'drop-shadow(0 2px 8px #000a)',
+            lineHeight: 1.1,
+            wordBreak: 'break-word',
+            padding: '0 0.2em',
+          }}
+        >
           Conflict
         </h1>
         <button
           onClick={handleLogin}
           disabled={loading}
-          className="signup-btn"
+          className="signup-btn login-btn"
           style={{
-            fontSize: '1.22rem',
-            padding: '0.8rem 2.6rem',
-            fontWeight: 400, // thinner text
+            fontSize: 'clamp(1rem, 4vw, 1.22rem)',
+            padding: '0.7em 2em',
+            fontWeight: 400,
             borderRadius: '1.2rem',
-            background: '#18181b', // solid black
-            color: '#f3f4f6', // soft off-white
-            border: '2.5px solid #fff', // white outline
-            boxShadow: '0 0 16px 2px #fff8, 0 2px 16px #000a', // white glow + subtle dark shadow
-            marginTop: '1.2rem',
-            marginBottom: '0.5rem',
+            background: '#18181b',
+            color: '#f3f4f6',
+            border: '2.5px solid #fff',
+            boxShadow: '0 0 16px 2px #fff8, 0 2px 16px #000a',
+            marginTop: 0,
+            marginBottom: 0,
             cursor: loading ? 'not-allowed' : 'pointer',
             transition: 'background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s',
             textAlign: 'center',
             display: 'block',
             opacity: 0.97,
             letterSpacing: '0.04em',
-            textShadow: '0 1px 0 #fff, 0 0 2px #fff', // subtle white text edge
+            textShadow: '0 1px 0 #fff, 0 0 2px #fff',
+            width: '100%',
+            maxWidth: 340,
+            minWidth: 0,
           }}
         >
           {loading ? 'Logging in...' : 'Login with Discord'}
         </button>
       </div>
-      <div style={{
+      <div className="quote" style={{
         position: 'fixed',
         left: 0,
         right: 0,
-        bottom: '2.5rem',
+        bottom: '3.5rem',
         width: '100vw',
         display: 'flex',
         justifyContent: 'center',
@@ -109,7 +131,7 @@ const LandingPage = () => {
       }}>
         <h2 style={{
           fontFamily: "'Cinzel', serif",
-          fontSize: '1.25rem', // Reduced size
+          fontSize: 'clamp(0.9rem, 3vw, 1.25rem)',
           color: '#fff',
           fontWeight: 700,
           margin: 0,

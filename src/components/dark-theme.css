@@ -419,10 +419,128 @@ select option {
   z-index: 2;
 }
 
+/* UserProfile responsive tweaks */
+@media (max-width: 600px) {
+  .user-profile-pill {
+    position: absolute !important;
+    top: 1.2rem !important;
+    right: 1.2rem !important;
+    left: auto !important;
+    margin: 0 !important;
+    z-index: 20 !important;
+    background: #23232a !important;
+    box-shadow: 0 2px 8px #000a !important;
+    min-width: unset !important;
+    max-width: 90vw !important;
+    width: auto !important;
+    flex-direction: row !important;
+    padding: 0.22rem 0.6rem !important;
+    gap: 0.5rem !important;
+    font-size: 0.98rem !important;
+  }
+  .user-profile-pill img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
 /* Responsive tweaks */
+@media (max-width: 900px) {
+  .dragon-head-bg {
+    width: 45vw;
+    max-width: 70vw;
+    min-width: 120px;
+  }
+}
+@media (max-width: 700px) {
+  .dragon-head-bg {
+    width: 60vw;
+    max-width: 90vw;
+    min-width: 100px;
+  }
+  .conflict-landing-heading {
+    font-size: 1.3rem;
+    padding: 0 0.2rem 0.2rem 0.2rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  .conflict-army-heading {
+    font-size: 1.1rem;
+    padding: 0 0.2rem 0.2rem 0.2rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  .login-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .quote {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    padding: 0 0.2rem;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0.2rem;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .landing-content, .landing-main-content {
+    padding: 0.5rem 0.2rem;
+    margin: 0;
+  }
+}
+@media (max-width: 500px) {
+  .dragon-head-bg {
+    width: 85vw;
+    max-width: 98vw;
+    min-width: 60px;
+  }
+}
 @media (max-width: 700px) {
   table.roster-table th, table.roster-table td {
     padding: 0.6rem 0.5rem;
     font-size: 0.98rem;
+  }
+  .conflict-landing-heading {
+    font-size: 2.2rem;
+    padding: 0 0.5rem;
+  }
+  .conflict-army-heading {
+    font-size: 1.4rem;
+    padding: 0 0.5rem;
+  }
+  .user-profile-pill {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.98rem;
+  }
+}
+@media (max-width: 400px) {
+  .conflict-landing-heading,
+  .conflict-army-heading {
+    font-size: 0.95rem;
+    padding: 0 0.1rem 0.1rem 0.1rem;
+    line-height: 1.05;
+    margin-bottom: 0.3rem;
+  }
+  .login-btn {
+    font-size: 0.92rem;
+    padding: 0.4rem 0.7rem;
+    margin-bottom: 0.3rem;
+  }
+  .quote {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+    padding: 0 0.1rem;
+  }
+  .landing-content, .landing-main-content {
+    padding: 0.2rem 0.1rem;
+    margin: 0;
   }
 }
