@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserProfile from './UserProfile';
 import SignupModal from './SignupModal';
 import { FaTrash, FaArchive, FaUserClock, FaPlus, FaCog } from 'react-icons/fa';
@@ -179,6 +180,7 @@ function getRoleOrder(role) {
 }
 
 const ViewRosterPage = () => {
+	const navigate = useNavigate();
 	const [roster, setRoster] = useState([]);
 	const [signupOpen, setSignupOpen] = useState(false);
 	const [user, setUser] = useState(null);
@@ -186,6 +188,7 @@ const ViewRosterPage = () => {
 	const [unassignedModalOpen, setUnassignedModalOpen] = useState(false);
 	const [actionsOpen, setActionsOpen] = useState(false);
 	const actionsRef = useRef();
+	const actionsMenuRef = useRef();
 
 	useEffect(() => {
 		try {
@@ -257,9 +260,19 @@ const ViewRosterPage = () => {
 	useEffect(() => {
 		if (!actionsOpen) return;
 		function handleClick(e) {
-			if (actionsRef.current && !actionsRef.current.contains(e.target)) {
-				setActionsOpen(false);
+			if (
+				actionsRef.current && actionsRef.current.contains(e.target)
+			) {
+				// Clicked the cog, let its onClick handle toggle
+				return;
 			}
+			if (
+				actionsMenuRef.current && actionsMenuRef.current.contains(e.target)
+			) {
+				// Clicked inside the actions menu, do nothing
+				return;
+			}
+			setActionsOpen(false);
 		}
 		document.addEventListener('mousedown', handleClick);
 		return () => document.removeEventListener('mousedown', handleClick);
@@ -313,12 +326,12 @@ const ViewRosterPage = () => {
 						Sign Up
 					</button>
 					{isElevated && (
-					  <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+					  <div style={{ position: 'relative', display: 'flex', alignItems: 'center', height: '100%' }}>
 					    <button
 					      title="Show Tools"
 					      className="icon-btn cogwheel-btn"
-					      style={{ background: 'none', border: 'none', color: '#fff', fontSize: 22, padding: '0.5rem', cursor: 'pointer', marginBottom: '-2px', display: 'flex', alignItems: 'flex-end', marginLeft: '0.5rem', zIndex: 11 }}
-					      onClick={() => setActionsOpen((open) => !open)}
+					      style={{ background: 'none', border: 'none', color: '#fff', fontSize: 22, padding: '0.5rem', cursor: 'pointer', marginBottom: '-2px', display: 'flex', alignItems: 'center', marginLeft: '0.5rem', zIndex: 11 }}
+					      onClick={e => { e.stopPropagation(); setActionsOpen((open) => !open); }}
 					      aria-expanded={actionsOpen}
 					      aria-label={actionsOpen ? 'Close tools' : 'Show tools'}
 					      ref={actionsRef}
@@ -329,6 +342,7 @@ const ViewRosterPage = () => {
 					    </button>
 					    <div
 					      className={`actions-collapse${actionsOpen ? ' open' : ''}`}
+					      ref={actionsMenuRef}
 					      style={{
 					        position: 'absolute',
 					        left: '100%',
@@ -379,7 +393,7 @@ const ViewRosterPage = () => {
 					        title="Create New Roster"
 					        className="icon-btn"
 					        style={{ background: 'none', border: 'none', color: '#059669', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
-					        onClick={() => { window.location.href = '/create-roster'; setActionsOpen(false); }}
+					        onClick={() => { navigate('/create-roster'); setActionsOpen(false); }}
 					      >
 					        <FaPlus />
 					      </button>
@@ -397,49 +411,104 @@ const ViewRosterPage = () => {
 			/>
 			<div style={{ width: '100%', maxWidth: 1200, overflowX: 'auto' }}>
 			  <table className="roster-table"
-			    style={{ minWidth: 320, width: '100%' }}
+			    style={{ minWidth: 600, width: '100%' }}
 			  >
 			    <thead>
 			      <tr>
-			        <th>Weapon</th>
-			        <th>Player</th>
+			        <th style={{ minWidth: 120 }}>Role</th>
+			        <th style={{ minWidth: 120 }}>Weapon</th>
+			        <th style={{ minWidth: 120 }}>Player</th>
+			        <th style={{ minWidth: 180 }}>Build Notes</th>
 			      </tr>
 			    </thead>
 			    <tbody>
-			      {sortedRoster.map((entry, index) => (
-			        <tr key={index}>
-			          <td>{entry.weapon}</td>
-			          <td>
-			            {isElevated ? (
-			              <select
-			                className={selectedPlayers[index] ? 'selected' : ''}
-			                style={{ minWidth: 120, maxWidth: 220, width: '100%', textAlign: 'center' }}
-			                value={selectedPlayers[index] || ''}
-			                onChange={e => handleSelectPlayer(index, e.target.value)}
-			              >
-			                <option value="">-- Select Player --</option>
-			                {selectedPlayers[index]
-			                  ? (() => {
-			                      const selectedUser = fakeSignups.find(u => u.id === selectedPlayers[index]);
-			                      return selectedUser ? [
-			                        <option key={selectedUser.id} value={selectedUser.id}>{selectedUser.nickname}</option>,
-			                        ...getUsersForWeapon(entry.weapon, assignedUserIds).filter(u => u.id !== selectedUser.id).map(u => (
+			      {sortedRoster.map((entry, index) => {
+			        // Determine role class for pill
+			        let roleClass = 'role-pill';
+			        let mainCallerStyle = undefined;
+			        switch ((entry.role || '').toLowerCase()) {
+			          case 'main caller':
+			            roleClass += ' role-main-caller';
+			            mainCallerStyle = {
+			              color: '#fffbe6',
+			              textShadow: '0 0 6px #fbbf24, 0 0 2px #fff',
+			              fontWeight: 700,
+			              letterSpacing: '0.04em',
+			              fontSize: '1.04em',
+			              border: '1.5px solid #fbbf24',
+			              background: 'linear-gradient(90deg, #fbbf24 0%, #f59e42 100%)',
+			              boxShadow: '0 0 6px #fbbf24cc',
+			              padding: '0.22em 0.5em',
+			              minWidth: 110,
+			              filter: 'brightness(1.08)',
+			              textTransform: 'none',
+			              borderRadius: '1.2em',
+			            };
+			            break;
+			          case 'tank':
+			            roleClass += ' role-tank';
+			            break;
+			          case 'support':
+			            roleClass += ' role-support';
+			            break;
+			          case 'healer':
+			            roleClass += ' role-healer';
+			            break;
+			          case 'mdps':
+			            roleClass += ' role-mdps';
+			            break;
+			          case 'rdps':
+			            roleClass += ' role-rdps';
+			            break;
+			          default:
+			            break;
+			        }
+			        return (
+			          <tr key={index}>
+			            <td style={{ textAlign: 'center' }}>
+			              <span className={roleClass} style={mainCallerStyle}>{entry.role}</span>
+			            </td>
+			            <td style={{ fontWeight: 700, color: '#f59e42', textAlign: 'center', background: '#18181b' }}>{entry.weapon}</td>
+			            <td style={{ textAlign: 'center', background: '#18181b' }}>
+			              {isElevated ? (
+			                <select
+			                  className={selectedPlayers[index] && selectedPlayers[index] !== '' ? 'selected' : ''}
+			                  style={{
+			                    minWidth: 120,
+			                    maxWidth: 220,
+			                    width: '100%',
+			                    textAlign: 'center',
+			                    border: (!selectedPlayers[index] || selectedPlayers[index] === '') ? '1.5px solid #dc2626' : undefined,
+			                    boxShadow: (!selectedPlayers[index] || selectedPlayers[index] === '') ? '0 0 0 2px #dc262688, 0 2px 16px #dc262655' : undefined,
+			                  }}
+			                  value={selectedPlayers[index] || ''}
+			                  onChange={e => handleSelectPlayer(index, e.target.value)}
+			                >
+			                  <option value="">-- Select Player --</option>
+			                  {selectedPlayers[index]
+			                    ? (() => {
+			                        const selectedUser = fakeSignups.find(u => u.id === selectedPlayers[index]);
+			                        return selectedUser ? [
+			                          <option key={selectedUser.id} value={selectedUser.id}>{selectedUser.nickname}</option>,
+			                          ...getUsersForWeapon(entry.weapon, assignedUserIds).filter(u => u.id !== selectedUser.id).map(u => (
+			                            <option key={u.id} value={u.id}>{u.nickname}</option>
+			                          ))
+			                        ] : getUsersForWeapon(entry.weapon, assignedUserIds).map(u => (
 			                          <option key={u.id} value={u.id}>{u.nickname}</option>
-			                        ))
-			                      ] : getUsersForWeapon(entry.weapon, assignedUserIds).map(u => (
+			                        ));
+			                      })()
+			                    : getUsersForWeapon(entry.weapon, assignedUserIds).map(u => (
 			                        <option key={u.id} value={u.id}>{u.nickname}</option>
-			                      ));
-			                    })()
-			                  : getUsersForWeapon(entry.weapon, assignedUserIds).map(u => (
-			                      <option key={u.id} value={u.id}>{u.nickname}</option>
-			                    ))}
-			              </select>
-			            ) : (
+			                      ))}
+			                </select>
+			              ) : (
 			              entry.player
 			            )}
-			          </td>
-			        </tr>
-			      ))}
+			            </td>
+			            <td style={{ color: '#f3f4f6', fontSize: 14, textAlign: 'center', background: '#18181b' }}>{entry.build}</td>
+			          </tr>
+			        );
+			      })}
 			    </tbody>
 			  </table>
 			</div>

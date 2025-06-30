@@ -419,7 +419,122 @@ select option {
   z-index: 2;
 }
 
-/* UserProfile responsive tweaks */
+/* --- Modern Roster Card & Overlay for CreateRosterPage --- */
+.background-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0;
+  background: rgba(24,24,27,0.82);
+  backdrop-filter: blur(2.5px) brightness(0.95);
+  pointer-events: none;
+}
+
+.roster-card {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(120deg, #23232a 80%, #18181b 100%);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 36px 0 #000a, 0 1.5px 8px #23232a;
+  padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+  margin: 2.5rem auto 2.5rem auto;
+  max-width: 1200px;
+  width: 100%;
+  border: 1.5px solid #6366f1;
+  transition: box-shadow 0.22s, border 0.22s;
+}
+.roster-card:hover, .roster-card:focus-within {
+  box-shadow: 0 12px 48px 0 #6366f1cc, 0 2px 12px #23232a;
+  border: 1.5px solid #a5b4fc;
+}
+
+/* Table tweaks for card look */
+.roster-card .roster-table {
+  margin: 0 auto 1.5rem auto;
+  border-radius: 1.1rem;
+  box-shadow: 0 2px 16px #0005;
+  background: #23232a;
+}
+
+/* Inputs & Textareas modern look */
+.roster-card input[type="text"],
+.roster-card textarea {
+  background: #18181b;
+  color: #f3f4f6;
+  border: 1.5px solid #6366f1;
+  border-radius: 0.7em;
+  padding: 0.6em 1.1em;
+  font-size: 1.08em;
+  font-weight: 500;
+  box-shadow: 0 1.5px 8px #0002;
+  transition: border 0.18s, box-shadow 0.18s;
+}
+.roster-card input[type="text"]:focus,
+.roster-card textarea:focus {
+  border: 1.5px solid #a5b4fc;
+  box-shadow: 0 0 0 2px #6366f188, 0 2px 16px #6366f155;
+  outline: none;
+}
+
+/* Table row hover effect */
+.roster-card .roster-table tbody tr:hover {
+  background: #18181b !important;
+  box-shadow: 0 2px 12px #6366f122;
+  transition: background 0.18s, box-shadow 0.18s;
+}
+
+/* Button modern look */
+.roster-card button[type="submit"] {
+  background: linear-gradient(90deg, #6366f1 60%, #2563eb 100%);
+  color: #fff;
+  border: none;
+  border-radius: 1.2em;
+  font-size: 1.15em;
+  font-weight: 700;
+  padding: 0.7em 2.2em;
+  box-shadow: 0 2px 12px #6366f155;
+  margin: 0 auto;
+  display: block;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.14s;
+}
+.roster-card button[type="submit"]:hover:not(:disabled) {
+  background: linear-gradient(90deg, #818cf8 60%, #2563eb 100%); /* Fixed missing parenthesis */
+  box-shadow: 0 4px 18px #6366f1cc;
+  transform: translateY(-2px) scale(1.03);
+}
+.roster-card button[type="submit"]:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Success/Error messages */
+.success-msg {
+  color: #22c55e;
+  background: #23232a;
+  border-radius: 0.7em;
+  padding: 0.7em 1.2em;
+  margin-top: 1.2em;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 1px 6px #22c55e22;
+}
+.error-msg {
+  color: #e11d48;
+  background: #23232a;
+  border-radius: 0.7em;
+  padding: 0.7em 1.2em;
+  margin-top: 1.2em;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 1px 6px #e11d4822;
+}
+
+/* Responsive tweaks for card */
+@media (max-width: 900px) {
+  .roster-card {
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    max-width: 99vw;
+  }
+}
 @media (max-width: 600px) {
   .user-profile-pill {
     position: absolute !important;
