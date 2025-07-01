@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './dark-theme.css';
+import './styles.css';
 
 // Helper to strip leading guild tag from nickname
 function stripGuildTag(nick) {

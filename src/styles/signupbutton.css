@@ -1,0 +1,11 @@
+/* SignUpButton component styles extracted from styles.css */
+
+button.signup-btn {
+  background: #2563eb;
+  color: #fff;
+  border: 1px solid #1d4ed8;
+  box-shadow: 0 0 8px #2563eb;
+}
+button.signup-btn:hover {
+  background: #1d4ed8;
+}

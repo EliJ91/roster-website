@@ -465,8 +465,8 @@ const ViewRosterPage = () => {
 			        }
 			        return (
 			          <tr key={index}>
-			            <td style={{ textAlign: 'center' }}>
-			              <span className={roleClass} style={mainCallerStyle}>{entry.role}</span>
+			            <td className="role-cell">
+			              <span className={roleClass}>{entry.role}</span>
 			            </td>
 			            <td style={{ fontWeight: 700, color: '#f59e42', textAlign: 'center', background: '#18181b' }}>{entry.weapon}</td>
 			            <td style={{ textAlign: 'center', background: '#18181b' }}>

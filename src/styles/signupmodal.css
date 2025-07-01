@@ -1,0 +1,6 @@
+/* SignupModal component styles extracted from styles.css */
+
+.modal, .SignupModal {
+  background: #23232a !important;
+  color: #f3f4f6 !important;
+}

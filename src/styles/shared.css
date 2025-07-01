@@ -1,0 +1,40 @@
+/* Shared and utility styles extracted from styles.css */
+
+body {
+  background: #18181b;
+  color: #f3f4f6;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+button[type="submit"] {
+  background: #e11d48;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7em 2.2em;
+  font-size: 1.2em;
+  cursor: pointer;
+  box-shadow: 0 2px 12px #0004;
+  transition: background 0.18s, transform 0.18s;
+}
+button[type="submit"]:hover:not(:disabled) {
+  background: #be123c;
+  transform: scale(1.04);
+}
+
+.success-msg {
+  color: #22c55e;
+  font-weight: 700;
+  margin-top: 1em;
+  font-size: 1.1em;
+}
+
+.error-msg {
+  color: #e11d48;
+  font-weight: 700;
+  margin-top: 1em;
+  font-size: 1.1em;
+}

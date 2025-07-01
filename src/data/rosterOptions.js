@@ -1,6 +1,8 @@
 // src/data/rosterOptions.js
 
 export const ROLE_OPTIONS = [
+  'Main Caller',
+  'Backup Caller',
   'Tanks',
   'Healers',
   'MDPS',

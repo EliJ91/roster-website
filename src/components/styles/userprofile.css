@@ -1,0 +1,68 @@
+/* UserProfile component styles extracted from styles.css */
+
+.user-profile-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  border: 2px solid #e11d48;
+}
+
+.user-profile-pill {
+  background: #27272a !important;
+  color: #f3f4f6 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25) !important;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.45), 0 1.5px 8px 0 #059669;
+  border: 1.5px solid #27272a;
+  position: relative;
+}
+
+.user-profile-pill img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #059669;
+  background: #18181b;
+}
+
+.signout-btn {
+  margin-left: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  opacity: 0.5;
+  transition: opacity 0.2s, box-shadow 0.2s;
+  font-size: 0;
+}
+.signout-btn:hover,
+.signout-btn:focus {
+  opacity: 1;
+  box-shadow: 0 0 8px #059669;
+}
+
+.signout-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background: #23232a;
+  color: #f3f4f6;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px #0008;
+  z-index: 20;
+  transition: opacity 0.2s;
+}
