@@ -1,0 +1,339 @@
+/* styles.css - main stylesheet for the app, replacing all inline styles and dark-theme.css */
+
+body {
+  background: #18181b;
+  color: #f3f4f6;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.create-roster-page {
+  padding: 2rem;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-profile-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  border: 2px solid #e11d48;
+}
+
+.roster-topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-bottom: 0.75rem;
+  width: 100%;
+  max-width: 1200px;
+  gap: 0;
+  flex-wrap: wrap;
+  padding: 0;
+  border: 2px solid #22c55e;
+}
+
+.conflict-army-heading {
+  margin: 0;
+  display: block;
+  border: 2px solid #f472b6;
+  border-radius: 4px;
+  text-align: center;
+  width: 100%;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #e11d48;
+  letter-spacing: 0.04em;
+  background: rgba(24,24,27,0.85);
+  box-shadow: 0 2px 12px #0006;
+}
+
+.roster-form {
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.roster-form-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: 18px;
+  gap: 24px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  justify-content: flex-start;
+}
+
+.roster-author-col, .roster-event-col {
+  flex: 0 0 200px;
+  min-width: 160px;
+  max-width: 220px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  height: 60px;
+  position: relative;
+}
+
+.roster-author-label {
+  font-weight: 700;
+  color: #a5b4fc;
+  font-size: 16px;
+  min-width: 90px;
+  text-align: left;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.roster-author-input {
+  display: inline;
+  width: auto;
+  background: none;
+  border: none;
+  color: #fbbf24;
+  font-weight: 700;
+  font-size: 1.5em;
+  box-shadow: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  letter-spacing: 0.01em;
+  text-transform: capitalize;
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.roster-label {
+  font-weight: 700;
+  color: #a5b4fc;
+  font-size: 16px;
+  min-width: 90px;
+  text-align: left;
+  display: block;
+  margin-bottom: 6px;
+  position: static;
+}
+
+.roster-event-input {
+  width: 100%;
+  font-size: 1em;
+  border-radius: 8px;
+  border: 2px solid #6366f1;
+  padding: 0.5em 1em;
+  background: #23232a;
+  color: #f3f4f6;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #0002;
+  outline: none;
+  letter-spacing: 0.04em;
+  margin-top: 0;
+}
+
+.roster-notes-col {
+  flex: 1 1 0;
+  min-width: 220px;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.roster-notes-col textarea {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 0.5em 0.7em;
+  background: #23232a;
+  color: #f3f4f6;
+  border: 1.5px solid #6366f1;
+  font-weight: 500;
+  box-shadow: 0 2px 8px #0002;
+  outline: none;
+  height: 48px;
+  max-height: 120px;
+  overflow-y: auto;
+  resize: none;
+  margin: 0;
+  scrollbar-width: none; /* Firefox */
+}
+.roster-notes-col textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.roster-table-container {
+  width: 100%;
+  max-width: 1200px;
+  overflow-x: auto;
+}
+
+.roster-table {
+  min-width: 600px;
+  width: 100%;
+  background: rgba(24,24,27,0.92);
+  border-radius: 8px;
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0 2px 12px #0004;
+}
+
+.roster-table th, .roster-table td {
+  padding: 0.5em 0.7em;
+  border-bottom: 1px solid #23232a;
+}
+
+.roster-table th {
+  color: #f59e42;
+  font-size: 1.1em;
+  font-weight: 700;
+  background: #23232a;
+  min-width: 120px;
+}
+
+.roster-table th:last-child, .roster-table td:last-child {
+  min-width: 180px;
+}
+
+.roster-table td {
+  color: #f3f4f6;
+  font-size: 1em;
+  background: #18181b;
+}
+
+.roster-table select {
+  min-width: 120px;
+  max-width: 220px;
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 1.2em;
+  background: #23232a;
+  color: #f59e42;
+  border: none;
+  box-shadow: 0 1px 4px #0002;
+}
+
+.roster-table textarea {
+  width: calc(100% - 8px);
+  min-width: 0;
+  max-width: 100%;
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 0.5em 0.7em;
+  background: #23232a;
+  color: #f3f4f6;
+  border: 1.5px solid #6366f1;
+  resize: vertical;
+  margin: 4px;
+}
+
+.roster-actions {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+button[type="submit"] {
+  background: #e11d48;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7em 2.2em;
+  font-size: 1.2em;
+  cursor: pointer;
+  box-shadow: 0 2px 12px #0004;
+  transition: background 0.18s, transform 0.18s;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background: #be123c;
+  transform: scale(1.04);
+}
+
+button[title="Add a Roster"] {
+  margin-left: 24px;
+  background: none;
+  border: none;
+  color: #22c55e;
+  font-size: 48px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 18px #0004;
+  transition: transform 0.18s cubic-bezier(.7,1.7,.5,1), background 0.18s;
+  position: relative;
+  z-index: 2;
+  vertical-align: middle;
+}
+
+button[title="Add a Roster"]:hover {
+  transform: scale(1.13);
+}
+
+.success-msg {
+  color: #22c55e;
+  font-weight: 700;
+  margin-top: 1em;
+  font-size: 1.1em;
+}
+
+.error-msg {
+  color: #e11d48;
+  font-weight: 700;
+  margin-top: 1em;
+  font-size: 1.1em;
+}
+
+.role-pill {
+  border-radius: 1.2em;
+  padding: 0.22em 0.5em;
+  min-width: 110px;
+  text-align: center;
+  font-weight: 600;
+  background: #23232a;
+  color: #a5b4fc;
+  border: 1.5px solid #6366f1;
+  box-shadow: 0 1px 4px #0002;
+}
+
+.role-main-caller {
+  color: #fffbe6;
+  text-shadow: 0 0 6px #fbbf24, 0 0 2px #fff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 1.04em;
+  border: 1.5px solid #fbbf24;
+  background: linear-gradient(90deg, #fbbf24 0%, #f59e42 100%);
+  box-shadow: 0 0 6px #fbbf24cc;
+  filter: brightness(1.08);
+  text-transform: none;
+}
+
+/* Add more as needed for UserProfile, topbar, etc. */

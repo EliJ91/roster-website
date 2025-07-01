@@ -6,6 +6,7 @@ import LandingPage from './components/LandingPage';
 import ViewRosterPage from './components/ViewRosterPage';
 import CreateRosterPage from './components/CreateRosterPage';
 import backgroundSmoke from './assets/backgroundSmoke.mp4';
+import './components/styles.css';
 
 function App() {
   const [user, setUser] = useState(null);
