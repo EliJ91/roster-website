@@ -1,16 +1,154 @@
-/* LandingPage component styles extracted from styles.css */
+/* LandingPage component styles */
 
-.conflict-army-heading {
-  margin: 0;
-  display: block;
-  border: 2px solid #f472b6;
-  border-radius: 4px;
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Cinzel:wght@700&display=swap');
+
+/* Dragon Background */
+.dragon-bg {
+  position: relative;
+  z-index: 1;
+  background: #000;
+}
+
+.dragon-bg::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background: url('../assets/dragonHead2.png') no-repeat top center;
+  background-size: 520px auto;
+  mask-image: radial-gradient(circle at 50% 18%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%);
+  -webkit-mask-image: radial-gradient(circle at 50% 18%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%);
+  filter: drop-shadow(0 0 60px #000a);
+}
+
+/* Landing page typography */
+.conflict-landing-heading {
+  font-family: "'UnifrakturCook', 'Cinzel', serif";
+  color: #fff;
+  text-shadow: 0 4px 24px #000a, 0 0 8px #fff, 2px 2px 0 #23232a;
+  filter: drop-shadow(0 2px 8px #000a);
   text-align: center;
-  width: 100%;
-  font-size: 2.2rem;
-  font-weight: 800;
+  line-height: 1.1;
+  word-break: break-word;
+}
+
+/* Shimmer animation for login button */
+@keyframes shimmer {
+  0% {
+    background-position: -350px 0;
+  }
+  80% {
+    background-position: 350px 0;
+  }
+  100% {
+    background-position: 350px 0;
+  }
+}
+
+.login-btn {
+  position: relative;
+  overflow: hidden;
+  background: #18181b;
   color: #f3f4f6;
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 12px #fff2, 0 0 4px #fff4;
+  font-weight: 400;
   letter-spacing: 0.04em;
-  background: rgba(24,24,27,0.85);
-  box-shadow: 0 2px 12px #0006;
+  transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
+  background-image: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.18) 40%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0.18) 60%, transparent 100%);
+  background-size: 350px 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 2.2s cubic-bezier(0.4,0.2,0.2,1) 2s infinite;
+}
+
+.login-btn:active {
+  filter: brightness(0.95);
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .dragon-head-bg {
+    width: 45vw;
+    max-width: 70vw;
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 700px) {
+  .dragon-head-bg {
+    width: 60vw;
+    max-width: 90vw;
+    min-width: 100px;
+  }
+  
+  .conflict-landing-heading {
+    font-size: 1.3rem;
+    padding: 0 0.2rem 0.2rem 0.2rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  
+  .login-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .quote {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    padding: 0 0.2rem;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0.2rem;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 2;
+  }
+  
+  .landing-content, .landing-main-content {
+    padding: 0.5rem 0.2rem;
+    margin: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .dragon-head-bg {
+    width: 85vw;
+    max-width: 98vw;
+    min-width: 60px;
+  }
+}
+
+@media (max-width: 400px) {
+  .conflict-landing-heading {
+    font-size: 0.95rem;
+    padding: 0 0.1rem 0.1rem 0.1rem;
+    line-height: 1.05;
+    margin-bottom: 0.3rem;
+  }
+  
+  .login-btn {
+    font-size: 0.92rem;
+    padding: 0.4rem 0.7rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .quote {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+    padding: 0 0.1rem;
+  }
+  
+  .landing-content, .landing-main-content {
+    padding: 0.2rem 0.1rem;
+    margin: 0;
+  }
 }

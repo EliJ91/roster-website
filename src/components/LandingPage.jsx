@@ -23,7 +23,17 @@ const LandingPage = () => {
           console.log('OAuth response:', data);
           if (data.success) {
             localStorage.setItem('user', JSON.stringify(data.user));
-            navigate('/view-roster'); // Redirect after login
+            
+            // Check if user is elevated/admin
+            const ELEVATED_ROLE_ID = process.env.REACT_APP_ELEVATED_ROLE_ID;
+            const isElevated = data.user?.guildRoles && ELEVATED_ROLE_ID && data.user.guildRoles.includes(ELEVATED_ROLE_ID);
+            
+            // Redirect based on user role
+            if (isElevated) {
+              navigate('/admin');
+            } else {
+              navigate('/select-roster');
+            }
           } else {
             console.error('Login failed:', data);
           }

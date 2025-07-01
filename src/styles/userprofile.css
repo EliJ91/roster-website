@@ -1,0 +1,193 @@
+/* UserProfile component styles */
+
+.user-profile-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.user-profile-pill {
+  background: linear-gradient(120deg, #23232a 80%, #18181b 100%) !important;
+  color: #f3f4f6 !important;
+  box-shadow: 0 8px 36px 0 #000a, 0 1.5px 8px #23232a !important;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  border: 1.5px solid #27272a;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.user-profile-pill:hover, .user-profile-pill:focus-within {
+  box-shadow: 0 4px 12px 0 rgba(99, 102, 241, 0.15), 0 2px 6px rgba(35, 35, 42, 0.8) !important;
+  border: 1.5px solid rgba(165, 180, 252, 0.3);
+  transform: scale(1.02);
+}
+
+.user-profile-pill img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #059669;
+  background: #18181b;
+}
+
+.user-profile-display-name {
+  color: #fbbf24;
+  font-weight: 700;
+  font-size: 1.1em;
+  letter-spacing: 0.01em;
+  text-transform: capitalize;
+}
+
+.user-profile-signout-btn {
+  background: rgba(225, 29, 72, 0.1) !important;
+  border: 1px solid rgba(225, 29, 72, 0.3);
+  padding: 0.3rem;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: all 0.25s ease;
+  font-size: 1rem;
+  color: #e11d48;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+}
+
+.user-profile-signout-btn:hover,
+.user-profile-signout-btn:focus {
+  opacity: 1;
+  background: rgba(225, 29, 72, 0.2) !important;
+  border-color: rgba(225, 29, 72, 0.5);
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.3);
+}
+
+.user-profile-elevated-badge {
+  background: #22c55e;
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: 600;
+  padding: 0.2em 0.5em;
+  border-radius: 0.5em;
+  margin-left: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Admin link button styles */
+.user-profile-admin-link {
+  background: none;
+  color: rgba(255, 255, 255, 0.6);
+  border: none;
+  padding: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: lowercase;
+  letter-spacing: 0.2px;
+  outline: none;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+}
+
+.user-profile-admin-link:hover {
+  color: rgba(255, 255, 255, 0.9);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.user-profile-admin-link:active {
+  transform: translateY(0);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .user-profile-pill {
+    padding: 0.4rem 0.8rem;
+    gap: 0.8rem;
+  }
+  
+  .user-profile-pill img {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .user-profile-display-name {
+    font-size: 1rem;
+  }
+  
+  .user-profile-elevated-badge {
+    font-size: 0.7em;
+    padding: 0.1em 0.4em;
+  }
+  
+  .user-profile-admin-link {
+    font-size: 0.85rem;
+  }
+}
+
+.signout-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background: #23232a;
+  color: #f3f4f6;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px #0008;
+  z-index: 20;
+  transition: opacity 0.2s;
+}
+
+/* Responsive tweaks for user profile */
+@media (max-width: 600px) {
+  .user-profile-pill {
+    position: absolute !important;
+    top: 1.2rem !important;
+    right: 1.2rem !important;
+    left: auto !important;
+    margin: 0 !important;
+    z-index: 20 !important;
+    background: #23232a !important;
+    box-shadow: 0 2px 8px #000a !important;
+    min-width: unset !important;
+    max-width: 90vw !important;
+    width: auto !important;
+    flex-direction: row !important;
+    padding: 0.22rem 0.6rem !important;
+    gap: 0.5rem !important;
+    font-size: 0.98rem !important;
+  }
+  
+  .user-profile-pill img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .user-profile-pill {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.98rem;
+  }
+}

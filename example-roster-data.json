@@ -1,0 +1,223 @@
+[
+  {
+    "author": "admin",
+    "createdAt": "2025-07-01T15:30:45.123Z",
+    "name": "Weekly Siege Battle",
+    "description": "Large scale siege warfare event - bring your A-game!",
+    "parties": [
+      {
+        "name": "Main Party",
+        "description": "Primary assault force",
+        "positions": [
+          {
+            "role": "Main Caller",
+            "weapon": "Great Axe",
+            "buildNotes": "Heavy armor tank build, focus on crowd control and positioning"
+          },
+          {
+            "role": "Backup Caller",
+            "weapon": "Sword & Shield",
+            "buildNotes": "Secondary tank, ready to take over calling if needed"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Fire Staff",
+            "buildNotes": "High damage mage build with Meteor and Fireball"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Ice Gauntlet",
+            "buildNotes": "Crowd control mage, focus on Ice Spike and Ice Storm"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Musket", 
+            "buildNotes": "Long range DPS, focus on Power Shot and Sticky Bomb"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Bow",
+            "buildNotes": "Mobile DPS with Penetrating Shot and Rain of Vengeance"
+          },
+          {
+            "role": "Healer",
+            "weapon": "Life Staff",
+            "buildNotes": "Primary healer with Beacon and Sacred Ground"
+          },
+          {
+            "role": "Healer",
+            "weapon": "Life Staff",
+            "buildNotes": "Secondary healer with Divine Embrace and Lights Embrace"
+          },
+          {
+            "role": "Support",
+            "weapon": "Void Gauntlet",
+            "buildNotes": "Debuff support with Orb of Decay and Petrifying Scream"
+          },
+          {
+            "role": "Tank",
+            "weapon": "Sword & Shield",
+            "buildNotes": "Front line tank with Shield Bash and Defiant Stance"
+          },
+          {
+            "role": "Tank",
+            "weapon": "War Hammer",
+            "buildNotes": "CC tank with Gravity Well and Shockwave"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Hatchet",
+            "buildNotes": "Berserker DPS with Social Distancing and Raging Torrent"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Spear",
+            "buildNotes": "Mobile DPS with Javelin and Sweep"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Rapier",
+            "buildNotes": "High mobility DPS with Fleche and Riposte"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Blunderbuss",
+            "buildNotes": "Close range DPS with Blast Shot and Mortar Charge"
+          },
+          {
+            "role": "Support",
+            "weapon": "Void Gauntlet",
+            "buildNotes": "Healing support with Essence Rupture and Oblivion"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Great Sword",
+            "buildNotes": "Heavy DPS with Skyward Slash and Crosscut"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Flail",
+            "buildNotes": "Versatile DPS with Spinning Chain and Meteor"
+          },
+          {
+            "role": "Healer",
+            "weapon": "Life Staff",
+            "buildNotes": "Utility healer with Orb of Protection and Splash of Light"
+          },
+          {
+            "role": "Tank",
+            "weapon": "Tower Shield",
+            "buildNotes": "Defensive tank with Shield Wall and Fortified Recovery"
+          }
+        ]
+      },
+      {
+        "name": "Flanking Party",
+        "description": "Secondary assault team for flanking maneuvers",
+        "positions": [
+          {
+            "role": "Main Caller",
+            "weapon": "Great Axe",
+            "buildNotes": "Flanking squad leader with mobility focus"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Bow",
+            "buildNotes": "Mobile archer for hit and run tactics"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Musket",
+            "buildNotes": "Sniper support for long range picks"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Hatchet",
+            "buildNotes": "Fast melee DPS for quick strikes"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Rapier",
+            "buildNotes": "High mobility assassin build"
+          },
+          {
+            "role": "Healer",
+            "weapon": "Life Staff",
+            "buildNotes": "Mobile healer with light armor"
+          },
+          {
+            "role": "Support",
+            "weapon": "Void Gauntlet",
+            "buildNotes": "Debuff support for enemy weakening"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Spear",
+            "buildNotes": "Flanking spear user with mobility"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Great Sword",
+            "buildNotes": "Heavy flanking DPS"
+          },
+          {
+            "role": "Tank",
+            "weapon": "Sword & Shield",
+            "buildNotes": "Mobile tank for flanking protection"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Fire Staff",
+            "buildNotes": "AoE mage for crowd clearing"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Ice Gauntlet",
+            "buildNotes": "CC mage for enemy control"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Blunderbuss",
+            "buildNotes": "Close quarters combat specialist"
+          },
+          {
+            "role": "Healer",
+            "weapon": "Life Staff",
+            "buildNotes": "Secondary healer for squad support"
+          },
+          {
+            "role": "Support",
+            "weapon": "Void Gauntlet",
+            "buildNotes": "Utility support with enemy debuffs"
+          },
+          {
+            "role": "DPS",
+            "weapon": "War Hammer",
+            "buildNotes": "CC DPS for enemy disruption"
+          },
+          {
+            "role": "Tank",
+            "weapon": "Tower Shield",
+            "buildNotes": "Defensive anchor for flanking team"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Flail",
+            "buildNotes": "Versatile DPS for adaptable combat"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Bow",
+            "buildNotes": "Secondary archer for ranged support"
+          },
+          {
+            "role": "DPS",
+            "weapon": "Hatchet",
+            "buildNotes": "Backup berserker for sustained damage"
+          }
+        ]
+      }
+    ],
+    "id": "1719849045123-abc123def"
+  }
+]

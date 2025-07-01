@@ -1,0 +1,88 @@
+[
+  {
+    "author": "admin",
+    "createdAt": "2025-07-01T15:30:45.123Z",
+    "name": "Partial Roster Example",
+    "description": "Example showing a roster with only some positions filled",
+    "parties": [
+      {
+        "name": "Main Party",
+        "description": "Primary assault force - partially filled",
+        "positions": [
+          {
+            "role": "Main Caller",
+            "weapon": "GA (DEF)",
+            "buildNotes": "Heavy armor tank build, focus on crowd control and positioning"
+          },
+          {
+            "role": "Backup Caller",
+            "weapon": "Clump Tank",
+            "buildNotes": "Secondary tank, ready to take over calling if needed"
+          },
+          {
+            "role": "Healers",
+            "weapon": "Hallowfall",
+            "buildNotes": "Primary healer with Beacon and Sacred Ground"
+          },
+          {
+            "role": "MDPS",
+            "weapon": "Infernal Scythe",
+            "buildNotes": "High damage melee with focus on positioning"
+          },
+          {
+            "role": "RDPS",
+            "weapon": "Siegebow",
+            "buildNotes": "Long range DPS with focus on priority targets"
+          }
+        ]
+      }
+    ],
+    "id": "1719849045123-partial123"
+  },
+  {
+    "author": "admin",
+    "createdAt": "2025-07-01T15:25:30.456Z",
+    "name": "Full 40-Man Roster",
+    "description": "Complete roster with two full parties",
+    "parties": [
+      {
+        "name": "Main Party",
+        "description": "Primary assault force",
+        "positions": [
+          {
+            "role": "Main Caller",
+            "weapon": "GA (DEF)",
+            "buildNotes": "Primary tank and shot caller"
+          },
+          {
+            "role": "Backup Caller",
+            "weapon": "Heavy Mace",
+            "buildNotes": "Secondary tank and backup caller"
+          }
+        ]
+      },
+      {
+        "name": "Flanking Party", 
+        "description": "Secondary assault team",
+        "positions": [
+          {
+            "role": "Main Caller",
+            "weapon": "Clump Tank",
+            "buildNotes": "Flanking squad leader"
+          },
+          {
+            "role": "RDPS",
+            "weapon": "Siegebow",
+            "buildNotes": "Mobile archer for flanking"
+          },
+          {
+            "role": "MDPS", 
+            "weapon": "Realmbreaker",
+            "buildNotes": "Fast melee DPS for quick strikes"
+          }
+        ]
+      }
+    ],
+    "id": "1719849045123-full40man"
+  }
+]

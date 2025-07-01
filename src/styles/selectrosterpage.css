@@ -1,0 +1,128 @@
+/* SelectRosterPage component styles */
+
+.select-roster-page {
+  padding: 2rem;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.select-roster-heading {
+  font-family: 'UnifrakturCook', 'Cinzel', serif;
+  font-size: clamp(1.1rem, 4vw, 2.6rem);
+  color: #fff;
+  text-shadow: 0 4px 24px #000a, 0 0 8px #fff, 2px 2px 0 #23232a;
+  margin-bottom: 0;
+  letter-spacing: 0.18em;
+  text-align: center;
+  filter: drop-shadow(0 2px 8px #000a);
+  line-height: 1.1;
+  word-break: break-word;
+  padding: 0.7em 0.2em 0.7em 0.2em;
+  border-radius: 4px;
+  max-width: 700px;
+  margin: 2.5rem auto 2.5rem auto;
+}
+
+.select-roster-table-container {
+  width: 100%;
+  max-width: 1200px;
+  overflow-x: auto;
+  margin-bottom: 5px !important;
+}
+
+.select-roster-table {
+  min-width: 600px;
+  width: 100%;
+  background: rgba(24,24,27,0.92);
+  border-radius: 8px;
+  border-collapse: separate !important;
+  border-spacing: 0 5px;
+  box-shadow: 0 2px 12px #0004;
+  margin: 0 auto 1.5rem auto;
+  border-radius: 1.1rem;
+  box-shadow: 0 2px 16px #0005;
+  background: #23232a;
+}
+
+.select-roster-table thead {
+  position: relative;
+  z-index: 2;
+  background: #18181b;
+}
+
+.select-roster-table tbody {
+  display: table-row-group;
+}
+
+.select-roster-table th, .select-roster-table td {
+  border-bottom: none !important;
+  padding: 0.8em 0.7em;
+}
+
+.select-roster-table tbody tr {
+  border-bottom: none;
+}
+
+.select-roster-table tbody td {
+  border-bottom: none;
+}
+
+.select-roster-table tbody tr:hover {
+  background: #18181b !important;
+  box-shadow: 0 2px 12px #6366f122;
+  transition: background 0.18s, box-shadow 0.18s;
+}
+
+.select-roster-table th {
+  color: #f59e42;
+  font-size: 1.1em;
+  font-weight: 700;
+  background: #23232a;
+  min-width: 120px;
+  border-bottom: none !important;
+}
+
+.select-roster-table td {
+  color: #f3f4f6;
+  font-size: 1em;
+  background: #18181b;
+}
+
+.select-roster-card {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(120deg, #23232a 80%, #18181b 100%);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 36px 0 #000a, 0 1.5px 8px #23232a;
+  padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+  margin: 1rem auto 2.5rem auto;
+  max-width: 1200px;
+  width: 100%;
+  transition: box-shadow 0.22s, border 0.22s;
+}
+
+.select-roster-card:hover, .select-roster-card:focus-within {
+  box-shadow: 0 12px 48px 0 #6366f1cc, 0 2px 12px #23232a;
+  border: 1.5px solid #a5b4fc;
+}
+
+.select-roster-topbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.select-roster-actions-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 0.75rem auto;
+}

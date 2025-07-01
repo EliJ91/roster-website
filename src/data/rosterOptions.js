@@ -36,6 +36,12 @@ export const WEAPON_OPTIONS = [
 export const BUILD_NOTES_PLACEHOLDER = `Type build notes here (e.g. required gear, playstyle, special instructions, etc.)`;
 
 export const WEAPON_OPTIONS_BY_ROLE = {
+  'Main Caller': [
+    '1H Arcane (Mimic)', '1H Arcane(Cleanse)', '1H Hammer', 'Bedrock', 'Black Monk Staff', 'Camlann Mace', 'Clump Tank', 'D Tank', 'Dreadstorm Mace', 'Dreadstorm Monarch', 'Forge Hammers', 'GA (Cleanse)', 'GA (DEF)', 'GA (OFF)', 'Glaive', 'Golem', 'Grailseeker', 'Great Hammer', 'Grovekeeper', 'Hand of Justice', 'Heavy Mace', 'Hoarfrost', 'Icicle', 'Incubus Mace', 'Lifecurse(DTank)', 'Looter', 'Mace', 'Morning Star', 'Phantom Twinblade', 'Polehammer', 'Primal', 'Soulscythe', 'Staff of Balance', 'Tombhammer', 'Witchwork(Tank)', 'Stillgaze', 'Truebolt'
+  ],
+  'Backup Caller': [
+    '1H Arcane (Mimic)', '1H Arcane(Cleanse)', '1H Hammer', 'Bedrock', 'Black Monk Staff', 'Camlann Mace', 'Clump Tank', 'D Tank', 'Dreadstorm Mace', 'Dreadstorm Monarch', 'Forge Hammers', 'GA (Cleanse)', 'GA (DEF)', 'GA (OFF)', 'Glaive', 'Golem', 'Grailseeker', 'Great Hammer', 'Grovekeeper', 'Hand of Justice', 'Heavy Mace', 'Hoarfrost', 'Icicle', 'Incubus Mace', 'Lifecurse(DTank)', 'Looter', 'Mace', 'Morning Star', 'Phantom Twinblade', 'Polehammer', 'Primal', 'Soulscythe', 'Staff of Balance', 'Tombhammer', 'Witchwork(Tank)', 'Stillgaze', 'Truebolt'
+  ],
   Tanks: [
     '1H Arcane (Mimic)', '1H Arcane(Cleanse)', '1H Hammer', 'Bedrock', 'Black Monk Staff', 'Camlann Mace', 'Clump Tank', 'D Tank', 'Dreadstorm Mace', 'Dreadstorm Monarch', 'Forge Hammers', 'GA (Cleanse)', 'GA (DEF)', 'GA (OFF)', 'Glaive', 'Golem', 'Grailseeker', 'Great Hammer', 'Grovekeeper', 'Hand of Justice', 'Heavy Mace', 'Hoarfrost', 'Icicle', 'Incubus Mace', 'Lifecurse(DTank)', 'Looter', 'Mace', 'Morning Star', 'Phantom Twinblade', 'Polehammer', 'Primal', 'Soulscythe', 'Staff of Balance', 'Tombhammer', 'Witchwork(Tank)', 'Stillgaze', 'Truebolt'
   ],

@@ -1,11 +1,40 @@
-/* SignUpButton component styles extracted from styles.css */
+/* SignUpButton component styles */
 
-button.signup-btn {
-  background: #2563eb;
-  color: #fff;
-  border: 1px solid #1d4ed8;
-  box-shadow: 0 0 8px #2563eb;
+.signup-btn {
+  background: #2563eb !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 0.7em 2.2em !important;
+  cursor: pointer !important;
+  font-size: inherit !important;
+  font-weight: normal !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  transition: transform 0.2s ease, background-color 0.2s ease !important;
+  transform: scale(1) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
-button.signup-btn:hover {
-  background: #1d4ed8;
+
+.signup-btn:hover:not(:disabled) {
+  transform: scale(1.05) !important;
+}
+
+.signup-btn:active:not(:disabled) {
+  background: #22c55e !important;
+}
+
+.signup-btn:disabled {
+  opacity: 0.7 !important;
+  cursor: not-allowed !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .signup-btn {
+    padding: 0.6em 1.8em !important;
+    font-size: 0.9em !important;
+  }
 }

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { createEvent } from "../utils/firestoreEvents";
+import React, { useState, useEffect } from "react";
+import { createRoster } from "../utils/firestoreEvents";
 import UserProfile from './UserProfile';
-import './styles.css';
 import { ROLE_OPTIONS, WEAPON_OPTIONS_BY_ROLE, BUILD_NOTES_PLACEHOLDER } from '../data/rosterOptions';
 
 // Default to 1 roster, each with 20 positions
@@ -22,6 +21,25 @@ export default function CreateRosterPage({ currentUser }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+
+  // Auto-dismiss success and error messages after 4 seconds
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => {
+        setSuccess(false);
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError("");
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   // Add a new roster (max 5 for sanity)
   const addRoster = () => {
@@ -65,18 +83,54 @@ export default function CreateRosterPage({ currentUser }) {
     setLoading(true);
     setError("");
     setSuccess(false);
+    
     try {
-      for (const r of rosters) {
-        await createEvent({
-          author: currentUser?.discordId || "admin",
-          name: r.name,
-          description: r.description,
-          parties: r.parties,
-        });
+      // Get event name and description from first roster
+      const eventName = rosters[0].eventName || '';
+      const eventDescription = rosters[0].description || '';
+      
+      // Validate required fields
+      if (!eventName || eventName.trim() === '') {
+        throw new Error('Event name is required');
       }
+      
+      // Convert rosters to parties format and filter out empty positions
+      const parties = rosters.map((roster, idx) => ({
+        name: idx === 0 ? 'Main Party' : roster.name,
+        description: roster.description || '',
+        positions: roster.positions.filter(pos => 
+          pos.role && pos.role.trim() !== '' && 
+          pos.weapon && pos.weapon.trim() !== ''
+        )
+      }));
+
+      // Validate that we have at least one position
+      const totalPositions = parties.reduce((sum, party) => sum + party.positions.length, 0);
+      if (totalPositions === 0) {
+        throw new Error('Please add at least one position with role and weapon selected');
+      }
+
+      const rosterData = {
+        author: currentUser?.discordId || currentUser?.username || currentUser?.id || "admin",
+        eventName: eventName,
+        eventDescription: eventDescription,
+        parties: parties,
+        createdBy: currentUser ? {
+          discordId: currentUser.discordId,
+          id: currentUser.id,
+          username: currentUser.username,
+          displayName: currentUser.displayName,
+          nickname: currentUser.nickname,
+          nick: currentUser.nick
+        } : null
+      };
+
+      const rosterId = await createRoster(rosterData);
+      
       setSuccess(true);
+      // Reset form
       setRosters([
-        { name: '', description: '', positions: defaultPositions }
+        { name: '', description: '', positions: defaultPositions.map(p => ({ ...p })) }
       ]);
     } catch (err) {
       setError("Failed to create roster: " + err.message);
@@ -89,17 +143,18 @@ export default function CreateRosterPage({ currentUser }) {
       <div className="user-profile-bar">
         <UserProfile />
       </div>
-      <div className="roster-topbar">
+      <div className="create-roster-topbar">
         <div>
-          <h1 className="conflict-army-heading">Create Roster</h1>
+          <h1 className="create-roster-heading">Create Roster</h1>
         </div>
       </div>
-      <form onSubmit={handleSubmit} className="roster-form">
-        <div className="roster-form-row">
-          <div className="roster-author-col">
-            <label className="roster-author-label">Author:</label>
+      <div className="create-roster-card">
+        <form onSubmit={handleSubmit} className="create-roster-form">
+        <div className="create-roster-form-row">
+          <div className="create-roster-author-col">
+            <label className="create-roster-author-label">Author:</label>
             <input
-              className="roster-author-input"
+              className="create-roster-author-input"
               value={
                 (currentUser?.nickname || currentUser?.displayName || currentUser?.username || 'Unknown')
                   .replace(/^(\\w)/, c => c.toUpperCase())
@@ -108,10 +163,10 @@ export default function CreateRosterPage({ currentUser }) {
               readOnly
             />
           </div>
-          <div className="roster-event-col">
-            <label className="roster-label">Event Name:</label>
+          <div className="create-roster-event-col">
+            <label className="create-roster-label">Event Name:</label>
             <input
-              className="roster-event-input"
+              className="create-roster-event-input"
               value={rosters[0].eventName || ''}
               onChange={e => {
                 const newRosters = [...rosters];
@@ -122,7 +177,7 @@ export default function CreateRosterPage({ currentUser }) {
               placeholder="Event Name"
             />
           </div>
-          <div className="roster-notes-col">
+          <div className="create-roster-notes-col">
             <textarea
               placeholder="Write your notes here..."
               value={rosters[0].description}
@@ -131,21 +186,21 @@ export default function CreateRosterPage({ currentUser }) {
           </div>
         </div>
         {rosters.map((roster, idx) => (
-          <div key={idx} className="roster-table-container" style={{ marginBottom: 32, marginTop: idx === 0 ? 8 : 32 }}>
-            <div className="roster-form-row">
+          <div key={idx} className="create-roster-table-container" style={{ marginBottom: 32, marginTop: idx === 0 ? 8 : 32 }}>
+            <div className="create-roster-form-row">
               {idx === 0 ? null : (
                 <>
-                  <div className="roster-event-col">
-                    <label className="roster-label">Party Name:</label>
+                  <div className="create-roster-event-col">
+                    <label className="create-roster-label">Party Name:</label>
                     <input
-                      className="roster-event-input"
+                      className="create-roster-event-input"
                       value={roster.name}
                       onChange={e => updateRosterField(idx, 'name', e.target.value)}
                       required
                       placeholder="Party Name"
                     />
                   </div>
-                  <div className="roster-notes-col">
+                  <div className="create-roster-notes-col">
                     <textarea
                       placeholder="Write your notes here..."
                       value={roster.description}
@@ -155,7 +210,7 @@ export default function CreateRosterPage({ currentUser }) {
                 </>
               )}
             </div>
-            <table className="roster-table">
+            <table className="create-roster-table">
               <thead>
                 <tr>
                   <th>Role</th>
@@ -176,7 +231,6 @@ export default function CreateRosterPage({ currentUser }) {
                         <select
                           value={pos.role}
                           onChange={e => updatePosition(idx, posIdx, 'role', e.target.value)}
-                          required
                           className={roleClass}
                         >
                           <option value="">-- Select Role --</option>
@@ -189,7 +243,6 @@ export default function CreateRosterPage({ currentUser }) {
                         <select
                           value={pos.weapon || ''}
                           onChange={e => updatePosition(idx, posIdx, 'weapon', e.target.value)}
-                          required
                         >
                           <option value="">-- Select Weapon --</option>
                           {weaponOptions.map(w => (
@@ -211,9 +264,9 @@ export default function CreateRosterPage({ currentUser }) {
             </table>
           </div>
         ))}
-        <div className="roster-actions" style={{ marginTop: 0 }}>
+        <div className="create-roster-actions" style={{ marginTop: 0 }}>
           <button type="submit" disabled={loading}>
-            {loading ? "Saving..." : "Save"}
+            {loading ? "Saving to Database..." : "Save Roster"}
           </button>
           {rosters.length < 5 && (
             <button
@@ -225,9 +278,10 @@ export default function CreateRosterPage({ currentUser }) {
             </button>
           )}
         </div>
-        {success && <div className="success-msg">Rosters created!</div>}
+        {success && <div className="success-msg">Roster saved to database successfully!</div>}
         {error && <div className="error-msg">{error}</div>}
       </form>
+      </div>
     </div>
   );
 }

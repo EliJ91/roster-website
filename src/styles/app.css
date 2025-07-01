@@ -1,0 +1,158 @@
+/* =================================================================== */
+/* APP.CSS - MAIN STYLESHEET FOR ROSTER WEBSITE                       */
+/* =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Cinzel:wght@700&display=swap');
+
+/* =================================================================== */
+/* GLOBAL STYLES                                                      */
+/* =================================================================== */
+
+body {
+  background: #18181b !important;
+  color: #f3f4f6;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* =================================================================== */
+/* BACKGROUND & VIDEO STYLES                                          */
+/* =================================================================== */
+
+.background-smoke-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.background-overlay {
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100vw; 
+  height: 100vh;
+  z-index: 0;
+  background: rgba(24,24,27,0.82);
+  backdrop-filter: blur(2.5px) brightness(0.95);
+  pointer-events: none;
+}
+
+/* Prevent containers from covering the smoke video */
+.landing-page-container, .dragon-bg, .main-content, .landing-content {
+  background: none !important;
+  z-index: 1;
+}
+
+/* =================================================================== */
+/* USER PROFILE COMPONENT STYLES                                      */
+/* =================================================================== */
+
+.user-profile-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  border: 2px solid #e11d48;
+}
+
+.user-profile-pill {
+  background: #27272a !important;
+  color: #f3f4f6 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25) !important;
+}
+
+/* =================================================================== */
+/* BUTTON STYLES                                                      */
+/* =================================================================== */
+
+/* Icon button hover grow effect */
+.icon-btn {
+  transition: transform 0.18s cubic-bezier(.7,1.7,.5,1), color 0.18s;
+}
+
+.icon-btn:hover, .icon-btn:focus {
+  transform: scale(1.22);
+  z-index: 2;
+}
+
+/* Submit buttons */
+button[type="submit"] {
+  background: #e11d48;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7em 2.2em;
+  font-size: 1.2em;
+  cursor: pointer;
+  box-shadow: 0 2px 12px #0004;
+  transition: background 0.18s, transform 0.18s;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background: #be123c;
+  transform: scale(1.04);
+}
+
+/* =================================================================== */
+/* MESSAGE STYLES                                                     */
+/* =================================================================== */
+
+.success-msg {
+  color: #22c55e;
+  font-weight: 700;
+  margin-top: 1em;
+  font-size: 1.1em;
+}
+
+.error-msg {
+  color: #e11d48;
+  font-weight: 700;
+  margin-top: 1em;
+  font-size: 1.1em;
+}
+
+/* =================================================================== */
+/* RESPONSIVE DESIGN - USER PROFILE                                   */
+/* =================================================================== */
+
+@media (max-width: 600px) {
+  .user-profile-pill {
+    position: absolute !important;
+    top: 1.2rem !important;
+    right: 1.2rem !important;
+    left: auto !important;
+    margin: 0 !important;
+    z-index: 20 !important;
+    background: #23232a !important;
+    box-shadow: 0 2px 8px #000a !important;
+    min-width: unset !important;
+    max-width: 90vw !important;
+    width: auto !important;
+    flex-direction: row !important;
+    padding: 0.22rem 0.6rem !important;
+    gap: 0.5rem !important;
+    font-size: 0.98rem !important;
+  }
+  
+  .user-profile-pill img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .user-profile-pill {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.98rem;
+  }
+}
