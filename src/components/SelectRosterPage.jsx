@@ -3,21 +3,26 @@ import { useNavigate } from 'react-router-dom';
 import { mockRosterData } from '../test-data/mockRosterData';
 import '../styles/selectrosterpage.css';
 
-// Helper to get users who signed up for a weapon and role, excluding already assigned users
-function getUsersForWeapon(weapon, role, assignedUserIds, signups) {
+// Helper to get users who signed up for a weapon, excluding already assigned users
+function getUsersForWeapon(weapon, assignedUserIds, signups) {
+	// First check if signups exist and is an array
+	if (!Array.isArray(signups)) {
+		return [];
+	}
+	
 	return signups.filter((u) => {
 		// Check if user is already assigned
 		if (assignedUserIds.includes(u.id)) {
 			return false;
 		}
 		
-		// Check if the user signed up for this role
-		if (!u.roles.includes(role)) {
+		// Check if the user has weapons listed
+		if (!Array.isArray(u.weapons)) {
 			return false;
 		}
 		
-		// Check if the user signed up for this weapon for this role
-		return u.weaponsByRole[role] && u.weaponsByRole[role].includes(weapon);
+		// Check if the user signed up for this weapon
+		return u.weapons.includes(weapon);
 	});
 }
 
@@ -144,28 +149,34 @@ const SelectRosterPage = (props) => {
 									const signupsData = await signupsRes.json();
 									
 									// Transform the signup data to match the format expected by the component
-									const formattedSignups = signupsData.signups?.map(signup => {
-										// Create an array of weapons from all roles
-										const allWeapons = [];
-										Object.entries(signup.weaponsByRole || {}).forEach(([role, weapons]) => {
-											weapons.forEach(weapon => {
-												if (!allWeapons.includes(weapon)) {
-													allWeapons.push(weapon);
-												}
-											});
-										});
-										
-										return {
-											id: signup.userId,
-											discordId: signup.discordId,
-											name: signup.name,
-											nickname: signup.name + (signup.guildTag ? ` ${signup.guildTag}` : ''),
-											roles: signup.roles || [],
-											weapons: allWeapons,
-											weaponsByRole: signup.weaponsByRole || {},
-											timestamp: signup.timestamp
-										};
-									}) || [];
+									const formattedSignups = Array.isArray(signupsData?.signups) 
+										? signupsData.signups.map(signup => {
+											// Create an array of weapons from all roles
+											const allWeapons = [];
+											if (signup.weaponsByRole && typeof signup.weaponsByRole === 'object') {
+												Object.entries(signup.weaponsByRole).forEach(([role, weapons]) => {
+													if (Array.isArray(weapons)) {
+														weapons.forEach(weapon => {
+															if (!allWeapons.includes(weapon)) {
+																allWeapons.push(weapon);
+															}
+														});
+													}
+												});
+											}
+											
+											return {
+												id: signup.userId || `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+												discordId: signup.discordId,
+												name: signup.name || 'Unknown',
+												nickname: (signup.name || 'Unknown') + (signup.guildTag ? ` ${signup.guildTag}` : ''),
+												roles: Array.isArray(signup.roles) ? signup.roles : [],
+												weapons: allWeapons,
+												weaponsByRole: signup.weaponsByRole || {},
+												timestamp: signup.timestamp
+											};
+										})
+										: [];
 									
 									setSignups(formattedSignups);
 								}
@@ -306,28 +317,34 @@ const SelectRosterPage = (props) => {
 								const signupsData = await signupsRes.json();
 								
 								// Transform the signup data to match the format expected by the component
-								const formattedSignups = signupsData.signups?.map(signup => {
-									// Create an array of weapons from all roles
-									const allWeapons = [];
-									Object.entries(signup.weaponsByRole || {}).forEach(([role, weapons]) => {
-										weapons.forEach(weapon => {
-											if (!allWeapons.includes(weapon)) {
-												allWeapons.push(weapon);
-											}
-										});
-									});
-									
-									return {
-										id: signup.userId,
-										discordId: signup.discordId,
-										name: signup.name,
-										nickname: signup.name + (signup.guildTag ? ` ${signup.guildTag}` : ''),
-										roles: signup.roles || [],
-										weapons: allWeapons,
-										weaponsByRole: signup.weaponsByRole || {},
-										timestamp: signup.timestamp
-									};
-								}) || [];
+								const formattedSignups = Array.isArray(signupsData?.signups) 
+									? signupsData.signups.map(signup => {
+										// Create an array of weapons from all roles
+										const allWeapons = [];
+										if (signup.weaponsByRole && typeof signup.weaponsByRole === 'object') {
+											Object.entries(signup.weaponsByRole).forEach(([role, weapons]) => {
+												if (Array.isArray(weapons)) {
+													weapons.forEach(weapon => {
+														if (!allWeapons.includes(weapon)) {
+															allWeapons.push(weapon);
+														}
+													});
+												}
+											});
+										}
+										
+										return {
+											id: signup.userId || `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+											discordId: signup.discordId,
+											name: signup.name || 'Unknown',
+											nickname: (signup.name || 'Unknown') + (signup.guildTag ? ` ${signup.guildTag}` : ''),
+											roles: Array.isArray(signup.roles) ? signup.roles : [],
+											weapons: allWeapons,
+											weaponsByRole: signup.weaponsByRole || {},
+											timestamp: signup.timestamp
+										};
+									})
+									: [];
 								
 								setSignups(formattedSignups);
 							}
@@ -539,14 +556,14 @@ const SelectRosterPage = (props) => {
 																						return selectedUser ? [
 																							<option key={selectedUser.id} value={selectedUser.id}>{selectedUser.nickname}</option>,
 																							...getUsersForWeapon(position.weapon, assignedUserIds, signups).filter(u => u.id !== selectedUser.id).map(u => (
-																								<option key={u.id} value={u.id}>{u.nickname}</option>
+																								<option key={u.id} value={u.id}>{u.nickname || u.name || 'Unknown'}</option>
 																							))
 																						] : getUsersForWeapon(position.weapon, assignedUserIds, signups).map(u => (
-																							<option key={u.id} value={u.id}>{u.nickname}</option>
+																							<option key={u.id} value={u.id}>{u.nickname || u.name || 'Unknown'}</option>
 																						));
 																					})()
 																				: getUsersForWeapon(position.weapon, assignedUserIds, signups).map(u => (
-																						<option key={u.id} value={u.id}>{u.nickname}</option>
+																						<option key={u.id} value={u.id}>{u.nickname || u.name || 'Unknown'}</option>
 																					))}
 																		</select>
 																	) : isPositionFilled ? (
