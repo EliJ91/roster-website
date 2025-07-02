@@ -1,0 +1,1169 @@
+{
+  "eventName": "Hawkinze Sheet",
+  "eventDescription": "Comprehensive battle roster with multi-party coordination and specialized mount support",
+  "author": "Hawkinze",
+  "parties": [
+    {
+      "partyName": "Main Party",
+      "positions": [
+        {
+          "role": "Main Caller",
+          "weapon": "Clump Tank",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Don't die"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Heavy Mace",
+          "signedUpUser": "",
+          "head": [
+            "Hellion",
+            "Judi"
+          ],
+          "chest": [
+            "Knight",
+            "Guardian"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Heavy Mace",
+          "signedUpUser": "",
+          "head": [
+            "Hellion",
+            "Judi"
+          ],
+          "chest": [
+            "Knight",
+            "Guardian"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "1H Hammer",
+          "signedUpUser": "",
+          "head": [
+            "Hellion"
+          ],
+          "chest": [
+            "Duskweaver"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "GA (OFF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Support",
+          "weapon": "Lifecurse(DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Support",
+          "weapon": "Oathkeepers",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Support",
+          "weapon": "Locus",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Support",
+          "weapon": "Carving Sword",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Support",
+          "weapon": "Realmbreaker SUP",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Realmbreaker",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Infernal Scythe",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Spirithunter",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Hellfire",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Spiked",
+          "signedUpUser": "",
+          "head": [
+            "Mistwalker"
+          ],
+          "chest": [
+            "Tenacity",
+            "Hunter Jacket"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Healer",
+          "weapon": "Forge/Blight",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Feyscale"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Guardian"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Chariot",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        }
+      ]
+    },
+    {
+      "partyName": "Party Two",
+      "positions": [
+        {
+          "role": "Backup Caller",
+          "weapon": "Golem",
+          "signedUpUser": "",
+          "head": [
+            "Cleric"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Hunter"
+          ],
+          "buildNotes": "Can Also be HAND OF JUSTICE"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Staff of Balance",
+          "signedUpUser": "",
+          "head": [
+            "Hellion"
+          ],
+          "chest": [
+            "Duskweaver"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "1H Hammer",
+          "signedUpUser": "",
+          "head": [
+            "Hellion"
+          ],
+          "chest": [
+            "Duskweaver"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Heavy Mace",
+          "signedUpUser": "",
+          "head": [
+            "Hellion",
+            "Judi"
+          ],
+          "chest": [
+            "Guardian"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "1H Arcane(Cleanse)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Bedrock",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Guard Rune"
+        },
+        {
+          "role": "Support",
+          "weapon": "Locus",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Support",
+          "weapon": "Rotcaller (Support)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Pierce"
+        },
+        {
+          "role": "Support",
+          "weapon": "Oathkeepers",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Guard Rune"
+        },
+        {
+          "role": "Support",
+          "weapon": "Damnation",
+          "signedUpUser": "",
+          "head": [
+            "Feyscale"
+          ],
+          "chest": [
+            "Royal Armor"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Realmbreaker",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Realmbreaker",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Infinity Blade",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Ursine Maulers",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Astral Staff",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "idc don't die"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Healer",
+          "weapon": "Forge/Blight",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Feyscale"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Guardian"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Sarcophogus"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Sarcophogus"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Sarcophogus"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Behemoth",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        }
+      ]
+    },
+    {
+      "partyName": "Party Three",
+      "positions": [
+        {
+          "role": "Tank",
+          "weapon": "Staff of Balance",
+          "signedUpUser": "",
+          "head": [
+            "Hellion"
+          ],
+          "chest": [
+            "Duskweaver"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Icicle",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Duskweaver"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Heavy Mace",
+          "signedUpUser": "",
+          "head": [
+            "Hellion",
+            "Judi"
+          ],
+          "chest": [
+            "Guardian"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Dreadstorm Mace",
+          "signedUpUser": "",
+          "head": [
+            "Hellion"
+          ],
+          "chest": [
+            "Guardian"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "GA (DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "1H Arcane(Cleanse)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Support",
+          "weapon": "Oathkeepers",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Support",
+          "weapon": "Rootbound",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Realmbreaker",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Infinity Blade",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Astral Staff",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "idc don't die"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Guardian"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Sarcophogus"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Sarcophogus"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Sarcophogus"
+        },
+        {
+          "role": "Mount",
+          "weapon": "Bloodletter",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        }
+      ]
+    },
+    {
+      "partyName": "CHAD BM PARTY",
+      "positions": [
+        {
+          "role": "Battlemount",
+          "weapon": "Fill Any",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Eagle",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Spider",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Bear",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Juggernaut",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Bastion",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Basi",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Ballista",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Mount",
+          "weapon": "Beetle",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Ent",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Battlemount",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        }
+      ]
+    }
+  ]
+}

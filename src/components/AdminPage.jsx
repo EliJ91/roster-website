@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserProfile from './UserProfile';
 import ManageRosters from './ManageRosters';
+import SelectPlayers from './SelectPlayers';
 
 const AdminPage = ({ currentUser }) => {
   const navigate = useNavigate();
-  const [currentView, setCurrentView] = useState('dashboard'); // 'dashboard' or 'manage-rosters'
+  const [currentView, setCurrentView] = useState('dashboard'); // 'dashboard', 'manage-rosters', or 'select-players'
 
   // Check if user is elevated/admin
   const ELEVATED_ROLE_ID = process.env.REACT_APP_ELEVATED_ROLE_ID;
@@ -24,6 +25,14 @@ const AdminPage = ({ currentUser }) => {
 
   const handleManageRosters = () => {
     setCurrentView('manage-rosters');
+  };
+
+  const handleSelectPlayers = () => {
+    setCurrentView('select-players');
+  };
+
+  const handleCreateRoster = () => {
+    navigate('/create-roster');
   };
 
   const handleBackToDashboard = () => {
@@ -55,20 +64,20 @@ const AdminPage = ({ currentUser }) => {
               </div>
 
               <div className="admin-block">
-                <div className="admin-block-icon">👥</div>
-                <h3 className="admin-block-title">User Management</h3>
-                <p className="admin-block-description">Manage user permissions and roles</p>
-                <button className="admin-block-button" disabled>
-                  Coming Soon
+                <div className="admin-block-icon">➕</div>
+                <h3 className="admin-block-title">Create Roster</h3>
+                <p className="admin-block-description">Create a new roster for upcoming events</p>
+                <button className="admin-block-button" onClick={handleCreateRoster}>
+                  Create
                 </button>
               </div>
 
               <div className="admin-block">
-                <div className="admin-block-icon">⚙️</div>
-                <h3 className="admin-block-title">Server Settings</h3>
-                <p className="admin-block-description">Configure server and application settings</p>
-                <button className="admin-block-button" disabled>
-                  Coming Soon
+                <div className="admin-block-icon">👥</div>
+                <h3 className="admin-block-title">Select Players</h3>
+                <p className="admin-block-description">Player selection tool for roster management</p>
+                <button className="admin-block-button" onClick={handleSelectPlayers}>
+                  Open
                 </button>
               </div>
 
@@ -82,8 +91,10 @@ const AdminPage = ({ currentUser }) => {
               </div>
             </div>
           </>
-        ) : (
+        ) : currentView === 'manage-rosters' ? (
           <ManageRosters onBack={handleBackToDashboard} />
+        ) : (
+          <SelectPlayers onBack={handleBackToDashboard} />
         )}
       </div>
     </div>

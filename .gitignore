@@ -3,6 +3,9 @@ node_modules
 # Local Netlify folder
 .netlify
 
+# Local Test-Data
+/test-data  
+
 # Ignore environment variable files
 .env
 .env.*

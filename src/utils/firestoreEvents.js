@@ -1,5 +1,5 @@
 // src/utils/firestoreEvents.js
-import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy } from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 // API function to submit roster via Netlify function (backup)
@@ -161,4 +161,55 @@ export async function updateEvent(eventId, updatedData) {
 // DELETE: Delete an event by ID
 export async function deleteEvent(eventId) {
   await deleteDoc(doc(db, "events", eventId));
+}
+
+// LIVE ROSTER MANAGEMENT: Set a roster as live (overwrites existing live roster)
+export async function setLiveRoster(rosterData) {
+  try {
+    // Use a fixed document ID to ensure only one live roster exists
+    const liveRosterRef = doc(db, "liverosters", "current");
+    
+    // Add metadata for live roster
+    const liveRosterData = {
+      ...rosterData,
+      madeAt: serverTimestamp(),
+      originalRosterId: rosterData.id // Keep reference to original roster
+    };
+    
+    // Use setDoc to overwrite any existing live roster
+    await setDoc(liveRosterRef, liveRosterData);
+    return "current"; // Return the document ID
+  } catch (error) {
+    console.error('Failed to set live roster:', error);
+    throw new Error(`Failed to set live roster: ${error.message}`);
+  }
+}
+
+// Get the current live roster
+export async function getLiveRoster() {
+  try {
+    const liveRosterRef = doc(db, "liverosters", "current");
+    const docSnap = await getDocs(collection(db, "liverosters"));
+    
+    if (!docSnap.empty) {
+      const liveRosterDoc = docSnap.docs[0];
+      return { id: liveRosterDoc.id, ...liveRosterDoc.data() };
+    } else {
+      return null; // No live roster exists
+    }
+  } catch (error) {
+    console.error('Failed to get live roster:', error);
+    throw new Error(`Failed to get live roster: ${error.message}`);
+  }
+}
+
+// Check if a live roster currently exists
+export async function hasLiveRoster() {
+  try {
+    const querySnapshot = await getDocs(collection(db, "liverosters"));
+    return !querySnapshot.empty;
+  } catch (error) {
+    console.error('Failed to check for live roster:', error);
+    return false;
+  }
 }

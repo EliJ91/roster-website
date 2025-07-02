@@ -7,6 +7,7 @@ import SelectRosterPage from './components/SelectRosterPage';
 import ViewRosterPage from './components/ViewRosterPage';
 import CreateRosterPage from './components/CreateRosterPage';
 import AdminPage from './components/AdminPage';
+import DevUploader from './components/DevUploader';
 import backgroundSmoke from './assets/backgroundSmoke.mp4';
 import './styles/app.css';
 import './styles/landingpage.css';
@@ -61,6 +62,7 @@ function App() {
           <Route path="/admin" element={<AdminPage currentUser={user} />} />
         </Routes>
       </Router>
+      <DevUploader />
     </div>
   );
 }

@@ -1,0 +1,1164 @@
+{
+  "eventName": "04 Defense/Castles",
+  "eventDescription": "Defensive roster for castle operations with coordinated multi-party strategies",
+  "author": "LostEnder",
+  "parties": [
+    {
+      "partyName": "Main Party",
+      "positions": [
+        {
+          "role": "Main Caller",
+          "weapon": "Golem",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Valor"
+          ],
+          "boots": [
+            "Mage"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Heavy Mace",
+          "signedUpUser": "",
+          "head": [
+            "Hellion"
+          ],
+          "chest": [
+            "Guardian"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Stuff, stop engages, dont just blow your load cause they are clumped"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Bedrock",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Play with party, ready to demon, guard rune on cd"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Bedrock",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Play with party, ready to demon, guard rune on cd"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Grovekeeper",
+          "signedUpUser": "",
+          "head": [
+            "Hellion"
+          ],
+          "chest": [
+            "Duskweaver"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "E then helmet on engage, the drop ring+armor after"
+        },
+        {
+          "role": "Support",
+          "weapon": "Lifecurse",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "E on 4"
+        },
+        {
+          "role": "Support",
+          "weapon": "Damnation",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Scholar"
+          ],
+          "boots": [
+            "Merc"
+          ],
+          "buildNotes": "E on 4"
+        },
+        {
+          "role": "Support",
+          "weapon": "Locus(OFF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Merc"
+          ],
+          "buildNotes": "e on 5 where dps will stop to hit"
+        },
+        {
+          "role": "Support",
+          "weapon": "Shadowcaller",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "E on 5 beam spike on 4"
+        },
+        {
+          "role": "Support",
+          "weapon": "Oathkeepers(OFF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon(Engage)"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "E on 5, rune on 4 demon and walk with dps on 3"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Feyscale"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "dont e clumps"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Exalted",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Feyscale"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "E CLUMPS"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Blight",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Royal Jacket"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "dont e clumps"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Feyscale"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "dont e clumps"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Realmbreaker",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Pierce on 3"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Spirithunter",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Royal Jacket"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Pierce on 3"
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Permafrost",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Scholar"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Hit on 2"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Spiked",
+          "signedUpUser": "",
+          "head": [
+            "Mistwalker"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Hit on 2"
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Siege/Longbow/Rift",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Hit on 2"
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Siege/Longbow/Rift",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Hit on 2"
+        }
+      ]
+    },
+    {
+      "partyName": "STOP GETTING LOST",
+      "positions": [
+        {
+          "role": "Backup Caller",
+          "weapon": "Hand of Justice",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Incubus Mace",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "Stuff, stop engages, dont just blow your load cause they are clumped"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Heavy Mace",
+          "signedUpUser": "",
+          "head": [
+            "Judi",
+            "Hellion",
+            "Soldier"
+          ],
+          "chest": [
+            "Guardian"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "Stuff, stop engages, dont just blow your load cause they are clumped"
+        },
+        {
+          "role": "Tank",
+          "weapon": "1H Arcane(Cleanse)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "Watch the bombs not their main"
+        },
+        {
+          "role": "Tank",
+          "weapon": "GA (Cleanse)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "Talk with LC defensive, combo to remove GG boots"
+        },
+        {
+          "role": "Tank",
+          "weapon": "1H Hammer",
+          "signedUpUser": "",
+          "head": [
+            "Judi",
+            "Hellion",
+            "Soldier"
+          ],
+          "chest": [
+            "Duskweaver"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "Stuff, stop engages, dont just blow your load cause they are clumped"
+        },
+        {
+          "role": "Support",
+          "weapon": "Rootbound",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Graveguard"
+          ],
+          "buildNotes": "e on 3"
+        },
+        {
+          "role": "Support",
+          "weapon": "Lifecurse(DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon(Engage)"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Combo with GA so you can full stop"
+        },
+        {
+          "role": "Support",
+          "weapon": "Locus(DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon(Engage)"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Demon on 3 with our engages"
+        },
+        {
+          "role": "Support",
+          "weapon": "Occult (Engage)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Royal Jacket"
+          ],
+          "boots": [
+            "Merc"
+          ],
+          "buildNotes": "def judi"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Royal Jacket"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Healer",
+          "weapon": "Blight",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Feyscale"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "dont e clumps"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Knight",
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Feyscale"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "E CLUMPS"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Fallen",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Feyscale"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "dont e clumps"
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Rotcaller (DPS)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "dont e clumps"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Realmbreaker",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Hit on 2"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Realmbreaker",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Hit on 2"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Hellfire",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Hit on 2"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Hellfire",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Hit on 2"
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Siege/Longbow/Rift",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Hit on 2"
+        }
+      ]
+    },
+    {
+      "partyName": "STOP THEIR ABILITY TO PLAY THE VIDEO GAME",
+      "positions": [
+        {
+          "role": "Tank",
+          "weapon": "GA (DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "GA (DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "GA (DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "1H Arcane (Mimic)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "1H Arcane (Mimic)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "1H Arcane (Mimic)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Black Monk Staff",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Black Monk Staff",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Black Monk Staff",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Icicle",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Royal Jacket"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Icicle",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Royal Jacket"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Icicle",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Royal Jacket"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Support",
+          "weapon": "Locus(OFF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Graveguard"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Support",
+          "weapon": "Locus(OFF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Graveguard"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Support",
+          "weapon": "Lifecurse(DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon(Engage)"
+          ],
+          "boots": [
+            "Stalker",
+            "Graveguard"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Support",
+          "weapon": "Locus(DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon(Engage)"
+          ],
+          "boots": [
+            "Stalker",
+            "Graveguard"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Healer",
+          "weapon": "Blight",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Feyscale"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Healer",
+          "weapon": "Fallen",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Feyscale"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Siege/Longbow/Rift",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Siege/Longbow/Rift",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": ""
+        }
+      ]
+    },
+    {
+      "partyName": "ZOO TIME",
+      "positions": [
+        {
+          "role": "Battlemount",
+          "weapon": "Fill Any",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Chariot",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Chariot",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Venom Basi",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Flame Basi",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mount",
+          "weapon": "Beetle",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Mount",
+          "weapon": "Beetle",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Behemoth",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Behemoth",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Behemoth",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Ballista",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Ballista",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Ballista",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Eagle",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Eagle",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Eagle",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Eagle",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Siege/Longbow/Rift",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Siege/Longbow/Rift",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": ""
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Siege/Longbow/Rift",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Tenacity"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": ""
+        }
+      ]
+    }
+  ]
+}

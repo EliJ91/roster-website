@@ -98,19 +98,6 @@
   font-size: 1.2rem;
 }
 
-.roster-card {
-  background: rgba(0, 0, 0, 0.7);
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  text-align: left;
-  color: white;
-  width: 100%;
-}
-
 .roster-card:hover {
   border-color: rgba(99, 102, 241, 0.5);
   transform: translateY(-3px);
@@ -150,6 +137,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  flex: 1; /* Allow body to grow and push stats to bottom */
 }
 
 .roster-author {
@@ -168,16 +156,17 @@
   font-size: 0.9rem;
   line-height: 1.4;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  -webkit-line-clamp: 3; /* Allow more lines for consistency */
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  flex: 1; /* Allow description to take available space */
 }
 
 .roster-stats {
   display: flex;
   gap: 1rem;
-  margin-top: 0.5rem;
+  margin-top: auto; /* Push stats to bottom of card */
 }
 
 .party-count, .position-count {
@@ -187,6 +176,523 @@
   border-radius: 4px;
   font-size: 0.8rem;
   font-weight: 600;
+}
+
+/* Roster Detail View Styles */
+.roster-detail-view {
+  width: 100%;
+}
+
+.roster-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.roster-detail-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.roster-detail-title h2 {
+  color: #fbbf24;
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.roster-detail-date {
+  color: #a0a0a0;
+  font-size: 1rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  align-self: flex-start;
+}
+
+.roster-detail-info {
+  margin-bottom: 2rem;
+}
+
+.roster-info-card {
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.roster-info-card h3 {
+  color: #6366f1;
+  margin: 0 0 1rem 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.info-item {
+  color: #e5e5e5;
+  font-size: 0.95rem;
+}
+
+.info-item strong {
+  color: #a5b4fc;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.info-item.description {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.info-item.description p {
+  margin: 0.5rem 0 0 0;
+  color: #b8b8b8;
+  line-height: 1.5;
+}
+
+.roster-parties-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.party-card {
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.party-name {
+  color: #fbbf24;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.positions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.position-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+
+.position-card.filled {
+  border-color: rgba(34, 197, 94, 0.5);
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.position-card.empty {
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.position-role {
+  color: #a5b4fc;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.position-user {
+  font-size: 0.9rem;
+}
+
+.signed-up-user {
+  color: #22c55e;
+  font-weight: 500;
+}
+
+.empty-slot {
+  color: #ef4444;
+  font-style: italic;
+}
+
+.no-positions, .no-parties {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #888888;
+  font-style: italic;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+/* Roster card container and Make Live button */
+.roster-card-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%; /* Ensure all containers take full height */
+}
+
+.roster-card {
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  text-align: left;
+  color: white;
+  width: 100%;
+  flex: 1; /* Allow card to grow and fill available space */
+  display: flex;
+  flex-direction: column;
+}
+
+.make-live-btn {
+  background: rgba(0, 0, 0, 0.8);
+  color: #22c55e;
+  border: 2px solid rgba(34, 197, 94, 0.6);
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+  text-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.make-live-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  border-color: rgba(34, 197, 94, 0.8);
+  color: #16a34a;
+  transform: translateY(-1px);
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+  text-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+}
+
+.make-live-btn:active {
+  transform: translateY(0);
+}
+
+/* Delete roster button */
+.delete-roster-btn {
+  background: rgba(0, 0, 0, 0.8);
+  color: #dc143c;
+  border: 1px solid #dc143c;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.delete-roster-btn:hover {
+  background: rgba(220, 20, 60, 0.1);
+  border-color: #dc143c;
+  color: #dc143c;
+  transform: translateY(-1px);
+}
+
+.delete-roster-btn:active {
+  transform: translateY(0);
+}
+
+/* Edit roster button */
+.edit-roster-btn {
+  background: rgba(0, 0, 0, 0.8);
+  color: #9ca3af;
+  border: 1px solid #9ca3af;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.edit-roster-btn:hover {
+  background: rgba(156, 163, 175, 0.1);
+  border-color: #9ca3af;
+  color: #d1d5db;
+  transform: translateY(-1px);
+}
+
+.edit-roster-btn:active {
+  transform: translateY(0);
+}
+
+/* Roster buttons container */
+.roster-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  flex: 0 0 auto;
+}
+
+.roster-buttons-left {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.roster-buttons-right {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Header controls for filter and count */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+.author-filter {
+  background: rgba(0, 0, 0, 0.5);
+  color: #cccccc;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.author-filter:hover {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.author-filter:focus {
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.author-filter option {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+/* Confirmation Dialog Styles */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.confirm-dialog {
+  background: rgba(24, 24, 27, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  color: #f3f4f6;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.confirm-dialog h3 {
+  color: #fbbf24;
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.confirm-dialog p {
+  color: #e5e5e5;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+.dialog-roster-info {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  color: #d1d5db;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dialog-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.halt-btn {
+  background: rgba(239, 68, 68, 0.8);
+  color: white;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.halt-btn:hover {
+  background: rgba(239, 68, 68, 1);
+  border-color: rgba(239, 68, 68, 0.8);
+  transform: translateY(-1px);
+}
+
+.proceed-btn {
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  color: white;
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 120px;
+}
+
+.proceed-btn:hover:not(.disabled) {
+  background: linear-gradient(45deg, #16a34a, #15803d);
+  border-color: rgba(34, 197, 94, 0.8);
+  transform: translateY(-1px);
+}
+
+.proceed-btn.disabled {
+  background: rgba(107, 114, 128, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(107, 114, 128, 0.3);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.proceed-btn:disabled {
+  background: rgba(107, 114, 128, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(107, 114, 128, 0.3);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Dialog info grid for 2x2 layout */
+.dialog-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.dialog-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dialog-info-item strong {
+  color: #a5b4fc;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Success message */
+.success-msg {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  color: #22c55e;
+  background: #23232a;
+  border: 2px solid #22c55e;
+  border-radius: 0.7em;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(34, 197, 94, 0.3), 0 4px 16px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  animation: slideInFromBottom 0.5s ease-out, fadeOut 0.5s ease-out 3.5s forwards;
+  min-width: 300px;
+  max-width: 90vw;
+}
+
+@keyframes slideInFromBottom {
+  from {
+    bottom: -100px;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    bottom: 30px;
+  }
+  to {
+    opacity: 0;
+    bottom: -20px;
+  }
 }
 
 /* Responsive design */
@@ -199,6 +705,19 @@
   
   .roster-count {
     margin-left: 0;
+  }
+  
+  .header-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .author-filter {
+    width: 100%;
+    max-width: 200px;
   }
   
   .manage-rosters h2 {
@@ -222,4 +741,809 @@
   .roster-date {
     align-self: flex-start;
   }
+  
+  .roster-card-container {
+    gap: 0.75rem;
+  }
+  
+  .roster-buttons {
+    gap: 0.375rem;
+    flex-direction: column;
+  }
+  
+  .roster-buttons-left {
+    order: 2;
+  }
+  
+  .roster-buttons-right {
+    order: 1;
+  }
+  
+  .make-live-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.7rem;
+  }
+  
+  .edit-roster-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.7rem;
+  }
+  
+  .delete-roster-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.7rem;
+  }
+  
+  .confirm-dialog {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .dialog-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .halt-btn, .proceed-btn {
+    width: 100%;
+    padding: 0.875rem 1rem;
+  }
+  
+  .equipment-dropdown {
+    max-width: 100px;
+  }
+  
+  .equipment-dropdown-text {
+    font-size: 0.7rem;
+  }
+  
+  .player-input-compact {
+    max-width: 80px;
+    font-size: 0.75rem;
+  }
+  
+  .edit-textarea-compact {
+    max-width: 100px;
+    font-size: 0.7rem;
+  }
+  
+  .edit-table .position-equipment,
+  .edit-table .position-player,
+  .edit-table .position-build-notes {
+    max-width: 100px;
+  }
+}
+
+@media (max-width: 600px) {
+  .equipment-dropdown {
+    max-width: 80px;
+  }
+  
+  .equipment-dropdown-text {
+    font-size: 0.65rem;
+  }
+  
+  .player-input-compact {
+    max-width: 70px;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.4rem;
+  }
+  
+  .edit-textarea-compact {
+    max-width: 80px;
+    font-size: 0.65rem;
+  }
+  
+  .edit-table .view-roster-table th:nth-child(3),
+  .edit-table .view-roster-table td:nth-child(3),
+  .edit-table .view-roster-table th:nth-child(4),
+  .edit-table .view-roster-table td:nth-child(4),
+  .edit-table .view-roster-table th:nth-child(5),
+  .edit-table .view-roster-table td:nth-child(5) {
+    display: none; /* Hide equipment columns on small screens */
+  }
+  
+  .edit-table .view-roster-table th:nth-child(7),
+  .edit-table .view-roster-table td:nth-child(7) {
+    display: none; /* Hide build notes column on small screens */
+  }
+}
+
+/* Table styling to match ViewRosterPage */
+.manage-rosters .view-roster-table {
+  width: 100%;
+  background: rgba(35, 35, 42, 0.92);
+  border-radius: 8px;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  margin: 0 auto;
+}
+
+.manage-rosters .view-roster-table thead {
+  background: #23232a;
+}
+
+.manage-rosters .view-roster-table th {
+  color: #f59e42;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.8rem 0.7rem;
+  text-align: center;
+  border-bottom: 2px solid rgba(245, 158, 66, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #23232a;
+}
+
+.manage-rosters .view-roster-table th:nth-child(7) {
+  text-align: left; /* Build Notes column */
+}
+
+.manage-rosters .view-roster-table tbody tr {
+  background: #18181b;
+  transition: all 0.18s ease;
+  height: 72px; /* Fixed height for consistent row sizing */
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.manage-rosters .view-roster-table tbody tr:hover {
+  background: #1f1f23;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.manage-rosters .view-roster-table tbody tr.filled {
+  border-left: 4px solid #22c55e;
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.manage-rosters .view-roster-table tbody tr.empty {
+  border-left: 4px solid #ef4444;
+}
+
+.manage-rosters .view-roster-table td {
+  color: #f3f4f6;
+  font-size: 1rem;
+  padding: 0.8rem 0.7rem;
+  border-bottom: none;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.manage-rosters .view-roster-table td:nth-child(7) {
+  text-align: left; /* Build Notes column */
+}
+
+.manage-rosters .position-role {
+  color: #a5b4fc;
+  font-weight: 600;
+}
+
+.manage-rosters .position-weapon {
+  color: #fbbf24;
+  font-weight: 500;
+}
+
+.manage-rosters .position-player .player-name {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.manage-rosters .position-player .empty-slot {
+  color: #ef4444;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.manage-rosters .position-build-notes {
+  color: #d1d5db;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Equipment column styles */
+.manage-rosters .position-equipment {
+  padding: 0.6rem 0.4rem;
+  vertical-align: middle;
+  min-width: 120px;
+  max-width: 120px;
+  height: 60px; /* Fixed height to keep rows consistent */
+  position: relative;
+  overflow: visible;
+}
+
+.manage-rosters .equipment-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+}
+
+.manage-rosters .equipment-item {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 3px;
+  padding: 0.15rem 0.3rem;
+  font-size: 0.7rem;
+  color: #bfdbfe;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.1;
+  flex: 0 0 auto;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.manage-rosters .equipment-item:empty {
+  display: none;
+}
+
+/* Party section styles */
+.manage-rosters .party-section {
+  margin-bottom: 3rem;
+  background: rgba(35, 35, 42, 0.5);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.manage-rosters .party-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid rgba(245, 158, 66, 0.3);
+  padding-bottom: 1rem;
+}
+
+.manage-rosters .party-name {
+  color: #f59e42;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.manage-rosters .party-notes {
+  color: #d1d5db;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.5;
+  font-style: italic;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.manage-rosters .no-positions, .manage-rosters .no-parties {
+  text-align: center;
+  color: #888888;
+  font-style: italic;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  margin-top: 1rem;
+}
+
+/* Edit View Styles */
+.roster-edit-view {
+  width: 100%;
+  scroll-behavior: auto; /* Prevent smooth scrolling that can cause issues */
+}
+
+.roster-edit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(245, 158, 66, 0.3);
+}
+
+.roster-edit-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  max-width: 500px;
+}
+
+.roster-edit-title h2 {
+  color: #fbbf24;
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.event-name-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  width: 100%;
+}
+
+.event-name-input:focus {
+  outline: none;
+  border-color: rgba(251, 191, 36, 0.5);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.save-btn {
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.save-btn:hover:not(:disabled) {
+  background: linear-gradient(45deg, #16a34a, #15803d);
+  transform: translateY(-1px);
+}
+
+.save-btn:disabled {
+  background: rgba(107, 114, 128, 0.5);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.roster-edit-info {
+  margin-bottom: 2rem;
+}
+
+.edit-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  color: #ffffff;
+  font-size: 0.9rem;
+  width: 50%;
+  margin-top: 0.25rem;
+}
+
+.edit-input:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.edit-textarea {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.75rem;
+  color: #ffffff;
+  font-size: 0.9rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0.25rem auto 0 auto;
+  resize: none;
+  min-height: 80px;
+  font-family: inherit;
+  display: block;
+}
+
+.edit-textarea:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.edit-select {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  color: #ffffff;
+  font-size: 0.85rem;
+  width: 100%;
+  min-width: 120px;
+  cursor: pointer;
+}
+
+.edit-select:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+.edit-select option {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.edit-select-multiple {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.3rem;
+  color: #ffffff;
+  font-size: 0.8rem;
+  width: 100%;
+  min-width: 100px;
+  max-height: 60px;
+  overflow-y: auto;
+  cursor: pointer;
+}
+
+.edit-select-multiple:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+.edit-select-multiple option {
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 0.2rem;
+}
+
+.edit-select-multiple option:checked {
+  background: rgba(99, 102, 241, 0.5);
+}
+
+.edit-textarea-small {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.4rem;
+  color: #ffffff;
+  font-size: 0.8rem;
+  width: 100%;
+  resize: vertical;
+  min-height: 50px;
+  font-family: inherit;
+}
+
+.edit-textarea-small:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.player-input {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.player-input:focus {
+  border-color: rgba(34, 197, 94, 0.5);
+  background: rgba(34, 197, 94, 0.15);
+}
+
+.edit-table .view-roster-table td {
+  padding: 0.6rem 0.4rem;
+  vertical-align: middle;
+}
+
+/* Prevent scroll behavior for edit table inputs */
+.edit-table input,
+.edit-table textarea,
+.edit-table select {
+  scroll-margin: 0;
+  scroll-padding: 0;
+}
+
+/* Additional scroll prevention for specific input types */
+.edit-table .player-input-compact,
+.edit-table .edit-textarea-compact {
+  scroll-margin-top: 0;
+  scroll-margin-bottom: 0;
+  scroll-behavior: auto;
+}
+
+/* Prevent automatic scroll-to-focus behavior */
+.edit-table .player-input-compact:focus,
+.edit-table .edit-textarea-compact:focus {
+  scroll-margin: 0;
+}
+
+/* Equipment dropdown table cell positioning */
+.edit-table .position-equipment {
+  position: relative;
+  overflow: visible;
+}
+
+/* Save actions in edit view */
+.save-actions-bottom {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0 2rem 0;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(245, 158, 66, 0.3);
+}
+
+.save-btn-large {
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+.save-btn-large:hover:not(:disabled) {
+  background: linear-gradient(45deg, #16a34a, #15803d);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+}
+
+.save-btn-large:disabled {
+  background: rgba(107, 114, 128, 0.5);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Custom Equipment Dropdown Styles */
+.equipment-dropdown {
+  position: relative;
+  width: 100%;
+  max-width: 120px;
+}
+
+/* Ensure table cells don't clip dropdowns */
+.position-equipment {
+  overflow: visible !important;
+  position: relative;
+}
+
+.equipment-dropdown-trigger {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  color: #ffffff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  min-height: 32px;
+}
+
+.equipment-dropdown-trigger:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.equipment-dropdown-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+.equipment-dropdown-arrow {
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.equipment-dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+.equipment-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  z-index: 99999 !important;
+  max-height: 200px;
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+  min-width: 120px;
+}
+
+.equipment-dropdown-option {
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.equipment-dropdown-option:hover {
+  background: rgba(99, 102, 241, 0.2);
+}
+
+.equipment-dropdown-option input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  accent-color: #6366f1;
+  flex-shrink: 0;
+}
+
+.equipment-checkbox-label {
+  flex: 1;
+  color: #ffffff;
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+/* Compact Player Input */
+.player-input-compact {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 4px;
+  padding: 0.4rem 0.5rem;
+  color: #ffffff;
+  font-size: 0.8rem;
+  width: 100%;
+  max-width: 100px;
+  resize: none;
+  box-sizing: border-box;
+  scroll-margin: 0;
+  scroll-padding: 0;
+}
+
+.player-input-compact:focus {
+  outline: none;
+  border-color: rgba(34, 197, 94, 0.6);
+  background: rgba(34, 197, 94, 0.15);
+  scroll-margin: 0;
+}
+
+.player-input-compact::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+}
+
+/* Compact Build Notes Textarea */
+.edit-textarea-compact {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.3rem 0.4rem;
+  color: #ffffff;
+  font-size: 0.75rem;
+  width: 100%;
+  max-width: 120px;
+  resize: none;
+  min-height: 40px;
+  max-height: 60px;
+  font-family: inherit;
+  box-sizing: border-box;
+  scroll-margin: 0;
+  scroll-padding: 0;
+}
+
+.edit-textarea-compact:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5);
+  scroll-margin: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.edit-textarea-compact::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.7rem;
+}
+
+/* Enhanced table cell constraints for edit mode */
+.edit-table .position-equipment,
+.edit-table .position-player,
+.edit-table .position-build-notes {
+  max-width: 120px;
+  overflow: hidden;
+}
+
+.edit-table .position-player {
+  max-width: 100px;
+}
+
+.edit-table .position-build-notes {
+  max-width: 130px;
+}
+
+.edit-table .view-roster-table td {
+  padding: 0.5rem 0.3rem;
+  vertical-align: middle;
+}
+
+/* Scrollbar styling for dropdown menus */
+.equipment-dropdown-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.equipment-dropdown-menu::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.equipment-dropdown-menu::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.equipment-dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Party editing inputs */
+.party-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.party-name-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 200px;
+  min-width: 200px;
+  flex-shrink: 0;
+}
+
+.party-name-input:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.party-notes-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  color: #ffffff;
+  font-size: 0.9rem;
+  width: 50%;
+  flex: 1;
+  resize: none;
+  font-family: inherit;
+}
+
+.party-notes-input:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 }

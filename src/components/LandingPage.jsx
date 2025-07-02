@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const LandingPage = () => {
+const LandingPage = ({ setUser }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -9,7 +9,10 @@ const LandingPage = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
 
-    if (code) {
+    if (code && !loading) {
+      // Clear the code from URL immediately to prevent reuse
+      window.history.replaceState({}, document.title, window.location.pathname);
+      
       setLoading(true);
       fetch('/.netlify/functions/discordAuth', {
         method: 'POST',
@@ -23,6 +26,7 @@ const LandingPage = () => {
           console.log('OAuth response:', data);
           if (data.success) {
             localStorage.setItem('user', JSON.stringify(data.user));
+            setUser(data.user); // Update the App.js user state
             
             // Check if user is elevated/admin
             const ELEVATED_ROLE_ID = process.env.REACT_APP_ELEVATED_ROLE_ID;
@@ -43,7 +47,7 @@ const LandingPage = () => {
         })
         .finally(() => setLoading(false));
     }
-  }, [navigate]);
+  }, [navigate, loading, setUser]);
 
   const handleLogin = () => {
     const clientId = process.env.REACT_APP_DISCORD_CLIENT_ID;
@@ -101,31 +105,9 @@ const LandingPage = () => {
         <button
           onClick={handleLogin}
           disabled={loading}
-          className="signup-btn login-btn"
-          style={{
-            fontSize: 'clamp(1rem, 4vw, 1.22rem)',
-            padding: '0.7em 2em',
-            fontWeight: 400,
-            borderRadius: '1.2rem',
-            background: '#18181b',
-            color: '#f3f4f6',
-            border: '2.5px solid #fff',
-            boxShadow: '0 0 16px 2px #fff8, 0 2px 16px #000a',
-            marginTop: 0,
-            marginBottom: 0,
-            cursor: loading ? 'not-allowed' : 'pointer',
-            transition: 'background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s',
-            textAlign: 'center',
-            display: 'block',
-            opacity: 0.97,
-            letterSpacing: '0.04em',
-            textShadow: '0 1px 0 #fff, 0 0 2px #fff',
-            width: '100%',
-            maxWidth: 340,
-            minWidth: 0,
-          }}
+          className="login-btn"
         >
-          {loading ? 'Logging in...' : 'Login with Discord'}
+          {loading ? 'Loading...' : 'Login'}
         </button>
       </div>
       <div className="quote" style={{

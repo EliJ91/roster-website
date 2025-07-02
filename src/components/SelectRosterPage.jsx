@@ -6,145 +6,9 @@ import { FaTrash, FaArchive, FaUserClock, FaPlus, FaCog } from 'react-icons/fa';
 import { GiToolbox } from 'react-icons/gi'; // open toolbox icon
 import '../styles/selectrosterpage.css';
 
-const mockRosterData = [
-	{
-		role: 'Main Caller',
-		weapon: 'Clump Tank',
-		player: 'Elijxh',
-		build: "Don't fucking die",
-		nickname: '[CF] Elijxh',
-	},
-	{
-		role: 'Tank',
-		weapon: 'Heavy Mace',
-		player: '',
-		build: 'Hellion/Judi, Guardian',
-		nickname: '[EI] IronShield',
-	},
-	{
-		role: 'Tank',
-		weapon: '1H Hammer',
-		player: '',
-		build: 'Judi/Hellion/Soldier, Duskweaver',
-		nickname: '[EX] HammerGuy',
-	},
-	{
-		role: 'Tank',
-		weapon: 'GA (OFF)',
-		player: '',
-		build: 'Judi/Assassin/Hellion, Knight, Stalker/Cleric',
-		nickname: '[SVG] AxeLord',
-	},
-	{
-		role: 'Tank',
-		weapon: 'Incubus Mace',
-		player: '',
-		build: 'Guard Rune/Snare Charge - HIT ELIJXH\'S CLUMP',
-		nickname: '',
-	},
-	{
-		role: 'Support',
-		weapon: 'Lifecurse',
-		player: '',
-		build: 'Assassin, Demon, Graveguard',
-		nickname: '[CF] SupportGuy',
-	},
-	{
-		role: 'Support',
-		weapon: 'Oathkeepers(OFF)',
-		player: '',
-		build: 'Assassin, Demon, Guardian',
-		nickname: '',
-	},
-	{
-		role: 'Support',
-		weapon: 'Shadowcaller',
-		player: '',
-		build: 'Assassin, Demon, Stalker/Graveguard',
-		nickname: '[SVG] Shadow',
-	},
-	{
-		role: 'Support',
-		weapon: 'Locus(DEF)',
-		player: '',
-		build: 'Assassin, Judi',
-		nickname: '',
-	},
-	{
-		role: 'Healer',
-		weapon: 'Hallowfall',
-		player: '',
-		build: 'Merc(Cleanse), Purity, Stalker',
-		nickname: '[CF] Healz',
-	},
-	{
-		role: 'Healer',
-		weapon: 'Blight',
-		player: '',
-		build: 'Assassin, Purity, Stalker',
-		nickname: '[EI] Blighty',
-	},
-	{
-		role: 'Mdps',
-		weapon: 'Spirithunter',
-		player: '',
-		build: 'Knight, Judi, Stalker/Valor',
-		nickname: '[EX] Spear',
-	},
-	{
-		role: 'Mdps',
-		weapon: 'Spiked',
-		player: '',
-		build: 'Q2 | E the CLUMP | Morgana Cape(t7e+) | T9+ Weapon | T10+ Weapon has prio',
-		nickname: '',
-	},
-	{
-		role: 'Mdps',
-		weapon: 'Realmbreaker',
-		player: '',
-		build: 'Knight, Hellion, Stalker/Valor',
-		nickname: '[SVG] Realm',
-	},
-	{
-		role: 'Rdps',
-		weapon: 'Siegebow',
-		player: '',
-		build: 'Hunter Hood, Mage Robe, Soldier Boots',
-		nickname: '[CF] ArrowRain',
-	},
-	{
-		role: 'Rdps',
-		weapon: 'Boltcasters',
-		player: '',
-		build: 'Mage Cowl, Cleric Robe, Scholar Sandals',
-		nickname: '[EX] Bolty',
-	},
-	{
-		role: 'Rdps',
-		weapon: 'Frost Staff',
-		player: '',
-		build: 'Scholar Cowl, Scholar Robe, Scholar Sandals',
-		nickname: '[SVG] Frosty',
-	},
-	{
-		role: 'Mdps',
-		weapon: 'Infernal Scythe',
-		player: '',
-		build: 'Soldier, Hellion, Stalker/Valor',
-		nickname: '',
-	},
-	{
-		role: 'Mdps',
-		weapon: 'Hellfire',
-		player: '',
-		build: 'Soldier, Hellion, Stalker/Valor',
-		nickname: '',
-	},
-];
-
 // Helper to get users who signed up for a weapon, excluding already assigned users
-function getUsersForWeapon(weapon, assignedUserIds) {
-	return fakeSignups.filter((u) => u.weapons.includes(weapon) && !assignedUserIds.includes(u.id));
+function getUsersForWeapon(weapon, assignedUserIds, signups) {
+	return signups.filter((u) => u.weapons.includes(weapon) && !assignedUserIds.includes(u.id));
 }
 
 // Helper to get guild tag from nickname
@@ -183,6 +47,7 @@ function getRoleOrder(role) {
 const SelectRosterPage = () => {
 	const navigate = useNavigate();
 	const [roster, setRoster] = useState([]);
+	const [signups, setSignups] = useState([]);
 	const [signupOpen, setSignupOpen] = useState(false);
 	const [user, setUser] = useState(null);
 	const [selectedPlayers, setSelectedPlayers] = React.useState({});
@@ -201,18 +66,27 @@ const SelectRosterPage = () => {
 	}, []);
 
 	useEffect(() => {
-		if (process.env.NODE_ENV === 'development') {
-			setRoster(mockRosterData);
-		} else {
-			// Fetch live data from backend in production
-			fetch('/api/roster')
-				.then((res) => res.json())
-				.then((data) => setRoster(data))
-				.catch((err) => {
-					console.error('Failed to fetch live roster:', err);
-					setRoster([]);
-				});
-		}
+		// Fetch live data from backend
+		const fetchData = async () => {
+			try {
+				const [rosterRes, signupsRes] = await Promise.all([
+					fetch('/api/roster'),
+					fetch('/api/signups')
+				]);
+				
+				const rosterData = await rosterRes.json();
+				const signupsData = await signupsRes.json();
+				
+				setRoster(rosterData);
+				setSignups(signupsData);
+			} catch (err) {
+				console.error('Failed to fetch live data:', err);
+				setRoster([]);
+				setSignups([]);
+			}
+		};
+
+		fetchData();
 	}, []);
 
 	// Elevated check
@@ -236,7 +110,7 @@ const SelectRosterPage = () => {
 	});
 
 	// Live guild tag stats from signups
-	const liveGuildTagCounts = getGuildTagCounts(fakeSignups);
+	const liveGuildTagCounts = getGuildTagCounts(signups);
 
 	function handleSelectPlayer(rowIdx, userId) {
 		setSelectedPlayers((prev) => ({ ...prev, [rowIdx]: userId }));
@@ -253,7 +127,7 @@ const SelectRosterPage = () => {
 
 	// Find users who have signed up but are not assigned to any role
 	const assignedUserIds = Object.values(selectedPlayers).filter(Boolean);
-	const unassignedSignups = fakeSignups.filter(
+	const unassignedSignups = signups.filter(
 		u => !assignedUserIds.includes(u.id)
 	);
 
@@ -284,7 +158,6 @@ const SelectRosterPage = () => {
 			<div className="user-profile-bar">
 				<UserProfile />
 			</div>
-			<div style={{ height: '2.5rem', border: '2px solid #f59e42' }} /> {/* orange */}
 			<div className="select-roster-topbar">
 				<div>
 					<h1 className="select-roster-heading">Conflict Army</h1>
@@ -302,14 +175,13 @@ const SelectRosterPage = () => {
 					gap: 0,
 					flexWrap: 'wrap',
 					padding: 0,
-					border: '2px solid #22c55e', // green
 				}}
 			>
-				<div className="select-roster-actions-bar" style={{ display: 'flex', alignItems: 'center', gap: 0, width: 'auto', flex: 'none', minWidth: 0, justifyContent: 'flex-start', padding: 0, margin: 0, border: '2px solid #a21caf' }}>
+				<div className="select-roster-actions-bar" style={{ display: 'flex', alignItems: 'center', gap: 0, width: 'auto', flex: 'none', minWidth: 0, justifyContent: 'flex-start', padding: 0, margin: 0 }}>
 					<button
 						className={"signup-btn signup-btn-mobile-left"}
 						onClick={() => setSignupOpen(true)}
-						style={{ marginRight: 0, marginLeft: 0, border: '2px solid #2563eb', background: '#111' }} // blue
+						style={{ marginRight: 0, marginLeft: 0, background: '#111' }}
 					>
 						Sign Up
 					</button>
@@ -324,7 +196,7 @@ const SelectRosterPage = () => {
 					      aria-label={actionsOpen ? 'Close tools' : 'Show tools'}
 					      ref={actionsRef}
 					    >
-					      <span className={`gear-icon${actionsOpen ? ' open' : ' closed'}`} style={{ border: '2px solid #10b981', borderRadius: 4 }}>
+					      <span className={`gear-icon${actionsOpen ? ' open' : ' closed'}`} style={{ borderRadius: 4 }}>
 					        <FaCog />
 					      </span>
 					    </button>
@@ -349,7 +221,6 @@ const SelectRosterPage = () => {
 					        maxWidth: actionsOpen ? 400 : 0,
 					        opacity: 1,
 					        pointerEvents: actionsOpen ? 'auto' : 'none',
-					        border: '2px solid #6366f1',
 					        transition: 'max-width 0.32s cubic-bezier(.7,1.7,.5,1), opacity 0.2s',
 					      }}
 					    >
@@ -416,7 +287,6 @@ const SelectRosterPage = () => {
 			              fontWeight: 700,
 			              letterSpacing: '0.04em',
 			              fontSize: '1.04em',
-			              border: '1.5px solid #fbbf24',
 			              background: 'linear-gradient(90deg, #fbbf24 0%, #f59e42 100%)',
 			              boxShadow: '0 0 6px #fbbf24cc',
 			              padding: '0.22em 0.5em',
@@ -459,7 +329,6 @@ const SelectRosterPage = () => {
 			                    maxWidth: 220,
 			                    width: '100%',
 			                    textAlign: 'center',
-			                    border: (!selectedPlayers[index] || selectedPlayers[index] === '') ? '1.5px solid #dc2626' : undefined,
 			                    boxShadow: (!selectedPlayers[index] || selectedPlayers[index] === '') ? '0 0 0 2px #dc262688, 0 2px 16px #dc262655' : undefined,
 			                  }}
 			                  value={selectedPlayers[index] || ''}
@@ -468,17 +337,17 @@ const SelectRosterPage = () => {
 			                  <option value="">-- Select Player --</option>
 			                  {selectedPlayers[index]
 			                    ? (() => {
-			                        const selectedUser = fakeSignups.find(u => u.id === selectedPlayers[index]);
+			                        const selectedUser = signups.find(u => u.id === selectedPlayers[index]);
 			                        return selectedUser ? [
 			                          <option key={selectedUser.id} value={selectedUser.id}>{selectedUser.nickname}</option>,
-			                          ...getUsersForWeapon(entry.weapon, assignedUserIds).filter(u => u.id !== selectedUser.id).map(u => (
+			                          ...getUsersForWeapon(entry.weapon, assignedUserIds, signups).filter(u => u.id !== selectedUser.id).map(u => (
 			                            <option key={u.id} value={u.id}>{u.nickname}</option>
 			                          ))
-			                        ] : getUsersForWeapon(entry.weapon, assignedUserIds).map(u => (
+			                        ] : getUsersForWeapon(entry.weapon, assignedUserIds, signups).map(u => (
 			                          <option key={u.id} value={u.id}>{u.nickname}</option>
 			                        ));
 			                      })()
-			                    : getUsersForWeapon(entry.weapon, assignedUserIds).map(u => (
+			                    : getUsersForWeapon(entry.weapon, assignedUserIds, signups).map(u => (
 			                        <option key={u.id} value={u.id}>{u.nickname}</option>
 			                      ))}
 			                </select>
@@ -593,25 +462,6 @@ if (typeof document !== 'undefined' && !document.getElementById('gear-spin-style
   style.innerHTML = gearSpinStyles;
   document.head.appendChild(style);
 }
-
-// Pseudo list of Discord users who have signed up for specific weapons
-const fakeSignups = [
-  { id: '1', nickname: '[CF] Elijxh', weapons: ['Clump Tank', '1H Hammer', 'Hallowfall'] },
-  { id: '2', nickname: '[EI] IronShield', weapons: ['Heavy Mace', 'Incubus Mace'] },
-  { id: '3', nickname: '[SVG] AxeLord', weapons: ['GA (OFF)', 'Spirithunter'] },
-  { id: '4', nickname: '[EX] HammerGuy', weapons: ['1H Hammer', 'Realmbreaker'] },
-  { id: '5', nickname: '[CF] Healz', weapons: ['Hallowfall', 'Lifecurse'] },
-  { id: '6', nickname: '[SVG] Shadow', weapons: ['Shadowcaller', 'Locus(DEF)'] },
-  { id: '7', nickname: '[EX] Bolty', weapons: ['Boltcasters', 'Siegebow'] },
-  { id: '8', nickname: '[EI] Blighty', weapons: ['Blight', 'Lifecurse'] },
-  { id: '9', nickname: '[SVG] Frosty', weapons: ['Frost Staff'] },
-  { id: '10', nickname: '[CF] SupportGuy', weapons: ['Lifecurse', 'Oathkeepers(OFF)'] },
-  { id: '11', nickname: '[SVG] Realm', weapons: ['Realmbreaker'] },
-  { id: '12', nickname: '[CF] ArrowRain', weapons: ['Siegebow'] },
-  { id: '13', nickname: '[EX] Spear', weapons: ['Spirithunter'] },
-  { id: '14', nickname: '[SVG] afatfuckingfailure', weapons: ['Incubus Mace', 'Hellfire'] },
-  { id: '15', nickname: '[EI] Tanky', weapons: ['Heavy Mace', 'GA (OFF)'] },
-];
 
 export default SelectRosterPage;
 

@@ -1,0 +1,1166 @@
+{
+  "eventName": "Oib Sheet",
+  "eventDescription": "Comprehensive battle roster with tactical coordination and specialized roles",
+  "author": "Oib",
+  "parties": [
+    {
+      "partyName": "Main Party",
+      "positions": [
+        {
+          "role": "Main Caller",
+          "weapon": "Soulscythe",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Don't fucking die"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Heavy Mace",
+          "signedUpUser": "",
+          "head": [
+            "Hellion",
+            "Judi"
+          ],
+          "chest": [
+            "Guardian"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "SNARE CHARGE - STOP THEM/PURGE THEM"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Heavy Mace",
+          "signedUpUser": "",
+          "head": [
+            "Hellion",
+            "Judi"
+          ],
+          "chest": [
+            "Guardian"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "SNARE CHARGE - STOP THEM/PURGE THEM"
+        },
+        {
+          "role": "Tank",
+          "weapon": "1H Hammer",
+          "signedUpUser": "",
+          "head": [
+            "Judi",
+            "Hellion",
+            "Soldier"
+          ],
+          "chest": [
+            "Duskweaver"
+          ],
+          "boots": [
+            "Feyscale"
+          ],
+          "buildNotes": "Flank them and HOLD them"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Incubus Mace",
+          "signedUpUser": "",
+          "head": [
+            "idc don't die"
+          ],
+          "chest": [
+            "Knight",
+            "Guardian"
+          ],
+          "boots": [
+            "idc don't die"
+          ],
+          "buildNotes": "Guard Rune/Snare Charge - HIT ELIJXH'S CLUMP"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Hoarfrost",
+          "signedUpUser": "",
+          "head": [
+            "Judi",
+            "Hellion",
+            "Soldier"
+          ],
+          "chest": [
+            "Knight",
+            "Dusk"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Go behind them retard"
+        },
+        {
+          "role": "Support",
+          "weapon": "Oathkeepers",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Guardian"
+          ],
+          "buildNotes": "Guard Rune/Snare Charge"
+        },
+        {
+          "role": "Support",
+          "weapon": "Lifecurse",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Graveguard"
+          ],
+          "buildNotes": "Armor Piercer"
+        },
+        {
+          "role": "Support",
+          "weapon": "Locus(DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "idc don't die"
+          ],
+          "buildNotes": "Cleanse - get us the fuck out"
+        },
+        {
+          "role": "Support",
+          "weapon": "Damnation",
+          "signedUpUser": "",
+          "head": [
+            "Feyscale"
+          ],
+          "chest": [
+            "Judi",
+            "Scholar"
+          ],
+          "boots": [
+            "Refresh Sprint"
+          ],
+          "buildNotes": "E On 3 | CAST TIME PASSIVES ON HELM/CHEST"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Knight",
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Mage",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "SAVE URSELF WITH E"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Knight",
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Mage",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "SAVE URSELF WITH E"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Exalted",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Mage",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "SAVE URSELF WITH E"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Blight",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Mage",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Cleanse W | Heal everyone"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Spirithunter",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion",
+            "Mistwalker"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "E on 2"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Spiked",
+          "signedUpUser": "",
+          "head": [
+            "Mistwalker"
+          ],
+          "chest": [
+            "idc don't die"
+          ],
+          "boots": [
+            "idc don't die"
+          ],
+          "buildNotes": "Q2 | E the CLUMP | T9+ Weapon | T10+ Weapon has prio"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Realmbreaker",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion",
+            "Mistwalker"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "E the CLUMP | T9+ Weapon"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Kingmaker",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion",
+            "Mistwalker"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "E the CLUMP | T9+ Weapon"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Infernal Scythe",
+          "signedUpUser": "",
+          "head": [
+            "Soldier"
+          ],
+          "chest": [
+            "Hellion",
+            "Mistwalker"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "E the CLUMP | T9+ Weapon | T10+ Weapon has prio"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Chariot",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        }
+      ]
+    },
+    {
+      "partyName": "Hit with p1",
+      "positions": [
+        {
+          "role": "Backup Caller",
+          "weapon": "Golem",
+          "signedUpUser": "",
+          "head": [
+            "Cleric"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Hunter"
+          ],
+          "buildNotes": "Extend Clump"
+        },
+        {
+          "role": "Support",
+          "weapon": "Lifecurse(DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Valor"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Watch for Bombs ( no more 911)"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Stillgaze",
+          "signedUpUser": "",
+          "head": [
+            "Judi",
+            "Assassin",
+            "Hellion"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "CLEANSE - STOP ENGAGE/HOLD THEM"
+        },
+        {
+          "role": "Tank",
+          "weapon": "GA (OFF)",
+          "signedUpUser": "",
+          "head": [
+            "Judi",
+            "Assassin",
+            "Hellion"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "CLEANSE - STOP ENGAGE/HOLD THEM"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Truebolt",
+          "signedUpUser": "",
+          "head": [
+            "Judi",
+            "Hellion",
+            "Soldier"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "idc don't die"
+          ],
+          "buildNotes": "Onion Ring - Flank them and HOLD them"
+        },
+        {
+          "role": "Tank",
+          "weapon": "1H Arcane(Cleanse)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "CLEANSE - STOP THEIR BOMB/ENGAGE"
+        },
+        {
+          "role": "Support",
+          "weapon": "Locus",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "CLEANSE - GET US THE FUCK IN THERE"
+        },
+        {
+          "role": "Support",
+          "weapon": "Rootbound",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "BE IN TREE FORM WHEN YOU HAVE STACKS, HELP US SOAK"
+        },
+        {
+          "role": "Support",
+          "weapon": "Oathkeepers",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Guardian"
+          ],
+          "buildNotes": "Guard Rune - E THEIR ENGAGE, DEMON"
+        },
+        {
+          "role": "Support",
+          "weapon": "Occult",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "idc don't die"
+          ],
+          "boots": [
+            "Refresh Sprint"
+          ],
+          "buildNotes": "Move people to the clump"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Knight",
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Mage",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "SAVE URSELF WITH E"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Knight",
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Mage",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "SAVE URSELF WITH E"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Exalted",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Mage",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "E the Clump"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Wild Staff",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Mage",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric",
+            "Royal Shoe"
+          ],
+          "buildNotes": "Cleanse W | Heal everyone"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Infinity Blade",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion",
+            "Mistwalker"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "Go dive their healers you chimp"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Hellfire",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion",
+            "Mistwalker"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "Go dive their healers you chimp"
+        },
+        {
+          "role": "Rdps",
+          "weapon": "Astral Staff",
+          "signedUpUser": "",
+          "head": [
+            "idc don't die"
+          ],
+          "chest": [
+            "idc don't die"
+          ],
+          "boots": [
+            "idc don't die"
+          ],
+          "buildNotes": "DIVE PAST - FREE E - KILL EM ALL - T9+ Weapon"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Ursine Maulers",
+          "signedUpUser": "",
+          "head": [
+            "idc don't die"
+          ],
+          "chest": [
+            "idc don't die"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "PRESSURE NEAR CLUMP OR ON THE CLUMP | T9+ Weapon"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Bloodletter",
+          "signedUpUser": "",
+          "head": [
+            "idc don't die"
+          ],
+          "chest": [
+            "idc don't die"
+          ],
+          "boots": [
+            "Stalker"
+          ],
+          "buildNotes": "PRESSURE NEAR CLUMP OR ON THE CLUMP | T9+ Weapon"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Rhino",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown, Def vs All, Cast Speed"
+        }
+      ]
+    },
+    {
+      "partyName": "Nazori Calling",
+      "positions": [
+        {
+          "role": "Main Caller 2",
+          "weapon": "Clump Tank",
+          "signedUpUser": "",
+          "head": [
+            "Cleric"
+          ],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cleric Cowl, don't fucking suck"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Heavy Mace",
+          "signedUpUser": "",
+          "head": [
+            "Hellion",
+            "Judi"
+          ],
+          "chest": [
+            "Guardian"
+          ],
+          "boots": [
+            "Stalker",
+            "Cleric"
+          ],
+          "buildNotes": "SNARE CHARGE - STOP THEM/PURGE THEM"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Grovekeeper",
+          "signedUpUser": "",
+          "head": [
+            "Cleric"
+          ],
+          "chest": [
+            "Guardian"
+          ],
+          "boots": [
+            "Feyscale"
+          ],
+          "buildNotes": "Deep Dive, Inertia Ring, Feyscale out if needed."
+        },
+        {
+          "role": "Tank",
+          "weapon": "GA (DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Knight"
+          ],
+          "boots": [
+            "Feyscale"
+          ],
+          "buildNotes": "Stop Engages."
+        },
+        {
+          "role": "Tank",
+          "weapon": "Incubus Mace",
+          "signedUpUser": "",
+          "head": [
+            "idc don't die"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "idc don't die"
+          ],
+          "buildNotes": "Guard Rune/Snare Charge - HIT ELIJXH'S CLUMP"
+        },
+        {
+          "role": "Support",
+          "weapon": "Lifecurse",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Graveguard"
+          ],
+          "buildNotes": "Armored Piercer"
+        },
+        {
+          "role": "Support",
+          "weapon": "Rootbound",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Royal Jacket"
+          ],
+          "boots": [
+            "Royal Shoes"
+          ],
+          "buildNotes": "Guard Rune/Snare Charge - HIT ELIJXH'S CLUMP"
+        },
+        {
+          "role": "Support",
+          "weapon": "Shadowcaller",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Demon"
+          ],
+          "boots": [
+            "Stalker",
+            "Graveguard"
+          ],
+          "buildNotes": "Armored Piercer | E ON 3 | WALK UP IN RANGE"
+        },
+        {
+          "role": "Support",
+          "weapon": "Locus(DEF)",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "idc don't die"
+          ],
+          "buildNotes": "Cleanse - get us the fuck out"
+        },
+        {
+          "role": "Support",
+          "weapon": "Damnation",
+          "signedUpUser": "",
+          "head": [
+            "Feyscale"
+          ],
+          "chest": [
+            "Judi",
+            "Scholar"
+          ],
+          "boots": [
+            "Refresh Sprint"
+          ],
+          "buildNotes": "E On 3 | CAST TIME PASSIVES ON HELM/CHEST"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker"
+          ],
+          "buildNotes": "SAVE URSELF WITH E"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Merc(Cleanse)"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker"
+          ],
+          "buildNotes": "SAVE URSELF WITH E"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [
+            "Guardian"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker"
+          ],
+          "buildNotes": "SAVE URSELF WITH E"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Blight",
+          "signedUpUser": "",
+          "head": [
+            "Assassin"
+          ],
+          "chest": [
+            "Feyscale",
+            "Purity"
+          ],
+          "boots": [
+            "Stalker"
+          ],
+          "buildNotes": "Cleanse W | Heal everyone"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Spirithunter",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Judi"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "E on 2"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Spiked",
+          "signedUpUser": "",
+          "head": [
+            "idc don't die"
+          ],
+          "chest": [
+            "idc don't die"
+          ],
+          "boots": [
+            "idc don't die"
+          ],
+          "buildNotes": "Q2 | E the CLUMP | Morgana Cape(t7e+) | T9+ Weapon | T10+ Weapon has prio"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Realmbreaker",
+          "signedUpUser": "",
+          "head": [
+            "Knight"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "E the CLUMP | T9+ Weapon"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Infinity Blade",
+          "signedUpUser": "",
+          "head": [
+            "Soldier"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "idc don't die"
+          ],
+          "buildNotes": "DIVE PAST - FREE E - KILL EM ALL - T9+ Weapon"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Infernal Scythe",
+          "signedUpUser": "",
+          "head": [
+            "Soldier"
+          ],
+          "chest": [
+            "Hellion"
+          ],
+          "boots": [
+            "Graveguard",
+            "Valor"
+          ],
+          "buildNotes": "E the CLUMP | T9+ Weapon | T10+ Weapon has prio"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Bloodletter",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        }
+      ]
+    },
+    {
+      "partyName": "CHAD BM PARTY",
+      "positions": [
+        {
+          "role": "Battlemount",
+          "weapon": "Behemoth",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Heavy Mace",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Support",
+          "weapon": "Oathkeepers",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Realmbreaker",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Hallowfall",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Phalanx Beetle",
+          "signedUpUser": "",
+          "head": [
+            "Soldier"
+          ],
+          "chest": [
+            "Guardian"
+          ],
+          "boots": [
+            "Feyscale"
+          ],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Chariot",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Healer",
+          "weapon": "Blight",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Mdps",
+          "weapon": "Infinity Blade",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Bastion",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Juggernaut",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Spider",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Ballista",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Ballista",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Cooldown and Def vs All"
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Bear",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Eagle",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Eagle",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Battlemount",
+          "weapon": "Fill Any",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": ""
+        },
+        {
+          "role": "Tank",
+          "weapon": "Looter",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Authorized Only"
+        },
+        {
+          "role": "Tank",
+          "weapon": "Looter",
+          "signedUpUser": "",
+          "head": [],
+          "chest": [],
+          "boots": [],
+          "buildNotes": "Authorized Only"
+        }
+      ]
+    }
+  ]
+}

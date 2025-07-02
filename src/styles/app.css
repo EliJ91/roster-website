@@ -59,7 +59,6 @@ body {
   flex-direction: row;
   justify-content: flex-end;
   align-items: flex-start;
-  border: 2px solid #e11d48;
 }
 
 .user-profile-pill {

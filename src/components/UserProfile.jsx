@@ -16,11 +16,28 @@ function capitalizeFirst(str) {
 }
 
 const UserProfile = () => {
+  console.log('👤 UserProfile component rendering');
+  
   const [showSignOut, setShowSignOut] = React.useState(false);
   const navigate = useNavigate();
+  
+  // Track component lifecycle
+  React.useEffect(() => {
+    console.log('👤 UserProfile mounted');
+    return () => {
+      console.log('👤 UserProfile unmounted');
+    };
+  }, []);
+
+  // Track showSignOut state changes
+  React.useEffect(() => {
+    console.log('👤 UserProfile: showSignOut changed to', showSignOut);
+  }, [showSignOut]);
+  
   let user = null;
   try {
     user = JSON.parse(localStorage.getItem('user'));
+    console.log('👤 UserProfile: User data loaded', user ? { id: user.id, username: user.username } : 'null');
   } catch (e) {
     console.warn('UserProfile: Failed to parse user from localStorage', e);
   }
@@ -38,6 +55,7 @@ const UserProfile = () => {
     : 'https://cdn.discordapp.com/embed/avatars/0.png'; // fallback avatar
 
   const handleSignOut = () => {
+    console.log('👤 UserProfile: Signing out user');
     localStorage.removeItem('user');
     navigate('/');
   };
