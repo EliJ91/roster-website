@@ -22,11 +22,13 @@
 }
 
 .admin-heading {
+  font-family: 'Cinzel', serif;
   font-size: 3rem;
   font-weight: bold;
   color: #ffffff;
   margin-bottom: 0.5rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  letter-spacing: 0.05em;
 }
 
 .admin-subtitle {

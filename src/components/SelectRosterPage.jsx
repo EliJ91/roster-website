@@ -1,9 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserProfile from './UserProfile';
-import SignupModal from './SignupModal';
-import { FaTrash, FaArchive, FaUserClock, FaPlus, FaCog } from 'react-icons/fa';
-import { GiToolbox } from 'react-icons/gi'; // open toolbox icon
+import { mockRosterData } from '../test-data/mockRosterData';
 import '../styles/selectrosterpage.css';
 
 // Helper to get users who signed up for a weapon, excluding already assigned users
@@ -44,17 +41,40 @@ function getRoleOrder(role) {
   return idx === -1 ? 99 : idx;
 }
 
-const SelectRosterPage = () => {
+const SelectRosterPage = (props) => {
 	const navigate = useNavigate();
-	const [roster, setRoster] = useState([]);
+	const [roster, setRoster] = useState(null);
+	const [flatRoster, setFlatRoster] = useState([]); // For backward compatibility
 	const [signups, setSignups] = useState([]);
-	const [signupOpen, setSignupOpen] = useState(false);
 	const [user, setUser] = useState(null);
 	const [selectedPlayers, setSelectedPlayers] = React.useState({});
-	const [unassignedModalOpen, setUnassignedModalOpen] = useState(false);
-	const [actionsOpen, setActionsOpen] = useState(false);
-	const actionsRef = useRef();
-	const actionsMenuRef = useRef();
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	
+	// Helper function to safely handle equipment data (both array and string formats)
+	const safeGetEquipmentItems = (equipment) => {
+		if (!equipment) return [];
+		if (Array.isArray(equipment)) return equipment.filter(item => item && item.trim());
+		if (typeof equipment === 'string') return equipment.split('/').map(item => item.trim()).filter(item => item);
+		return [];
+	};
+
+	// Helper function to flatten mock data structure
+	const flattenMockData = () => {
+		const flattenedRoster = [];
+		mockRosterData.parties?.forEach(party => {
+			party.positions?.forEach(position => {
+				flattenedRoster.push({
+					role: position.role,
+					weapon: position.weapon,
+					player: position.player || position.signedUpUser || '',
+					build: position.buildNotes || '',
+					nickname: position.signedUpUser || position.player || ''
+				});
+			});
+		});
+		return flattenedRoster;
+	};
 
 	useEffect(() => {
 		try {
@@ -69,20 +89,85 @@ const SelectRosterPage = () => {
 		// Fetch live data from backend
 		const fetchData = async () => {
 			try {
-				const [rosterRes, signupsRes] = await Promise.all([
-					fetch('/api/roster'),
-					fetch('/api/signups')
-				]);
+				setLoading(true);
+				setError(null);
 				
-				const rosterData = await rosterRes.json();
-				const signupsData = await signupsRes.json();
+				// Try to fetch from your Netlify function first
+				const rosterRes = await fetch('/.netlify/functions/get-rosters');
 				
-				setRoster(rosterData);
-				setSignups(signupsData);
+				if (rosterRes.ok) {
+					const data = await rosterRes.json();
+					if (data.rosters && data.rosters.length > 0) {
+						// Get the most recent roster
+						const latestRoster = data.rosters[0];
+						setRoster(latestRoster);
+						
+						// Also create a flattened version for backward compatibility
+						const flattenedRoster = [];
+						latestRoster.parties?.forEach(party => {
+							party.positions?.forEach(position => {
+								flattenedRoster.push({
+									role: position.role,
+									weapon: position.weapon,
+									head: position.head,
+									chest: position.chest,
+									boots: position.boots,
+									player: position.player || position.signedUpUser || '',
+									build: position.buildNotes || '',
+									nickname: position.signedUpUser || position.player || ''
+								});
+							});
+						});
+						
+						setFlatRoster(flattenedRoster);
+					} else {
+						// Fallback to mock data if no rosters found
+						console.log('No rosters found, using mock data');
+						// Create a mock roster with party structure
+						const mockRosterWithParties = {
+							eventName: "Mock Event",
+							parties: [{
+								partyName: "Main Party",
+								positions: mockRosterData.parties[0].positions
+							}]
+						};
+						setRoster(mockRosterWithParties);
+						setFlatRoster(flattenMockData());
+					}
+				} else {
+					// Fallback to mock data if API call fails
+					console.log('API call failed, using mock data');
+					// Create a mock roster with party structure
+					const mockRosterWithParties = {
+						eventName: "Mock Event",
+						parties: [{
+							partyName: "Main Party",
+							positions: mockRosterData.parties[0].positions
+						}]
+					};
+					setRoster(mockRosterWithParties);
+					setFlatRoster(flattenMockData());
+				}
+				
+				// For signups, we'll use empty array for now since there's no signup endpoint
+				setSignups([]);
+				
 			} catch (err) {
 				console.error('Failed to fetch live data:', err);
-				setRoster([]);
+				console.log('Error occurred, using mock data');
+				// Fallback to mock data
+				const mockRosterWithParties = {
+					eventName: "Mock Event",
+					parties: [{
+						partyName: "Main Party",
+						positions: mockRosterData.parties[0].positions
+					}]
+				};
+				setRoster(mockRosterWithParties);
+				setFlatRoster(flattenMockData());
 				setSignups([]);
+			} finally {
+				setLoading(false);
 			}
 		};
 
@@ -100,7 +185,9 @@ const SelectRosterPage = () => {
 	// Guild tag stats
 	const guildTagCounts = {};
 	let totalPlayers = 0;
-	roster.forEach((entry) => {
+	
+	// Calculate guild tag stats from the flattened roster for backward compatibility
+	flatRoster.forEach((entry) => {
 		// Assume entry.nickname is available from backend, otherwise fallback to player name
 		const tag = getGuildTag(entry.nickname || entry.player);
 		if (tag) {
@@ -112,470 +199,288 @@ const SelectRosterPage = () => {
 	// Live guild tag stats from signups
 	const liveGuildTagCounts = getGuildTagCounts(signups);
 
-	function handleSelectPlayer(rowIdx, userId) {
-		setSelectedPlayers((prev) => ({ ...prev, [rowIdx]: userId }));
+	function handleSelectPlayer(positionId, userId) {
+		setSelectedPlayers((prev) => ({ ...prev, [positionId]: userId }));
 	}
-
-	// Sort roster by role order before rendering
-	const sortedRoster = [...roster].sort((a, b) => {
-		const aOrder = getRoleOrder(a.role);
-		const bOrder = getRoleOrder(b.role);
-		if (aOrder !== bOrder) return aOrder - bOrder;
-		// If same role, keep original order or sort by weapon
-		return a.weapon.localeCompare(b.weapon);
-	});
 
 	// Find users who have signed up but are not assigned to any role
 	const assignedUserIds = Object.values(selectedPlayers).filter(Boolean);
-	const unassignedSignups = signups.filter(
-		u => !assignedUserIds.includes(u.id)
-	);
 
-	// Close menu on outside click
-	useEffect(() => {
-		if (!actionsOpen) return;
-		function handleClick(e) {
-			if (
-				actionsRef.current && actionsRef.current.contains(e.target)
-			) {
-				// Clicked the cog, let its onClick handle toggle
-				return;
+	// Function to manually refresh data
+	const refreshData = async () => {
+		try {
+			setLoading(true);
+			setError(null);
+			
+			// Try to fetch from your Netlify function first
+			const rosterRes = await fetch('/.netlify/functions/get-rosters');
+			
+			if (rosterRes.ok) {
+				const data = await rosterRes.json();
+				if (data.rosters && data.rosters.length > 0) {
+					// Get the most recent roster
+					const latestRoster = data.rosters[0];
+					setRoster(latestRoster);
+					
+					// Also create a flattened version for backward compatibility
+					const flattenedRoster = [];
+					latestRoster.parties?.forEach(party => {
+						party.positions?.forEach(position => {
+							flattenedRoster.push({
+								role: position.role,
+								weapon: position.weapon,
+								head: position.head,
+								chest: position.chest,
+								boots: position.boots,
+								player: position.player || position.signedUpUser || '',
+								build: position.buildNotes || '',
+								nickname: position.signedUpUser || position.player || ''
+							});
+						});
+					});
+					
+					setFlatRoster(flattenedRoster);
+				} else {
+					// Fallback to mock data if no rosters found
+					const mockRosterWithParties = {
+						eventName: "Mock Event",
+						parties: [{
+							partyName: "Main Party",
+							positions: mockRosterData.parties[0].positions
+						}]
+					};
+					setRoster(mockRosterWithParties);
+					setFlatRoster(flattenMockData());
+				}
+			} else {
+				// Fallback to mock data if API call fails
+				const mockRosterWithParties = {
+					eventName: "Mock Event",
+					parties: [{
+						partyName: "Main Party",
+						positions: mockRosterData.parties[0].positions
+					}]
+				};
+				setRoster(mockRosterWithParties);
+				setFlatRoster(flattenMockData());
 			}
-			if (
-				actionsMenuRef.current && actionsMenuRef.current.contains(e.target)
-			) {
-				// Clicked inside the actions menu, do nothing
-				return;
-			}
-			setActionsOpen(false);
+			
+			// For signups, we'll use empty array for now
+			setSignups([]);
+			
+		} catch (err) {
+			console.error('Failed to refresh live data:', err);
+			setError(err.message);
+			// Fallback to mock data
+			const mockRosterWithParties = {
+				eventName: "Mock Event",
+				parties: [{
+					partyName: "Main Party",
+					positions: mockRosterData.parties[0].positions
+				}]
+			};
+			setRoster(mockRosterWithParties);
+			setFlatRoster(flattenMockData());
+		} finally {
+			setLoading(false);
 		}
-		document.addEventListener('mousedown', handleClick);
-		return () => document.removeEventListener('mousedown', handleClick);
-	}, [actionsOpen]);
+	};
 
 	return (
 		<div className="select-roster-page">
-			<div className="user-profile-bar">
-				<UserProfile />
-			</div>
-			<div className="select-roster-topbar">
-				<div>
-					<h1 className="select-roster-heading">Conflict Army</h1>
-				</div>
-			</div>
-			<div
-				className="select-roster-actions-topbar"
-				style={{
-					display: 'flex',
-					alignItems: 'flex-start',
-					justifyContent: 'flex-start',
-					marginBottom: '0.75rem',
-					width: '100%',
-					maxWidth: 1200,
-					gap: 0,
-					flexWrap: 'wrap',
-					padding: 0,
-				}}
-			>
-				<div className="select-roster-actions-bar" style={{ display: 'flex', alignItems: 'center', gap: 0, width: 'auto', flex: 'none', minWidth: 0, justifyContent: 'flex-start', padding: 0, margin: 0 }}>
-					<button
-						className={"signup-btn signup-btn-mobile-left"}
-						onClick={() => setSignupOpen(true)}
-						style={{ marginRight: 0, marginLeft: 0, background: '#111' }}
-					>
-						Sign Up
-					</button>
-					{isElevated && (
-					  <div style={{ position: 'relative', display: 'flex', alignItems: 'center', height: '100%' }}>
-					    <button
-					      title="Show Tools"
-					      className="icon-btn cogwheel-btn"
-					      style={{ background: 'none', border: 'none', color: '#fff', fontSize: 22, padding: '0.5rem', cursor: 'pointer', marginBottom: '-2px', display: 'flex', alignItems: 'center', marginLeft: '0.5rem', zIndex: 11 }}
-					      onClick={e => { e.stopPropagation(); setActionsOpen((open) => !open); }}
-					      aria-expanded={actionsOpen}
-					      aria-label={actionsOpen ? 'Close tools' : 'Show tools'}
-					      ref={actionsRef}
-					    >
-					      <span className={`gear-icon${actionsOpen ? ' open' : ' closed'}`} style={{ borderRadius: 4 }}>
-					        <FaCog />
-					      </span>
-					    </button>
-					    <div
-					      className={`actions-collapse${actionsOpen ? ' open' : ''}`}
-					      ref={actionsMenuRef}
-					      style={{
-					        position: 'absolute',
-					        left: '100%',
-					        top: 0,
-					        marginLeft: 8,
-					        display: actionsOpen ? 'flex' : 'none',
-					        flexDirection: 'row',
-					        gap: '0.3rem',
-					        background: '#18181b',
-					        borderRadius: 8,
-					        boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
-					        padding: '0.3rem 0.7rem',
-					        zIndex: 10,
-					        alignItems: 'center',
-					        minWidth: 0,
-					        maxWidth: actionsOpen ? 400 : 0,
-					        opacity: 1,
-					        pointerEvents: actionsOpen ? 'auto' : 'none',
-					        transition: 'max-width 0.32s cubic-bezier(.7,1.7,.5,1), opacity 0.2s',
-					      }}
-					    >
-					      <button
-					        title="Clear Roster"
-					        className="icon-btn"
-					        style={{ background: 'none', border: 'none', color: '#dc2626', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
-					        onClick={() => setActionsOpen(false)}
-					      >
-					        <FaTrash />
-					      </button>
-					      <button
-					        title="Archive Roster"
-					        className="icon-btn"
-					        style={{ background: 'none', border: 'none', color: '#a16207', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
-					        onClick={() => setActionsOpen(false)}
-					      >
-					        <FaArchive />
-					      </button>
-					      <button
-					        title="Show Unassigned Players"
-					        className="icon-btn"
-					        style={{ background: 'none', border: 'none', color: '#6366f1', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
-					        onClick={() => { setUnassignedModalOpen(true); setActionsOpen(false); }}
-					      >
-					        <FaUserClock />
-					      </button>
-					      <button
-					        title="Create New Roster"
-					        className="icon-btn"
-					        style={{ background: 'none', border: 'none', color: '#059669', fontSize: 22, padding: '0.5rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end' }}
-					        onClick={() => { navigate('/create-roster'); setActionsOpen(false); }}
-					      >
-					        <FaPlus />
-					      </button>
-					    </div>
-					  </div>
+			<div className="select-roster-content">
+				{/* Header with back button */}
+				<div className="select-roster-header">
+					<h1 className="select-roster-heading">
+						Select Players
+					</h1>
+					
+					{roster?.description && (
+						<p className="roster-description">{roster.description}</p>
 					)}
+					
+					<div className="select-roster-actions">
+						<button 
+							className="back-to-admin-btn"
+							onClick={props.onBack || (() => navigate('/admin'))}
+						>
+							← Back to Admin
+						</button>
+						
+						<button 
+							className="refresh-btn"
+							onClick={refreshData}
+							disabled={loading}
+						>
+							{loading ? 'Refreshing...' : '🔄 Refresh Data'}
+						</button>
+					</div>
 				</div>
+				
+				<div className="roster-container">
+					{loading && (
+						<div style={{ 
+							textAlign: 'center', 
+							padding: '2rem', 
+							color: '#6b7280',
+							fontSize: '1.1rem'
+						}}>
+							Loading live roster data...
+						</div>
+					)}
+					
+					{error && (
+						<div style={{ 
+							textAlign: 'center', 
+							padding: '2rem', 
+							color: '#dc2626',
+							fontSize: '1.1rem',
+							backgroundColor: 'rgba(220, 38, 38, 0.1)',
+							borderRadius: '0.5rem',
+							margin: '1rem 0'
+						}}>
+							Error loading roster: {error}
+						</div>
+					)}
+					
+					{!loading && !error && roster && (
+						<div className="select-roster-table-container">
+							{roster.parties && roster.parties.length > 0 ? (
+								roster.parties.map((party, partyIndex) => (
+									<div key={partyIndex} className="party-section">
+										<div className="party-header">
+											<h2 className="party-name">{party.partyName || `Party ${partyIndex + 1}`}</h2>
+											{party.partyNotes && (
+												<p className="party-notes">{party.partyNotes}</p>
+											)}
+										</div>
+										
+										<table className="view-roster-table">
+											<thead>
+												<tr>
+													<th>Role</th>
+													<th>Weapon</th>
+													<th>Head</th>
+													<th>Chest</th>
+													<th>Boots</th>
+													<th>Player</th>
+													<th>Build Notes</th>
+												</tr>
+											</thead>
+											<tbody>
+												{party.positions && party.positions.length > 0 ? (
+													party.positions.map((position, posIndex) => {
+														// Get position ID for selection mapping
+														const positionId = `${partyIndex}-${posIndex}`;
+														const isPositionFilled = position.player || position.signedUpUser;
+														
+														return (
+															<tr key={positionId} className={`position-row ${isPositionFilled ? 'filled' : 'empty'}`}>
+																<td className="position-role">{position.role || ''}</td>
+																<td className="position-weapon">{position.weapon || ''}</td>
+																
+																{/* Head equipment */}
+																<td className="position-equipment">
+																	{safeGetEquipmentItems(position.head).length > 0 ? (
+																		<div className="equipment-items">
+																			{safeGetEquipmentItems(position.head).map((item, index) => (
+																				<div key={index} className="equipment-item">{item}</div>
+																			))}
+																		</div>
+																	) : ''}
+																</td>
+																
+																{/* Chest equipment */}
+																<td className="position-equipment">
+																	{safeGetEquipmentItems(position.chest).length > 0 ? (
+																		<div className="equipment-items">
+																			{safeGetEquipmentItems(position.chest).map((item, index) => (
+																				<div key={index} className="equipment-item">{item}</div>
+																			))}
+																		</div>
+																	) : ''}
+																</td>
+																
+																{/* Boots equipment */}
+																<td className="position-equipment">
+																	{safeGetEquipmentItems(position.boots).length > 0 ? (
+																		<div className="equipment-items">
+																			{safeGetEquipmentItems(position.boots).map((item, index) => (
+																				<div key={index} className="equipment-item">{item}</div>
+																			))}
+																		</div>
+																	) : ''}
+																</td>
+																
+																{/* Player column */}
+																<td className="position-player">
+																	{isElevated ? (
+																		<select
+																			className={selectedPlayers[positionId] && selectedPlayers[positionId] !== '' ? 'selected' : ''}
+																			style={{
+																				minWidth: 120,
+																				maxWidth: 220,
+																				width: '100%',
+																				textAlign: 'center',
+																				backgroundColor: '#18181b',
+																				color: isPositionFilled ? '#22c55e' : '#ef4444',
+																				border: '1px solid rgba(255, 255, 255, 0.2)',
+																				borderRadius: '4px',
+																				padding: '0.5rem',
+																				fontSize: '1rem',
+																				fontWeight: '600',
+																				boxShadow: (!selectedPlayers[positionId] || selectedPlayers[positionId] === '') ? '0 0 0 2px #dc262688, 0 2px 16px #dc262655' : undefined,
+																			}}
+																			value={selectedPlayers[positionId] || ''}
+																			onChange={e => handleSelectPlayer(positionId, e.target.value)}
+																		>
+																			<option value="">-- Select Player --</option>
+																			{selectedPlayers[positionId]
+																				? (() => {
+																						const selectedUser = signups.find(u => u.id === selectedPlayers[positionId]);
+																						return selectedUser ? [
+																							<option key={selectedUser.id} value={selectedUser.id}>{selectedUser.nickname}</option>,
+																							...getUsersForWeapon(position.weapon, assignedUserIds, signups).filter(u => u.id !== selectedUser.id).map(u => (
+																								<option key={u.id} value={u.id}>{u.nickname}</option>
+																							))
+																						] : getUsersForWeapon(position.weapon, assignedUserIds, signups).map(u => (
+																							<option key={u.id} value={u.id}>{u.nickname}</option>
+																						));
+																					})()
+																				: getUsersForWeapon(position.weapon, assignedUserIds, signups).map(u => (
+																						<option key={u.id} value={u.id}>{u.nickname}</option>
+																					))}
+																		</select>
+																	) : isPositionFilled ? (
+																		<span className="player-name">{position.signedUpUser || position.player}</span>
+																	) : (
+																		<span className="empty-slot">Available</span>
+																	)}
+																</td>
+																
+																{/* Build notes */}
+																<td className="position-build-notes">{position.buildNotes || ''}</td>
+															</tr>
+														);
+													})
+												) : (
+													<tr>
+														<td colSpan="7" className="no-positions">No positions defined for this party</td>
+													</tr>
+												)}
+											</tbody>
+										</table>
+									</div>
+								))
+							) : (
+								<div className="no-data-message">No roster data available</div>
+							)}
+						</div>
+					)}
 			</div>
-			
-			<div className="select-roster-card">
-				<div className="select-roster-table-container">
-					<table className="select-roster-table">
-			    <thead>
-			      <tr>
-			        <th style={{ minWidth: 120 }}>Role</th>
-			        <th style={{ minWidth: 120 }}>Weapon</th>
-			        <th style={{ minWidth: 120 }}>Player</th>
-			        <th style={{ minWidth: 180 }}>Build Notes</th>
-			      </tr>
-			    </thead>
-			    <tbody>
-			      {sortedRoster.map((entry, index) => {
-			        // Determine role class for pill
-			        let roleClass = 'role-pill';
-			        let mainCallerStyle = undefined;
-			        switch ((entry.role || '').toLowerCase()) {
-			          case 'main caller':
-			            roleClass += ' role-main-caller';
-			            mainCallerStyle = {
-			              color: '#fffbe6',
-			              textShadow: '0 0 6px #fbbf24, 0 0 2px #fff',
-			              fontWeight: 700,
-			              letterSpacing: '0.04em',
-			              fontSize: '1.04em',
-			              background: 'linear-gradient(90deg, #fbbf24 0%, #f59e42 100%)',
-			              boxShadow: '0 0 6px #fbbf24cc',
-			              padding: '0.22em 0.5em',
-			              minWidth: 110,
-			              filter: 'brightness(1.08)',
-			              textTransform: 'none',
-			              borderRadius: '1.2em',
-			            };
-			            break;
-			          case 'tank':
-			            roleClass += ' role-tank';
-			            break;
-			          case 'support':
-			            roleClass += ' role-support';
-			            break;
-			          case 'healer':
-			            roleClass += ' role-healer';
-			            break;
-			          case 'mdps':
-			            roleClass += ' role-mdps';
-			            break;
-			          case 'rdps':
-			            roleClass += ' role-rdps';
-			            break;
-			          default:
-			            break;
-			        }
-			        return (
-			          <tr key={index}>
-			            <td className="role-cell">
-			              <span className={roleClass}>{entry.role}</span>
-			            </td>
-			            <td style={{ fontWeight: 700, color: '#f59e42', textAlign: 'center', background: '#18181b' }}>{entry.weapon}</td>
-			            <td style={{ textAlign: 'center', background: '#18181b' }}>
-			              {isElevated ? (
-			                <select
-			                  className={selectedPlayers[index] && selectedPlayers[index] !== '' ? 'selected' : ''}
-			                  style={{
-			                    minWidth: 120,
-			                    maxWidth: 220,
-			                    width: '100%',
-			                    textAlign: 'center',
-			                    boxShadow: (!selectedPlayers[index] || selectedPlayers[index] === '') ? '0 0 0 2px #dc262688, 0 2px 16px #dc262655' : undefined,
-			                  }}
-			                  value={selectedPlayers[index] || ''}
-			                  onChange={e => handleSelectPlayer(index, e.target.value)}
-			                >
-			                  <option value="">-- Select Player --</option>
-			                  {selectedPlayers[index]
-			                    ? (() => {
-			                        const selectedUser = signups.find(u => u.id === selectedPlayers[index]);
-			                        return selectedUser ? [
-			                          <option key={selectedUser.id} value={selectedUser.id}>{selectedUser.nickname}</option>,
-			                          ...getUsersForWeapon(entry.weapon, assignedUserIds, signups).filter(u => u.id !== selectedUser.id).map(u => (
-			                            <option key={u.id} value={u.id}>{u.nickname}</option>
-			                          ))
-			                        ] : getUsersForWeapon(entry.weapon, assignedUserIds, signups).map(u => (
-			                          <option key={u.id} value={u.id}>{u.nickname}</option>
-			                        ));
-			                      })()
-			                    : getUsersForWeapon(entry.weapon, assignedUserIds, signups).map(u => (
-			                        <option key={u.id} value={u.id}>{u.nickname}</option>
-			                      ))}
-			                </select>
-			              ) : (
-			              entry.player
-			            )}
-			            </td>
-			            <td style={{ color: '#f3f4f6', fontSize: 14, textAlign: 'center', background: '#18181b' }}>{entry.build}</td>
-			          </tr>
-			        );
-			      })}
-			    </tbody>
-			  </table>
-				</div>
-			</div>
-			
-			<SignupModal
-				open={signupOpen}
-				onClose={() => setSignupOpen(false)}
-			/>
-			
-			{unassignedModalOpen && (
-            <div
-                style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100vw',
-                    height: '100vh',
-                    background: 'rgba(0,0,0,0.3)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 2000,
-                }}
-                onClick={e => { if (e.target === e.currentTarget) setUnassignedModalOpen(false); }}
-            >
-                <div
-                    style={{
-                        background: '#23232a',
-                        color: '#f3f4f6',
-                        borderRadius: '1.2rem',
-                        padding: '1.2rem 1.5rem',
-                        minWidth: 320,
-                        maxWidth: 420,
-                        maxHeight: '55vh',
-                        overflowY: 'auto',
-                        boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
-                        position: 'relative',
-                    }}
-                    className="unassigned-modal"
-                    onClick={e => e.stopPropagation()}
-                >
-                    <button
-                        onClick={() => setUnassignedModalOpen(false)}
-                        style={{ position: 'absolute', top: 10, right: 15, fontSize: 20, background: 'none', border: 'none', cursor: 'pointer', color: '#6366f1' }}
-                    >
-                        ×
-                    </button>
-                    <h2 style={{ marginTop: 0, fontWeight: 600, color: '#a5b4fc' }}>Unassigned</h2>
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                        {unassignedSignups.length === 0 ? (
-                            <li style={{ color: '#aaa', fontStyle: 'italic' }}>All signed up players have been assigned.</li>
-                        ) : (
-                            unassignedSignups.map(u => (
-                                <li key={u.id} style={{ marginBottom: 12, padding: 8, background: '#18181b', borderRadius: 8 }}>
-                                    <strong>{u.nickname}</strong>
-                                    <div style={{ fontSize: 15, marginTop: 2, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                                        {u.weapons.map(w => {
-                                            // Determine text color for role
-                                            let color = '#f3f4f6';
-                                            const lower = w.toLowerCase();
-                                            if (lower.includes('tank')) color = '#2563eb';
-                                            else if (lower.includes('healer') || lower.includes('blight') || lower.includes('hallowfall')) color = '#059669';
-                                            else if (lower.includes('support') || lower.includes('locus') || lower.includes('shadowcaller') || lower.includes('oathkeeper')) color = '#eab308';
-                                            else if (lower.includes('bow') || lower.includes('frost') || lower.includes('bolt') || lower.includes('rdps')) color = '#f59e42';
-                                            else if (lower.includes('spear') || lower.includes('scythe') || lower.includes('breaker') || lower.includes('mdps') || lower.includes('mace') || lower.includes('hammer') || lower.includes('ga')) color = '#dc2626';
-                                            else color = '#a5b4fc';
-                                            return (
-                                                <span key={w} style={{ color, fontWeight: 700, marginRight: 8 }}>{w}</span>
-                                            );
-                                        })}
-                                    </div>
-                                </li>
-                            ))
-                        )}
-                    </ul>
-                </div>
-            </div>
-        )}
 		</div>
+	</div>
 	);
 };
 
-// CSS for color fade only (no spin)
-const gearSpinStyles = `
-.gear-icon {
-  font-size: 22px !important;
-  transition: color 0.32s, transform 0.18s cubic-bezier(.7,1.7,.5,1);
-  display: inline-block;
-}
-.gear-icon.open {
-  color: #eab308 !important;
-}
-.gear-icon.closed {
-  color: #fff !important;
-}
-`;
-if (typeof document !== 'undefined' && !document.getElementById('gear-spin-styles')) {
-  const style = document.createElement('style');
-  style.id = 'gear-spin-styles';
-  style.innerHTML = gearSpinStyles;
-  document.head.appendChild(style);
-}
-
 export default SelectRosterPage;
-
-// Responsive styles for mobile roster table and select/button
-if (typeof document !== 'undefined' && !document.getElementById('roster-responsive-styles')) {
-  const style = document.createElement('style');
-  style.id = 'roster-responsive-styles';
-  style.innerHTML = `
-    @media (max-width: 700px) {
-      .select-roster-table th, .select-roster-table td {
-        padding: 0.5rem 0.3rem !important;
-        font-size: 0.95rem !important;
-      }
-      .select-roster-topbar {
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 0.7rem !important;
-      }
-      .select-roster-table {
-        min-width: 320px !important;
-      }
-      .select-roster-table select {
-        min-width: 90px !important;
-        max-width: 140px !important;
-        font-size: 0.95em !important;
-        padding: 0.3em 0.5em !important;
-      }
-      .signup-btn {
-        font-size: 0.98em !important;
-        padding: 0.4em 1em !important;
-        min-width: 0 !important;
-        max-width: 140px !important;
-      }
-    }
-    @media (max-width: 400px) {
-      .select-roster-table th, .select-roster-table td {
-        font-size: 0.85rem !important;
-        padding: 0.3rem 0.1rem !important;
-      }
-      .select-roster-table select {
-        min-width: 70px !important;
-        max-width: 100px !important;
-        font-size: 0.9em !important;
-        padding: 0.2em 0.3em !important;
-      }
-      .signup-btn {
-        font-size: 0.92em !important;
-        padding: 0.3em 0.7em !important;
-        max-width: 100px !important;
-      }
-    }
-  `;
-  document.head.appendChild(style);
-}
-
-// Add responsive CSS for hiding .select-roster-stats-topbar on mobile
-if (typeof document !== 'undefined' && !document.getElementById('roster-stats-mobile-hide')) {
-  const style = document.createElement('style');
-  style.id = 'roster-stats-mobile-hide';
-  style.innerHTML = `
-    @media (max-width: 700px) {
-      .select-roster-stats-topbar { display: none !important; }
-    }
-  `;
-  document.head.appendChild(style);
-}
-
-// Responsive CSS for hiding Conflict Army text and adjusting actions bar on mobile
-if (typeof document !== 'undefined' && !document.getElementById('roster-topbar-mobile-hide')) {
-  const style = document.createElement('style');
-  style.id = 'roster-topbar-mobile-hide';
-  style.innerHTML = `
-    @media (max-width: 700px) {
-      .select-roster-heading { display: none !important; }
-      .select-roster-topbar { flex-direction: column !important; align-items: stretch !important; gap: 0.7rem !important; }
-      .select-roster-actions-bar { flex-direction: row !important; justify-content: flex-end !important; gap: 0.7rem !important; }
-    }
-  `;
-  document.head.appendChild(style);
-}
-
-// Responsive CSS for mobile: sign up button to far left, actions bar row, extra spacing
-if (typeof document !== 'undefined' && !document.getElementById('roster-topbar-mobile-signup')) {
-  const style = document.createElement('style');
-  style.id = 'roster-topbar-mobile-signup';
-  style.innerHTML = `
-    @media (max-width: 700px) {
-      .select-roster-heading { display: none !important; }
-      .select-roster-topbar { flex-direction: column !important; align-items: stretch !important; gap: 0.7rem !important; }
-      .select-roster-actions-bar { flex-direction: row !important; justify-content: flex-start !important; gap: 0.7rem !important; width: 100% !important; position: relative; }
-      .signup-cog-row { flex-direction: row !important; justify-content: flex-start !important; gap: 0.5rem !important; width: auto !important; }
-      .signup-btn-mobile-left { margin-right: 0 !important; margin-left: 0 !important; }
-      .icon-btn { margin-left: 0 !important; }
-    }
-  `;
-  document.head.appendChild(style);
-}
-
-// Responsive CSS for UserProfile top right and cog near sign up on mobile
-if (typeof document !== 'undefined' && !document.getElementById('roster-topbar-mobile-userprofile')) {
-  const style = document.createElement('style');
-  style.id = 'roster-topbar-mobile-userprofile';
-  style.innerHTML = `
-    @media (max-width: 700px) {
-      .select-roster-heading { display: none !important; }
-      .select-roster-topbar { flex-direction: column !important; align-items: stretch !important; gap: 0.7rem !important; }
-      .select-roster-actions-bar { flex-direction: row !important; justify-content: flex-end !important; gap: 0.7rem !important; width: 100% !important; position: relative; }
-      .signup-btn-mobile-left { margin-right: 0.5rem !important; }
-      .icon-btn { margin-left: 0 !important; }
-      /* UserProfile top right */
-      .user-profile-top-right { position: absolute !important; top: 1.2rem !important; right: 1.2rem !important; z-index: 100 !important; }
-    }
-  `;
-  document.head.appendChild(style);
-}
-
-

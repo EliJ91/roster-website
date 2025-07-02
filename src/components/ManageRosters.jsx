@@ -995,20 +995,24 @@ const ManageRosters = ({ onBack }) => {
       ) : (
         <>
           <div className="manage-rosters-header">
-            <button onClick={onBack} className="back-button">← Back to Admin</button>
-            <h2>Manage Rosters</h2>
-            <div className="header-controls">
-              <select 
-                className="author-filter"
-                value={authorFilter}
-                onChange={(e) => setAuthorFilter(e.target.value)}
-              >
-                <option value="">All Authors</option>
-                {uniqueAuthors.map(author => (
-                  <option key={author} value={author}>{author}</option>
-                ))}
-              </select>
-              <p className="roster-count">{filteredRosters.length} roster{filteredRosters.length !== 1 ? 's' : ''} found</p>
+            <h2 className="manage-rosters-title">Manage Rosters</h2>
+            
+            <div className="manage-rosters-actions">
+              <button onClick={onBack} className="back-button">← Back to Admin</button>
+              
+              <div className="header-controls">
+                <select 
+                  className="author-filter"
+                  value={authorFilter}
+                  onChange={(e) => setAuthorFilter(e.target.value)}
+                >
+                  <option value="">All Authors</option>
+                  {uniqueAuthors.map(author => (
+                    <option key={author} value={author}>{author}</option>
+                  ))}
+                </select>
+                <p className="roster-count">{filteredRosters.length} roster{filteredRosters.length !== 1 ? 's' : ''} found</p>
+              </div>
             </div>
           </div>
 

@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import { createRoster } from '../utils/firestoreEvents';
+import { useNavigate } from 'react-router-dom';
 
 const DevUploader = () => {
+  const navigate = useNavigate();
   const [jsonData, setJsonData] = useState('');
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
+  const [activeTab, setActiveTab] = useState('uploader'); // 'uploader' or 'nav'
+
+  // Define all your application routes
+  const routes = [
+    { path: '/', label: '/' },
+    { path: '/select-roster', label: '/select-roster' },
+    { path: '/create-roster', label: '/create-roster' },
+    { path: '/view-roster', label: '/view-roster' },
+    { path: '/admin', label: '/admin' }
+  ];
 
   // Only render in development mode
   if (process.env.NODE_ENV !== 'development') {
@@ -133,8 +145,8 @@ const DevUploader = () => {
     position: 'fixed',
     top: '10px',
     left: '10px',
-    width: '280px',
-    maxHeight: '60vh',
+    width: '320px',
+    maxHeight: '70vh',
     backgroundColor: 'rgba(0, 0, 0, 0.9)',
     backdropFilter: 'blur(8px)',
     border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -211,10 +223,48 @@ const DevUploader = () => {
     wordBreak: 'break-word'
   };
 
+  const tabStyle = {
+    backgroundColor: 'transparent',
+    color: 'white',
+    border: '1px solid rgba(255, 255, 255, 0.3)',
+    padding: '4px 8px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    fontSize: '10px',
+    marginRight: '4px',
+    marginBottom: '8px'
+  };
+
+  const activeTabStyle = {
+    ...tabStyle,
+    backgroundColor: '#00ff88',
+    color: 'black',
+    fontWeight: 'bold'
+  };
+
+  const navLinkStyle = {
+    display: 'block',
+    color: '#00ff88',
+    textDecoration: 'none',
+    padding: '6px 8px',
+    borderRadius: '4px',
+    fontSize: '11px',
+    marginBottom: '4px',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease'
+  };
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    setMessage(`🚀 Navigated to ${path}`);
+  };
+
   return (
     <div style={containerStyle}>
       <div style={headerStyle}>
-        <span>🛠️ DEV ROSTER UPLOADER</span>
+        <span>🛠️ DEV PANEL</span>
         <button 
           style={toggleButtonStyle}
           onClick={() => setIsExpanded(false)}
@@ -223,32 +273,79 @@ const DevUploader = () => {
         </button>
       </div>
       
-      <textarea
-        style={textareaStyle}
-        value={jsonData}
-        onChange={handleTextareaChange}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-        placeholder={isDragOver ? "Drop .txt file here..." : "Paste roster JSON data here or drag & drop a .txt file..."}
-      />
-      
-      <div>
+      {/* Tab Navigation */}
+      <div style={{ marginBottom: '12px' }}>
         <button
-          style={buttonStyle}
-          onClick={handleUpload}
-          disabled={uploading}
+          style={activeTab === 'nav' ? activeTabStyle : tabStyle}
+          onClick={() => setActiveTab('nav')}
         >
-          {uploading ? 'Uploading...' : 'Upload Roster'}
+          🧭 Navigation
         </button>
-        
         <button
-          style={{ ...toggleButtonStyle, marginLeft: '6px' }}
-          onClick={() => setJsonData('')}
+          style={activeTab === 'uploader' ? activeTabStyle : tabStyle}
+          onClick={() => setActiveTab('uploader')}
         >
-          Clear
+          📤 Uploader
         </button>
       </div>
+
+      {/* Navigation Tab Content */}
+      {activeTab === 'nav' && (
+        <div>
+          <div style={{ marginBottom: '8px', fontSize: '11px', color: '#00ff88', fontWeight: 'bold' }}>
+            📋 Page Navigation
+          </div>
+          {routes.map((route) => (
+            <div
+              key={route.path}
+              style={navLinkStyle}
+              onClick={() => handleNavigation(route.path)}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'rgba(0, 255, 136, 0.1)';
+                e.target.style.borderColor = '#00ff88';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+              }}
+            >
+              {route.label}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Uploader Tab Content */}
+      {activeTab === 'uploader' && (
+        <div>
+          <textarea
+            style={textareaStyle}
+            value={jsonData}
+            onChange={handleTextareaChange}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            placeholder={isDragOver ? "Drop .txt file here..." : "Paste roster JSON data here or drag & drop a .txt file..."}
+          />
+          
+          <div>
+            <button
+              style={buttonStyle}
+              onClick={handleUpload}
+              disabled={uploading}
+            >
+              {uploading ? 'Uploading...' : 'Upload Roster'}
+            </button>
+            
+            <button
+              style={{ ...toggleButtonStyle, marginLeft: '6px' }}
+              onClick={() => setJsonData('')}
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+      )}
 
       {message && (
         <div style={messageStyle}>

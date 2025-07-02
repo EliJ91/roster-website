@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import { createRoster } from "../utils/firestoreEvents";
-import UserProfile from './UserProfile';
 import { ROLE_OPTIONS, WEAPON_OPTIONS_BY_ROLE, BUILD_NOTES_PLACEHOLDER } from '../data/rosterOptions';
 
 // Default to 1 roster, each with 20 positions
@@ -15,6 +15,7 @@ const ROLE_OPTIONS_WITH_CALLERS = [
 ];
 
 export default function CreateRosterPage({ currentUser }) {
+  const navigate = useNavigate();
   const [rosters, setRosters] = useState(
     Array.from({ length: DEFAULT_ROSTER_COUNT }, () => ({ name: '', description: '', positions: defaultPositions.map(p => ({ ...p })) }))
   );
@@ -140,15 +141,22 @@ export default function CreateRosterPage({ currentUser }) {
 
   return (
     <div className="create-roster-page">
-      <div className="user-profile-bar">
-        <UserProfile />
-      </div>
-      <div className="create-roster-topbar">
-        <div>
+      <div className="create-roster-content">
+        {/* Header with back button */}
+        <div className="create-roster-header">
           <h1 className="create-roster-heading">Create Roster</h1>
+          
+          <div className="create-roster-actions">
+            <button 
+              className="back-to-admin-btn"
+              onClick={() => navigate('/admin')}
+            >
+              ← Back to Admin
+            </button>
+            <div></div> {/* This keeps the space for right alignment if needed */}
+          </div>
         </div>
-      </div>
-      <div className="create-roster-card">
+        <div className="create-roster-card">
         <form onSubmit={handleSubmit} className="create-roster-form">
         <div className="create-roster-form-row">
           <div className="create-roster-author-col">
@@ -264,7 +272,7 @@ export default function CreateRosterPage({ currentUser }) {
             </table>
           </div>
         ))}
-        <div className="create-roster-actions" style={{ marginTop: 0 }}>
+        <div className="create-roster-form-actions">
           <button type="submit" disabled={loading}>
             {loading ? "Saving to Database..." : "Save Roster"}
           </button>
@@ -281,6 +289,7 @@ export default function CreateRosterPage({ currentUser }) {
         {success && <div className="success-msg">Roster saved to database successfully!</div>}
         {error && <div className="error-msg">{error}</div>}
       </form>
+      </div>
       </div>
     </div>
   );

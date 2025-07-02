@@ -61,8 +61,8 @@ function App() {
           <Route path="/view-roster" element={<ViewRosterPage />} />
           <Route path="/admin" element={<AdminPage currentUser={user} />} />
         </Routes>
+        <DevUploader />
       </Router>
-      <DevUploader />
     </div>
   );
 }
