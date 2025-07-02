@@ -3,9 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import { mockRosterData } from '../test-data/mockRosterData';
 import '../styles/selectrosterpage.css';
 
-// Helper to get users who signed up for a weapon, excluding already assigned users
-function getUsersForWeapon(weapon, assignedUserIds, signups) {
-	return signups.filter((u) => u.weapons.includes(weapon) && !assignedUserIds.includes(u.id));
+// Helper to get users who signed up for a weapon and role, excluding already assigned users
+function getUsersForWeapon(weapon, role, assignedUserIds, signups) {
+	return signups.filter((u) => {
+		// Check if user is already assigned
+		if (assignedUserIds.includes(u.id)) {
+			return false;
+		}
+		
+		// Check if the user signed up for this role
+		if (!u.roles.includes(role)) {
+			return false;
+		}
+		
+		// Check if the user signed up for this weapon for this role
+		return u.weaponsByRole[role] && u.weaponsByRole[role].includes(weapon);
+	});
 }
 
 // Helper to get guild tag from nickname
@@ -120,6 +133,49 @@ const SelectRosterPage = (props) => {
 						});
 						
 						setFlatRoster(flattenedRoster);
+						
+						// Fetch signups for this roster
+						try {
+							// Only fetch if we have a valid roster ID
+							if (latestRoster.id) {
+								const signupsRes = await fetch(`/.netlify/functions/get-roster-signups?rosterId=${latestRoster.id}`);
+								
+								if (signupsRes.ok) {
+									const signupsData = await signupsRes.json();
+									
+									// Transform the signup data to match the format expected by the component
+									const formattedSignups = signupsData.signups?.map(signup => {
+										// Create an array of weapons from all roles
+										const allWeapons = [];
+										Object.entries(signup.weaponsByRole || {}).forEach(([role, weapons]) => {
+											weapons.forEach(weapon => {
+												if (!allWeapons.includes(weapon)) {
+													allWeapons.push(weapon);
+												}
+											});
+										});
+										
+										return {
+											id: signup.userId,
+											discordId: signup.discordId,
+											name: signup.name,
+											nickname: signup.name + (signup.guildTag ? ` ${signup.guildTag}` : ''),
+											roles: signup.roles || [],
+											weapons: allWeapons,
+											weaponsByRole: signup.weaponsByRole || {},
+											timestamp: signup.timestamp
+										};
+									}) || [];
+									
+									setSignups(formattedSignups);
+								}
+							}
+						} catch (signupsErr) {
+							console.error('Failed to fetch signups:', signupsErr);
+							// If signups fetch fails, just use empty array but continue with the roster
+							setSignups([]);
+						}
+						
 					} else {
 						// Fallback to mock data if no rosters found
 						console.log('No rosters found, using mock data');
@@ -133,6 +189,7 @@ const SelectRosterPage = (props) => {
 						};
 						setRoster(mockRosterWithParties);
 						setFlatRoster(flattenMockData());
+						setSignups([]);
 					}
 				} else {
 					// Fallback to mock data if API call fails
@@ -147,10 +204,8 @@ const SelectRosterPage = (props) => {
 					};
 					setRoster(mockRosterWithParties);
 					setFlatRoster(flattenMockData());
+					setSignups([]);
 				}
-				
-				// For signups, we'll use empty array for now since there's no signup endpoint
-				setSignups([]);
 				
 			} catch (err) {
 				console.error('Failed to fetch live data:', err);
@@ -240,6 +295,49 @@ const SelectRosterPage = (props) => {
 					});
 					
 					setFlatRoster(flattenedRoster);
+					
+					// Fetch signups for this roster
+					try {
+						// Only fetch if we have a valid roster ID
+						if (latestRoster.id) {
+							const signupsRes = await fetch(`/.netlify/functions/get-roster-signups?rosterId=${latestRoster.id}`);
+							
+							if (signupsRes.ok) {
+								const signupsData = await signupsRes.json();
+								
+								// Transform the signup data to match the format expected by the component
+								const formattedSignups = signupsData.signups?.map(signup => {
+									// Create an array of weapons from all roles
+									const allWeapons = [];
+									Object.entries(signup.weaponsByRole || {}).forEach(([role, weapons]) => {
+										weapons.forEach(weapon => {
+											if (!allWeapons.includes(weapon)) {
+												allWeapons.push(weapon);
+											}
+										});
+									});
+									
+									return {
+										id: signup.userId,
+										discordId: signup.discordId,
+										name: signup.name,
+										nickname: signup.name + (signup.guildTag ? ` ${signup.guildTag}` : ''),
+										roles: signup.roles || [],
+										weapons: allWeapons,
+										weaponsByRole: signup.weaponsByRole || {},
+										timestamp: signup.timestamp
+									};
+								}) || [];
+								
+								setSignups(formattedSignups);
+							}
+						}
+					} catch (signupsErr) {
+						console.error('Failed to fetch signups:', signupsErr);
+						// If signups fetch fails, just use empty array but continue with the roster
+						setSignups([]);
+					}
+					
 				} else {
 					// Fallback to mock data if no rosters found
 					const mockRosterWithParties = {
@@ -251,6 +349,7 @@ const SelectRosterPage = (props) => {
 					};
 					setRoster(mockRosterWithParties);
 					setFlatRoster(flattenMockData());
+					setSignups([]);
 				}
 			} else {
 				// Fallback to mock data if API call fails
@@ -263,10 +362,8 @@ const SelectRosterPage = (props) => {
 				};
 				setRoster(mockRosterWithParties);
 				setFlatRoster(flattenMockData());
+				setSignups([]);
 			}
-			
-			// For signups, we'll use empty array for now
-			setSignups([]);
 			
 		} catch (err) {
 			console.error('Failed to refresh live data:', err);
@@ -281,6 +378,7 @@ const SelectRosterPage = (props) => {
 			};
 			setRoster(mockRosterWithParties);
 			setFlatRoster(flattenMockData());
+			setSignups([]);
 		} finally {
 			setLoading(false);
 		}
