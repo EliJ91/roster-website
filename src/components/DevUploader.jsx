@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createRoster } from '../utils/firestoreEvents';
+import { createRoster, updateServerSettings } from '../utils/firestoreEvents';
 import { useNavigate } from 'react-router-dom';
 
 const DevUploader = () => {
@@ -9,7 +9,10 @@ const DevUploader = () => {
   const [message, setMessage] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
-  const [activeTab, setActiveTab] = useState('uploader'); // 'uploader' or 'nav'
+  const [settingsData, setSettingsData] = useState('');
+  const [isDragOverSettings, setIsDragOverSettings] = useState(false);
+  const [uploadingSettings, setUploadingSettings] = useState(false);
+  const [activeTab, setActiveTab] = useState('uploader'); // 'uploader', 'nav', or 'settings'
 
   // Define all your application routes
   const routes = [
@@ -103,6 +106,97 @@ const DevUploader = () => {
       setMessage(`❌ Error: ${error.message}`);
     } finally {
       setUploading(false);
+    }
+  };
+
+  const handleDragOverSettings = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOverSettings(true);
+  };
+
+  const handleDragLeaveSettings = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOverSettings(false);
+  };
+
+  const handleDropSettings = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragOverSettings(false);
+
+    const files = Array.from(e.dataTransfer.files);
+    const jsonFile = files.find(file => file.name.endsWith('.json'));
+
+    if (jsonFile) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const content = event.target.result;
+          // Attempt to parse the JSON to validate it
+          JSON.parse(content);
+          setSettingsData(content);
+          setMessage(`📁 Settings file "${jsonFile.name}" loaded successfully`);
+        } catch (error) {
+          setMessage(`❌ Invalid JSON in file "${jsonFile.name}": ${error.message}`);
+        }
+      };
+      reader.readAsText(jsonFile);
+    } else {
+      setMessage('❌ Please drop a .json file containing server settings');
+    }
+  };
+
+  const handleSettingsTextareaChange = (e) => {
+    setSettingsData(e.target.value);
+    if (message.includes('📁 Settings file')) {
+      setMessage(''); // Clear file load message when user starts typing
+    }
+  };
+
+  const handleUploadSettings = async () => {
+    if (!settingsData.trim()) {
+      setMessage('Please enter server settings data');
+      return;
+    }
+
+    try {
+      setUploadingSettings(true);
+      setMessage('');
+      
+      // Parse the JSON data
+      let settingsObject;
+      
+      try {
+        settingsObject = JSON.parse(settingsData);
+      } catch (error) {
+        throw new Error(`Invalid JSON format: ${error.message}`);
+      }
+      
+      // Validate the settings object
+      if (!settingsObject || typeof settingsObject !== 'object') {
+        throw new Error('Settings must be a valid object');
+      }
+      
+      // Required fields check
+      const requiredFields = ['guildId', 'elevatedRoleId', 'roles', 'weaponsByRole', 'armorOptions'];
+      for (const field of requiredFields) {
+        if (!settingsObject[field]) {
+          throw new Error(`Missing required field: ${field}`);
+        }
+      }
+      
+      // Update the server settings
+      await updateServerSettings(settingsObject);
+
+      setMessage(`✅ Server settings uploaded successfully!`);
+      setSettingsData('');
+    } catch (error) {
+      console.error('Upload error:', error);
+      setMessage(`❌ Error: ${error.message}`);
+    } finally {
+      setUploadingSettings(false);
     }
   };
 
@@ -285,7 +379,13 @@ const DevUploader = () => {
           style={activeTab === 'uploader' ? activeTabStyle : tabStyle}
           onClick={() => setActiveTab('uploader')}
         >
-          📤 Uploader
+          📤 Roster
+        </button>
+        <button
+          style={activeTab === 'settings' ? activeTabStyle : tabStyle}
+          onClick={() => setActiveTab('settings')}
+        >
+          ⚙️ Settings
         </button>
       </div>
 
@@ -343,6 +443,58 @@ const DevUploader = () => {
             >
               Clear
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Settings Tab Content */}
+      {activeTab === 'settings' && (
+        <div>
+          <div style={{ marginBottom: '8px', fontSize: '11px', color: '#00ff88', fontWeight: 'bold' }}>
+            ⚙️ Server Settings Upload
+          </div>
+          <textarea
+            style={{
+              ...textareaStyle,
+              backgroundColor: isDragOverSettings ? 'rgba(0, 255, 136, 0.1)' : 'rgba(255, 255, 255, 0.1)',
+              border: isDragOverSettings ? '2px dashed #00ff88' : '1px solid rgba(255, 255, 255, 0.3)'
+            }}
+            value={settingsData}
+            onChange={handleSettingsTextareaChange}
+            onDragOver={handleDragOverSettings}
+            onDragLeave={handleDragLeaveSettings}
+            onDrop={handleDropSettings}
+            placeholder={isDragOverSettings ? "Drop server-settings.json file here..." : "Paste server settings JSON here or drop the server-settings.json file..."}
+          />
+          
+          <div>
+            <button
+              style={{
+                ...buttonStyle,
+                backgroundColor: '#00bbff'
+              }}
+              onClick={handleUploadSettings}
+              disabled={uploadingSettings}
+            >
+              {uploadingSettings ? 'Uploading...' : 'Upload Settings'}
+            </button>
+            
+            <button
+              style={{ ...toggleButtonStyle, marginLeft: '6px' }}
+              onClick={() => setSettingsData('')}
+            >
+              Clear
+            </button>
+          </div>
+          
+          <div style={{
+            marginTop: '8px',
+            padding: '6px',
+            borderRadius: '4px',
+            backgroundColor: 'rgba(0, 187, 255, 0.1)',
+            fontSize: '10px'
+          }}>
+            💡 Paste or drop your server-settings.json file to configure your Discord server, roles, weapons, and armor options
           </div>
         </div>
       )}

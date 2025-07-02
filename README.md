@@ -1,3 +1,82 @@
+# Environment Setup
+
+### Discord Authentication
+
+This app uses Discord OAuth2 for authentication. You'll need to set up proper environment variables for both development and production environments:
+
+#### Development
+Create a `.env` file in the root directory with:
+```
+REACT_APP_DISCORD_REDIRECT_URI=http://localhost:3000
+REACT_APP_DISCORD_CLIENT_ID=YOUR_CLIENT_ID
+DISCORD_CLIENT_SECRET=YOUR_CLIENT_SECRET
+DISCORD_BOT_TOKEN=YOUR_BOT_TOKEN
+REACT_APP_GUILD_ID=YOUR_GUILD_ID
+REACT_APP_ELEVATED_ROLE_ID=YOUR_ADMIN_ROLE_ID
+REACT_APP_USER_ROLE_ID=YOUR_USER_ROLE_ID
+REACT_APP_GUEST_ROLE_ID=YOUR_GUEST_ROLE_ID
+```
+
+#### Production
+For production deployment on Netlify:
+1. Set environment variables in the Netlify dashboard under Site settings > Build & deploy > Environment variables
+2. Required variables:
+   - DISCORD_REDIRECT_URI=https://yourdomain.com
+   - REACT_APP_DISCORD_REDIRECT_URI=https://yourdomain.com
+   - DISCORD_CLIENT_ID
+   - DISCORD_CLIENT_SECRET
+   - DISCORD_BOT_TOKEN
+   - REACT_APP_GUILD_ID
+   - REACT_APP_ELEVATED_ROLE_ID
+   - REACT_APP_USER_ROLE_ID
+   - REACT_APP_GUEST_ROLE_ID
+
+3. Update your Discord Developer Portal OAuth2 settings:
+   - Add your production URL as a redirect URI (e.g., `https://yourdomain.com`)
+
+### Server Settings
+
+The app uses a Firestore document to store server settings, including:
+- Discord server ID and name
+- Role IDs for admins, users, and guests
+- Available roles for roster creation
+- Weapons available for each role
+- Armor options for character creation
+
+You can manage these settings:
+
+1. **Through the Admin UI**: Navigate to `/admin` and click "Server Settings" (requires admin access)
+2. **Dev Uploader (Development Mode)**: In development mode, click the "?" icon in the top-left corner and use the Settings tab to upload a server-settings.json file
+
+#### Default Server Settings
+
+The `server-settings.json` file contains default server settings that can be:
+- Used to initialize a new deployment
+- Uploaded through the Dev Uploader
+- Used as a reference for the structure of server settings
+
+Example:
+```json
+{
+  "guildId": "YOUR_DISCORD_SERVER_ID",
+  "elevatedRoleId": "ADMIN_ROLE_ID",
+  "userRoleId": "USER_ROLE_ID",
+  "guestRoleId": "GUEST_ROLE_ID",
+  "guildName": "Your Discord Server",
+  "roles": ["Tank", "Healer", "DPS"],
+  "weaponsByRole": {
+    "Tank": ["Sword and Shield", "Warhammer"],
+    "Healer": ["Life Staff", "Void Gauntlet"],
+    "DPS": ["Bow", "Fire Staff", "Rapier"]
+  },
+  "armorOptions": {
+    "head": ["Heavy Helm", "Medium Helm", "Light Hood"],
+    "chest": ["Heavy Plate", "Medium Chest", "Light Chest"],
+    "feet": ["Heavy Boots", "Medium Boots", "Light Shoes"]
+  }
+}
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

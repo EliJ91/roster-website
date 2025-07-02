@@ -165,12 +165,11 @@ const SelectRosterPage = (props) => {
 												});
 											}
 											
-											return {
-												id: signup.userId || `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-												discordId: signup.discordId,
-												name: signup.name || 'Unknown',
-												nickname: (signup.name || 'Unknown') + (signup.guildTag ? ` ${signup.guildTag}` : ''),
-												roles: Array.isArray(signup.roles) ? signup.roles : [],
+											return {											id: signup.userId || `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+											discordId: signup.discordId,
+											name: signup.name || 'Unknown',
+											nickname: (signup.name || 'Unknown') + (signup.hasGuildRole && signup.guildName ? ` [${signup.guildName}]` : ''),
+											roles: Array.isArray(signup.roles) ? signup.roles : [],
 												weapons: allWeapons,
 												weaponsByRole: signup.weaponsByRole || {},
 												timestamp: signup.timestamp
@@ -337,7 +336,7 @@ const SelectRosterPage = (props) => {
 											id: signup.userId || `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
 											discordId: signup.discordId,
 											name: signup.name || 'Unknown',
-											nickname: (signup.name || 'Unknown') + (signup.guildTag ? ` ${signup.guildTag}` : ''),
+											nickname: (signup.name || 'Unknown') + (signup.hasGuildRole && signup.guildName ? ` [${signup.guildName}]` : ''),
 											roles: Array.isArray(signup.roles) ? signup.roles : [],
 											weapons: allWeapons,
 											weaponsByRole: signup.weaponsByRole || {},

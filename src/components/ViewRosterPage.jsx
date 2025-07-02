@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserProfile from './UserProfile';
+import SignupModal from './SignupModal';
 import { getLiveRoster } from '../utils/firestoreEvents';
 
 const ViewRosterPage = () => {
   const [roster, setRoster] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
   const navigate = useNavigate();
 
   // Helper function to safely handle equipment data (both array and string formats)
@@ -107,10 +109,19 @@ const ViewRosterPage = () => {
       
       <div className="view-roster-content">
         <div className="signup-section">
-          <button className="signup-btn">
+          <button 
+            className="signup-btn"
+            onClick={() => setIsSignupModalOpen(true)}
+          >
             Sign Up for Event
           </button>
         </div>
+        
+        <SignupModal 
+          open={isSignupModalOpen} 
+          onClose={() => setIsSignupModalOpen(false)}
+          rosterId={roster?.id}
+        />
 
         <div className="view-roster-header">
           <h1 className="roster-title">{roster.eventName || 'No Event Name'}</h1>

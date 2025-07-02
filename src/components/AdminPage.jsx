@@ -82,6 +82,15 @@ const AdminPage = ({ currentUser }) => {
               </div>
 
               <div className="admin-block">
+                <div className="admin-block-icon">⚙️</div>
+                <h3 className="admin-block-title">Server Settings</h3>
+                <p className="admin-block-description">Configure roles, weapons, and permissions</p>
+                <button className="admin-block-button" onClick={() => navigate('/server-settings')}>
+                  Configure
+                </button>
+              </div>
+              
+              <div className="admin-block">
                 <div className="admin-block-icon">📊</div>
                 <h3 className="admin-block-title">Analytics</h3>
                 <p className="admin-block-description">View usage statistics and reports</p>

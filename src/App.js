@@ -7,6 +7,7 @@ import SelectRosterPage from './components/SelectRosterPage';
 import ViewRosterPage from './components/ViewRosterPage';
 import CreateRosterPage from './components/CreateRosterPage';
 import AdminPage from './components/AdminPage';
+import ServerSettings from './components/ServerSettings';
 import DevUploader from './components/DevUploader';
 import backgroundSmoke from './assets/backgroundSmoke.mp4';
 import './styles/app.css';
@@ -20,6 +21,7 @@ import './styles/userprofile.css';
 import './styles/roleLabels.css';
 import './styles/adminpage.css';
 import './styles/managerosters.css';
+import './styles/serversettings.css';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -60,6 +62,7 @@ function App() {
           <Route path="/create-roster" element={<CreateRosterPage currentUser={user} />} />
           <Route path="/view-roster" element={<ViewRosterPage />} />
           <Route path="/admin" element={<AdminPage currentUser={user} />} />
+          <Route path="/server-settings" element={<ServerSettings currentUser={user} />} />
         </Routes>
         <DevUploader />
       </Router>

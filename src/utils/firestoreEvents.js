@@ -1,5 +1,5 @@
 // src/utils/firestoreEvents.js
-import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy, setDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, getDoc, serverTimestamp, query, orderBy, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 // API function to submit roster via Netlify function (backup)
@@ -211,5 +211,99 @@ export async function hasLiveRoster() {
   } catch (error) {
     console.error('Failed to check for live roster:', error);
     return false;
+  }
+}
+
+// Get server settings from Firestore or fallback to API
+export async function getServerSettings() {
+  try {
+    // Try Firestore first
+    if (db) {
+      const settingsRef = doc(db, "serverSettings", "config");
+      const settingsSnap = await getDoc(settingsRef);
+      
+      if (settingsSnap.exists()) {
+        return settingsSnap.data();
+      }
+    }
+    
+    // Fallback to API
+    const response = await fetch('/.netlify/functions/get-server-settings');
+    
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status}`);
+    }
+    
+    const result = await response.json();
+    
+    if (result && result.data) {
+      return result.data;
+    }
+    
+    // Return default settings if nothing is found
+    return {
+      guildId: process.env.REACT_APP_DISCORD_GUILD_ID || '',
+      elevatedRoleId: process.env.REACT_APP_ELEVATED_ROLE_ID || '',
+      guildName: 'Conflict',
+      roles: [
+        'Main Caller',
+        'Backup Caller',
+        'Tank',
+        'Healer',
+        'DPS',
+        'Support',
+        'Battlemount',
+      ],
+      weaponsByRole: {
+        'Main Caller': ['Quarterstaff', 'Arcane Staff'],
+        'Backup Caller': ['Quarterstaff', 'Arcane Staff'],
+        'Tank': ['Mace', 'Hammer', 'Morning Star'],
+        'Healer': ['Holy Staff', 'Divine Staff', 'Nature Staff'],
+        'DPS': ['Fire Staff', 'Frost Staff', 'Bow', 'Spear'],
+        'Support': ['Cursed Staff', 'Arcane Staff'],
+        'Battlemount': ['Quarterstaff', 'Heavy Mace']
+      },
+      armorOptions: {
+        head: ['Scholar Cowl', 'Cleric Cowl', 'Mage Cowl'],
+        chest: ['Scholar Robe', 'Cleric Robe', 'Mage Robe'],
+        feet: ['Scholar Sandals', 'Cleric Sandals', 'Mage Sandals']
+      }
+    };
+  } catch (error) {
+    console.error("Error getting server settings:", error);
+    throw error;
+  }
+}
+
+// Update server settings
+export async function updateServerSettings(settingsData) {
+  try {
+    // Try Firestore first
+    if (db) {
+      const settingsRef = doc(db, "serverSettings", "config");
+      await setDoc(settingsRef, {
+        ...settingsData,
+        updatedAt: serverTimestamp()
+      });
+      return { success: true };
+    }
+    
+    // Fallback to API
+    const response = await fetch('/.netlify/functions/update-server-settings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(settingsData)
+    });
+    
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error("Error updating server settings:", error);
+    throw error;
   }
 }

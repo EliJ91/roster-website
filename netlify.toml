@@ -8,6 +8,10 @@
   
 [dev.env]
   PORT = "3000"
+  DISCORD_REDIRECT_URI = "http://localhost:3000"
+
+[context.production.environment]
+  DISCORD_REDIRECT_URI = "https://yourdomain.com"
 
 [[redirects]]
   from = "/.netlify/functions/*"

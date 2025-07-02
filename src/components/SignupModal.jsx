@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { buildDetails } from '../data/weaponOptions';
 import { ROLE_OPTIONS, WEAPON_OPTIONS_BY_ROLE } from '../data/rosterOptions';
 
+// Discord role ID that represents the guild
+const GUILD_ROLE_ID = '663082455422468096';
+const GUILD_NAME = 'Conflict';
+
 const SignupModal = ({ open, onClose, rosterId }) => {
   const [userInfo, setUserInfo] = useState({
     name: '',
-    guildTag: ''
+    guildName: '',
+    hasGuildRole: false
   });
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [selectedWeaponsByRole, setSelectedWeaponsByRole] = useState({});
@@ -18,11 +23,17 @@ const SignupModal = ({ open, onClose, rosterId }) => {
   useEffect(() => {
     if (open) {
       try {
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem('discordUser'));
+        const roles = JSON.parse(localStorage.getItem('discordRoles') || '[]');
+        
         if (user) {
+          // Check if user has the specific guild role ID
+          const hasGuildRole = Array.isArray(roles) && roles.includes(GUILD_ROLE_ID);
+          
           setUserInfo({
-            name: user.nickname || user.username || '',
-            guildTag: user.guildTag || ''
+            name: user.nickname || user.displayName || user.username || '',
+            guildName: GUILD_NAME,
+            hasGuildRole: hasGuildRole
           });
         }
       } catch (e) {
@@ -77,10 +88,13 @@ const SignupModal = ({ open, onClose, rosterId }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUserInfo(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    // Only allow changing the name
+    if (name === 'name') {
+      setUserInfo(prev => ({
+        ...prev,
+        name: value
+      }));
+    }
   };
 
   const handleSubmit = async () => {
@@ -111,13 +125,14 @@ const SignupModal = ({ open, onClose, rosterId }) => {
     setSubmitError('');
     
     try {
-      const user = JSON.parse(localStorage.getItem('user')) || {};
+      const user = JSON.parse(localStorage.getItem('discordUser')) || {};
       
       const signupData = {
         userId: user.id || Date.now().toString(),
-        discordId: user.discordId,
+        discordId: user.id, // Using id as discordId
         name: userInfo.name,
-        guildTag: userInfo.guildTag,
+        guildName: userInfo.hasGuildRole ? GUILD_NAME : '',
+        hasGuildRole: userInfo.hasGuildRole,
         roles: selectedRoles,
         weaponsByRole: selectedWeaponsByRole,
         timestamp: new Date().toISOString(),
@@ -203,7 +218,7 @@ const SignupModal = ({ open, onClose, rosterId }) => {
         {/* User info section */}
         <div style={{ marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', gap: '15px', marginBottom: '15px' }}>
-            <div style={{ flex: 1 }}>
+            <div style={{ flex: 2 }}>
               <label style={{ display: 'block', marginBottom: '5px', fontWeight: 500 }}>
                 Name:
               </label>
@@ -222,22 +237,34 @@ const SignupModal = ({ open, onClose, rosterId }) => {
               />
             </div>
             <div style={{ flex: 1 }}>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: 500 }}>
-                Guild Tag:
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '5px', 
+                fontWeight: 500,
+                color: userInfo.hasGuildRole ? '#22c55e' : '#6b7280'
+              }}>
+                Guild:
               </label>
-              <input
-                type="text"
-                name="guildTag"
-                value={userInfo.guildTag}
-                onChange={handleInputChange}
+              <div
                 style={{ 
                   width: '100%', 
                   padding: '8px', 
                   borderRadius: '4px',
-                  border: '1px solid #ccc'
+                  border: '1px solid #e5e7eb',
+                  backgroundColor: '#f9fafb',
+                  color: userInfo.hasGuildRole ? '#22c55e' : '#6b7280',
+                  minHeight: '37px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontWeight: userInfo.hasGuildRole ? 500 : 400,
                 }}
-                placeholder="Your guild tag"
-              />
+              >
+                {userInfo.hasGuildRole ? (
+                  <span>{userInfo.guildName}</span>
+                ) : (
+                  <span style={{ color: '#9ca3af', fontStyle: 'italic' }}>Not a member of {GUILD_NAME}</span>
+                )}
+              </div>
             </div>
           </div>
         </div>
